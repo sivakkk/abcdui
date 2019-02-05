@@ -1,0 +1,74 @@
+@import '../../assets/partials/_mixins.scss';
+
+.dashboard 
+{
+    #earning-details {
+        .bg-blue
+        {
+            border-radius: 3px;
+            height: 250px;
+            @include gradient(#fff, 110deg, #556DF6, #2437E9);
+    
+            @media(max-width: 998px) {
+                height: 200px;
+            }
+        }
+        .title
+        {
+            font-size: 1.2rem;
+            
+            @media(max-width: 998px) {
+                font-size: 1rem;
+            }
+        }
+        .sub-title
+        {
+            @media(max-width: 998px) {
+                font-size: 0.8rem;
+            }
+        }
+        .earning
+        {
+            font-size: 1.5rem;
+    
+            @media(max-width: 998px) {
+                font-size: 1rem;
+            }
+        }
+        .earning-before
+        {
+            font-size: 0.9rem;
+            opacity: 0.9;
+    
+            @media(max-width: 998px) {
+                font-size: 0.7rem;
+            }
+    
+            .fa-sort-up {
+                transform: translateY(30%);
+            }
+            .fa-sort-down {
+                transform: translateY(-30%);
+            }
+        }
+        .earning-before-text
+        {
+            font-size: 0.8rem;
+            opacity: 0.9;
+    
+            @media(max-width: 998px) {
+                font-size: 0.65rem;
+            }
+        }
+    }
+
+    #chart-box{
+        border-radius: 3px;
+        color: #505571;
+
+        #chart{
+            height: 300px;
+        }
+    }
+    
+}

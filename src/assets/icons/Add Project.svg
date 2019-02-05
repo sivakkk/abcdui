@@ -1,0 +1,23 @@
+<svg id="Group_5441" data-name="Group 5441" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 26.458 26.458">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#556df6"/>
+      <stop offset="1" stop-color="#2437e9"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#14d4ed"/>
+      <stop offset="1" stop-color="#3124d1"/>
+    </linearGradient>
+  </defs>
+  <rect id="Rectangle_865" data-name="Rectangle 865" class="cls-1" width="3.679" height="26.458" rx="1.84" transform="translate(12.004)"/>
+  <path id="Path_5893" data-name="Path 5893" class="cls-2" d="M1.84,0a1.84,1.84,0,0,1,1.84,1.84V24.619a1.84,1.84,0,0,1-3.679,0V1.84A1.84,1.84,0,0,1,1.84,0Z" transform="translate(26.458 11.024) rotate(90)"/>
+</svg>

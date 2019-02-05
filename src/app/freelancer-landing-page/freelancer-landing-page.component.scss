@@ -1,0 +1,191 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css);
+// Variables
+$primary-color: #4DA9F7;
+$secondary-color: #ffffff;
+$font-family-regular: 'open-sans-regular';
+$font-family-semibold: 'open-sans-semibold';
+$font-family-bold: 'open-sans-bold';
+@mixin oc-primary-button($primary-color, $secondary-color, $font-family-semibold, $font-size: 1em) {
+    background-color: $primary-color;
+    border-radius: 2px;
+    color: $secondary-color;
+    font-family: $font-family-semibold;
+    font-size: $font-size;
+    &:hover {
+        background-color: #117bf3;
+    }
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    &:before {
+        -webkit-box-sizing: inherit;
+        box-sizing: inherit;
+    }
+    &:after {
+        -webkit-box-sizing: inherit;
+        box-sizing: inherit;
+    }
+}
+
+.navbar-nav>li {
+    a {
+        cursor: pointer;
+    }
+}
+
+.navbar {
+    -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.navbar-brand {
+    margin-left: -6%;
+    padding: 0 2% 0 2%;
+    img {
+        width: 54%;
+        height: 100%;
+    }
+}
+
+.oc-login {
+    @include oc-primary-button($primary-color, $secondary-color, $font-family-semibold)
+}
+
+header.masthead {
+    position: relative;
+    background-color: white;
+    background: url('../../assets/images/freelancer/bg.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    .overlay {
+        position: absolute;
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.6;
+    }
+    input {
+        border-radius: 0px;
+    }
+    .fl-head-tag {
+        color: #117bf3;
+    }
+    .btn {
+        background-color: $primary-color;
+        border-radius: 2px;
+        color: $secondary-color;
+        font-family: $font-family-semibold;
+        font-size: 1em;
+        border-radius: 0px;
+        &:hover {
+            background-color: #117bf3;
+        }
+    }
+    .mb-3 {
+        color: black;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    @media (min-width: 768px) {
+        padding-top: 12rem;
+        padding-bottom: 12rem;
+        h1 {
+            font-size: 3rem;
+        }
+    }
+}
+
+.features-icons {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    .features-icons-item {
+      max-width: 20rem;
+      .features-icons-icon {
+        height: 7rem;
+        i {
+          font-size: 4.5rem;
+        }
+      }
+      &:hover {
+        .features-icons-icon {
+          i {
+            font-size: 5rem;
+          }
+        }
+      }
+    }
+  }
+
+.showcase {
+    .showcase-text {
+        padding: 3rem;
+    }
+    .showcase-img {
+        min-height: 30rem;
+        background-size: cover;
+    }
+    @media (min-width: 768px) {
+        .showcase-text {
+            padding: 7rem;
+        }
+    }
+}
+
+.call-to-action {
+    position: relative;
+    background-color: white;
+    background: url('../../assets/images/freelancer/fl-lp-calltoaction-01.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    .mb-4 {
+        color: black;
+    }
+    .btn {
+        background-color: $primary-color;
+        border-radius: 2px;
+        color: $secondary-color;
+        font-family: $font-family-semibold;
+        font-size: 1em;
+        border-radius: 0px;
+        &:hover {
+            background-color: #117bf3;
+        }
+    }
+    .overlay {
+      position: absolute;
+      background-color: white;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0.3;
+    }
+  }
+
+  footer.footer {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }

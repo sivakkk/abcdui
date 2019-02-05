@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #cad0e0;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#765dff"/>
+      <stop offset="1" stop-color="#08b6d6"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_5497" data-name="Group 5497" transform="translate(-258.679 -541.679)">
+    <circle id="Ellipse_3" data-name="Ellipse 3" class="cls-1" cx="24.968" cy="24.968" r="24.968" transform="translate(258.711 541.711)"/>
+    <circle id="Ellipse_4" data-name="Ellipse 4" class="cls-2" cx="25" cy="25" r="25" transform="translate(258.679 541.679)"/>
+    <circle id="Ellipse_5" data-name="Ellipse 5" class="cls-3" cx="3.571" cy="3.571" r="3.571" transform="translate(283.679 545.25)"/>
+    <circle id="Ellipse_6" data-name="Ellipse 6" class="cls-3" cx="3.571" cy="3.571" r="3.571" transform="translate(280.107 580.964)"/>
+    <circle id="Ellipse_7" data-name="Ellipse 7" class="cls-3" cx="3.571" cy="3.571" r="3.571" transform="translate(265.821 570.25)"/>
+    <circle id="Ellipse_8" data-name="Ellipse 8" class="cls-3" cx="3.571" cy="3.571" r="3.571" transform="translate(265.821 552.393)"/>
+    <circle id="Ellipse_9" data-name="Ellipse 9" class="cls-3" cx="3.571" cy="3.571" r="3.571" transform="translate(297.964 555.964)"/>
+    <circle id="Ellipse_10" data-name="Ellipse 10" class="cls-3" cx="3.571" cy="3.571" r="3.571" transform="translate(294.393 573.822)"/>
+    <g id="Group_1" data-name="Group 1" transform="translate(274.347 556.995) rotate(7)">
+      <path id="Path_564" data-name="Path 564" class="cls-3" d="M2.527-.109a2.7,2.7,0,1,1-2.7,2.7A2.7,2.7,0,0,1,2.527-.109Z" transform="translate(9.516 5.318)"/>
+      <path id="Path_1" data-name="Path 1" class="cls-3" d="M8.308,9.79,0,0,10.675,6.833Z" transform="translate(-0.109 1.599) rotate(-14)"/>
+    </g>
+  </g>
+</svg>

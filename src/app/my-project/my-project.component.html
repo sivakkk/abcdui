@@ -1,0 +1,215 @@
+<!-- <div class="my-project" *ngIf="tab == 'my_project'"> -->
+<div class="my-project">
+
+    <!--************ Modal for adding Project ************-->
+    <div class="modal fade" id="addProject" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 box-shadow">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                <div class="modal-body">
+                    <!-- Project Name -->
+                    <div>
+                        <label for="folderName" style="color:rgba(48, 67, 236,0.61)" class="mb-3">New Folder</label>
+                        <input type="text" id="folderName" name="folderName" placeholder="Folder Name" [(ngModel)]="project.projectName" class="form-control">
+                    </div>
+                    <!-- Annotate by option (SELF or FREELANCER) -->
+                    <div class="mt-3 mb-3">
+                        <label for="annotateBy" class="mb-3">Annotate By</label>
+                        <div style="position:relative">
+                            <div class="dropdown">
+                                <button class="btn select btn-block dropdown-toggle text-left" type="button" id="annotateByButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ this.project.annotateBy | titlecase}}
+                                </button>
+                                <div class="dropdown-menu box-shadow" aria-labelledby="annotateByButton" id="annotateByMenu">
+                                    <a class="dropdown-item" *ngFor="let option of annotateByOptions" (click)="setProperty('annotateBy', option)">
+                                        {{ option | titlecase }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Show Available storage types for current user -->
+                    <div class="mt-3 mb-3">
+                        <label for="driveSelect" class="mb-3">Drive Select</label>
+                        <div style="position:relative">
+                            <div class="dropdown">
+                                <button class="btn select btn-block dropdown-toggle text-left" type="button" id="selectDriveButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ this.environment.STORAGE_TYPE[project.projectStorage] }}
+                                </button>
+                                <div class="dropdown-menu box-shadow" aria-labelledby="selectDriveButton" id="storageMenu">
+                                    <a class="dropdown-item" *ngFor="let storageType of activatedStorageTypes; index as i" (click)="setProperty('projectStorage', storageType)">
+                                        {{ this.environment.STORAGE_TYPE[storageType] }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Show Available storage types for current user -->
+                    <div class="mt-3 mb-3">
+                        <label for="fileSelect" class="mb-3">File Type</label>
+                        <div style="position:relative">
+                            <div class="dropdown">
+                                <button class="btn select btn-block dropdown-toggle text-left" type="button" id="fileTypeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ project.fileType | titlecase }}
+                                </button>
+                                <div class="dropdown-menu box-shadow" aria-labelledby="fileTypeButton" id="storageMenu">
+                                    <a class="dropdown-item" *ngFor="let fileType of fileTypeOptions; index as i" (click)="setProperty('fileType', fileType)">
+                                        {{ fileType | titlecase }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Show Available storage types for current user -->
+                    <div class="mt-3 mb-3">
+                        <label for="driveSelect" class="mb-3">Project Type</label>
+                        <div style="position:relative">
+                            <div class="dropdown">
+                                <button class="btn select btn-block dropdown-toggle text-left" type="button" id="projectTypeButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ project.projectType | titlecase }}
+                                </button>
+                                <div class="dropdown-menu box-shadow" aria-labelledby="projectTypeButton" id="storageMenu">
+                                    <a class="dropdown-item" *ngFor="let projectType of projectTypeOptions; index as i" (click)="setProperty('projectType', projectType)">
+                                        {{ projectType | titlecase }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Semantic segmentation Option (Only for PRO users) -->
+                    <div *ngIf="user?.USER_TYPE == environment.USER_TYPE.SELF.NAME || user?.USER_TYPE == environment.USER_TYPE.ADMIN.NAME">
+                        <img src="../../assets/icons/check-box-empty.svg" height="16" *ngIf="!project?.semantic_segmentation" style="cursor:pointer; position: relative; top:-2px;" (click)="setProperty('semantic_segmentation', true)">
+                        <i class="fa fa-check-square" aria-hidden="true" *ngIf="project?.semantic_segmentation" style="font-size:1.1rem; color:#3043EC; cursor: pointer;" (click)="setProperty('semantic_segmentation', false)"></i>
+                        <label for="semantic_segmentation" class="mb-3 ml-1">Semantic Segmentation</label>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 justify-content-between pt-0">
+                    <button class="btn btn-rounded p-1 pr-4 pl-4 blue-border-btn box-shadow" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-rounded p-1 pr-4 pl-4 blue-bg-btn box-shadow" (click)="createProject()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--************ Header of My Project Component ************-->
+    <div class="row m-0 mr-3 justify-content-between align-items-center head">
+        <!-- Add project button (Not for team users) -->
+        <div class="ml-lg-auto" *ngIf="user.USER_TYPE !== environment.USER_TYPE.FREELANCER.NAME && user.USER_TYPE !== environment.USER_TYPE.TEAM.NAME">
+            <button class="btn btn-rounded box-shadow add-project pr-4 pl-4" (click)="addProjectModal()" [disabled]="currentStatus === STATUS_SAVING">
+                <span class="mr-2">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                <!-- <img src="../../assets/icons/Add Project.svg" style="width:1.1rem;"/> -->
+                </span>
+                Add Project
+            </button>
+        </div>
+        <!-- Project folder sorting methods -->
+        <div class="ml-md-5 ml-lg-auto">
+            <div style="position:relative">
+                <span class="mr-3">Sort By</span>
+                <div class="dropdown d-md-inline-block">
+                    <button class="btn select box-shadow dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ sortingMethod }}
+                        <span class="down-arrow">
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu box-shadow" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" (click)="changeSortingMethod('None')">None</a>
+                        <a class="dropdown-item" (click)="changeSortingMethod('Name A to Z')">Name A to Z</a>
+                        <a class="dropdown-item" (click)="changeSortingMethod('Name Z to A')">Name Z to A</a>
+                        <a class="dropdown-item" (click)="changeSortingMethod('Latest First')">Latest First</a>
+                        <a class="dropdown-item" (click)="changeSortingMethod('Oldest First')">Oldest First</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Search box for searching folders with name -->
+        <div class="mt-md-2 mt-lg-0 ml-lg-auto">
+            <div style="position:relative;width:250px;">
+                <input type="text" class="p-2 pl-5 box-shadow" placeholder="Search Your Folder" [(ngModel)]="searchTerm">
+                <span class="search-icon">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+            </div>
+        </div>
+        <!-- Change View mode (Grid mode <-> list mode) -->
+        <div class="mt-md-2 mt-lg-0 ml-md-5 ml-lg-auto">
+            <span class="change-view-icon" (click)="changeViewMode()">
+                <i class="fa fa-th-large" aria-hidden="true" *ngIf="!gridViewMode" data-toggle="tooltip" data-placement="top" title="Grid Mode"></i>
+                <i class="fa fa-list" *ngIf="gridViewMode" data-toggle="tooltip" data-placement="top" title="List Mode"></i>
+            </span>
+        </div>
+    </div>
+
+
+            <!--************ My Projects (FOLDERS) ************-->
+
+                    <!--********  GRID MODE  ***********-->
+    <div class="container project-folders p-md-0 p-xl-3" *ngIf="gridViewMode" [@myAnimation]="gridViewMode">
+        <div class="row mt-4">
+            <div *ngFor="let project of user?.PROJECTS | sortSearch:sortingMethod:searchTerm"  class="col-md-6 p-2 folder" (click)="changeTab('project_settings', project.key)">
+                <!--**** Used custom pipe 'sortSearch' to sort and search folders ****-->
+                <div class="d-flex align-items-center h-100 bg-white box-shadow p-md-2 py-md-3 p-lg-4">
+                    <div class="col-sm-1 col-xl-2 h-100 py-2 px-0">
+                        <img src="../../assets/icons/folder2.svg" alt="Folder" class="ml-xl-2 folder-icon">
+                    </div>
+                    <div class="col-sm-5 col-xl-5 border-right h-100 py-2 px-2 text-truncate">
+                        <span>{{ project.value.NAME || 0}}</span>
+                    </div>
+                    <div class="col-sm-6 col-xl-5 h-100 py-2 px-1 px-lg-2 text-truncate">
+                        <span class="ml-xl-3">Total Images: {{ project.value.TOTAL_IMAGES || 0 }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                      <!--********  LIST MODE  ***********-->
+    <div class="container my-4 project-folders p-md-0 p-xl-3" *ngIf="!gridViewMode" [@myAnimation]="!gridViewMode">
+        <div  *ngFor="let project of user?.PROJECTS | sortSearch:sortingMethod:searchTerm" class="row m-0 bg-white border-top border-bottom p-md-3 p-lg-4">
+            <div class="col-11 folder" (click)="changeTab('project_settings', project.key)">
+                <div class="row align-items-center h-100">
+                    <div class="col-1 h-100 py-2 px-0">
+                        <img src="../../assets/icons/folder2.svg" alt="Folder" class="ml-xl-2 folder-icon">
+                    </div>
+                    <div class="col-2 h-100 py-2 px-2 text-truncate">
+                        <span>{{ project.value.NAME }}</span>
+                    </div>
+                    <div class="col-9 h-100 py-2">
+                        <div class="row">
+                            <div class="col-4 px-2 text-truncate">
+                                <span class="ml-xl-2">Total Images: {{ project.value.TOTAL_IMAGES || 0 }}</span>
+                            </div>
+                            <div class="col-4 px-0 text-truncate">
+                                <span class="ml-xl-2">Total Images Classified: {{ project.value.TOTAL_CLASSIFIED_IMAGES || 0 }}</span>
+                            </div>
+                            <!-- No. of Invited users for current project (Only for admin users) -->
+                            <div class="col-4 px-2 h-100 text-truncate" *ngIf="user.USER_TYPE === this.environment.USER_TYPE.ADMIN.NAME || user.USER_TYPE === this.environment.USER_TYPE.STUDENT_ADMIN.NAME">
+                                <span class="ml-xl-2">Invited Users: {{ project.value.TOTAL_INVITED_USERS || 0 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- WHATS NEW DATA MODAL -->
+<div class="modal fade" id="whats-new-modal" tabindex="-1" role="dialog" aria-hidden="true" style="">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 800px;">
+        <div class="modal-content border-0" style="background: transparent;">
+            <div class="modal-header" style="border: 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="width: min-content;margin-right: -60px;font-size: 35px;color: floralwhite;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding:0;">
+                <img [src]="this.whatsNewImage" width="100%"/>
+            </div>
+        </div>
+    </div>
+</div>

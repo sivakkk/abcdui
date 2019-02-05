@@ -1,0 +1,158 @@
+@import '../../assets/partials/_mixins.scss';
+
+$border-grey: #CACDDB;
+$font-color-grey-dark: #505571;
+$font-color-skyBlue: #1E9DE5;
+$font-color-tabs: #1E99E4;
+$modal-btn-color: #3043EC;
+
+.profile-settings{
+    font-size: 1.2rem;
+    color: $font-color-grey-dark;
+
+    @media(max-width:768px){
+        font-size: 1rem;
+    }
+    .disabled{
+        pointer-events: none; 
+    }
+    .nav{
+        border-bottom: 1px solid $border-grey;
+        font-family: 'helvetica-medium';
+        .active{
+            color: $font-color-tabs;
+            border-bottom: 3px solid $font-color-tabs;
+        }
+    }
+    #general{
+        .link{
+            color: $font-color-skyBlue;
+            cursor: pointer;
+        }
+        .account{
+            margin-top: 5rem;
+        }
+        #change-image{ // Hiding the input type file for selecting image
+            display: none;
+        }
+        .modal{
+            .modal-content{
+                border-radius: 2px;
+            }
+            .close{
+                position: absolute;
+                right: -10%;
+                top: -10%;
+                width: 32px;
+                height: 32px;
+                border: 3px solid #fff;
+                border-radius: 50%;
+                font-size: 1.5rem;
+                font-weight: 400;
+                color: #fff;
+                opacity: 1;
+            }
+            .blue-border-btn{
+                border: 1px solid $modal-btn-color;
+                background: transparent;
+                color: $font-color-grey-dark;
+
+                @include button-hover($modal-btn-color, #fff);
+            }
+            .blue-bg-btn{
+                background: $modal-btn-color;
+                @include button-hover( #fff, $modal-btn-color);
+            }
+        }
+        input{
+            font-size: 1rem;
+            border-radius: 60px;
+            border: 1px solid $border-grey;
+        }
+    }
+    .link{
+        color: $font-color-skyBlue;
+        cursor: pointer;
+    }
+    .row{
+        border-bottom: 1px solid $border-grey;
+        overflow-x: hidden;
+
+        .user-thumb{
+            width: 3.5rem;
+            height: 3.5rem;
+            border: 2px solid $font-color-skyBlue;
+        }
+    }
+    
+}
+
+section.pricing {
+    font-size: 1.0rem;
+}
+
+.pricing .card {
+  border: none;
+  border-radius: 1rem;
+  transition: all 0.2s;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.pricing hr {
+  margin: 1.5rem 0;
+}
+
+.pricing .card-title {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+}
+
+.pricing .card-price {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.pricing .card-price .period {
+  font-size: 0.8rem;
+}
+
+.pricing ul li {
+  margin-bottom: 1rem;
+}
+
+.pricing .text-muted {
+  opacity: 0.7;
+}
+
+.pricing .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+/* Hover Effects on Card */
+
+@media (min-width: 992px) {
+  .pricing .card:hover {
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+  }
+  .pricing .card:hover .btn {
+    opacity: 1;
+  }
+}
+
+
+#developer {
+    .regenerate-key {
+        @include btn-twoColorLinearGradient( #149fda, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+        @include btn-twoColorLinearGradient-hover( right center);
+    }
+}

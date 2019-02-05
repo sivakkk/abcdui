@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="container-email" style="text-align: center;background: rgba(255, 248, 248, 0.37);height: 100%;">
+    <div class="row parent-container" style="padding:10%">
+        <div class="col-md-12">
+           <div class="images">
+              <img src="/assets/email-verify.png" style="width: 240px">
+           </div>
+           <div class="content">
+             <div class="heading" style="font-size: 2rem">Verify your email address to access Ocalvi</div>
+             <div class="desc" style="margin:2% auto">
+                <span>We’ve just sent an email to your address: {{tempData?.EMAIL_ID || tempData.email}}</span>
+                <span style="display: block;">Please check your email and click on the link provided to verify your address.</span>
+            </div>
+
+            <button class="re-send" style="width: 260px;" (click)="resend()">
+                RESEND MAIL
+            </button>
+           </div>
+        </div>
+    </div>
+</div>

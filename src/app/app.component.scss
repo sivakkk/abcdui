@@ -1,0 +1,144 @@
+@import '../assets/partials/_mixins.scss';
+
+$modal-btn-color: #3043ec;
+$font-color-grey-dark: #505571;
+$font-color-grey-alert: #53547c;
+$text-red: #f00;
+$bg-red: #f65656;
+
+.acceptButton
+{
+    @include button-hover(white,#4ea5a3);
+}
+.rejectButton
+{
+    @include button-hover(white,#d475a6);
+}
+
+[hidden]
+{
+    display: none !important;
+}
+
+#loader
+{
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+
+    opacity: 1;
+    background-color: white;
+}
+
+#loaderContent
+{
+    position: absolute;
+    z-index: 1000;
+    top: 45%;
+
+    display: grid;
+
+    width: 100%;
+
+    opacity: 1;
+
+    img
+    {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    label
+    {
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+.modal
+{
+    font-family: 'helvetica-regular';
+
+    .modal-content
+    {
+        border-radius: 2px;
+    }
+    .close
+    {
+        font-size: 1.5rem;
+        font-weight: 400;
+
+        position: absolute;
+        top: -20%;
+        right: -7%;
+
+        width: 32px;
+        height: 32px;
+
+        opacity: 1;
+        color: #fff;
+        border: 3px solid #fff;
+        border-radius: 50%;
+    }
+    .modal-footer
+    {
+        background: #eee;
+    }
+    .blue-border-btn
+    {
+        color: $font-color-grey-dark;
+        border: 1px solid $modal-btn-color;
+        background: transparent;
+
+        @include button-hover($modal-btn-color, #fff);
+    }
+    .blue-bg-btn
+    {
+        background: $modal-btn-color;
+
+        @include button-hover( #fff, $modal-btn-color);
+    }
+    .alert-message
+    {
+        color: $font-color-grey-alert;
+    }
+    .light-border-btn
+    {
+        color: #fff;
+        border: 1px solid #fff;
+
+        @include button-hover( #fff, $bg-red);
+    }
+    .text-red
+    {
+        color: $text-red;
+    }
+    .bg-red
+    {
+        background: $bg-red;
+    }
+    h4
+    {
+        font-family: 'helvetica-medium';
+    }
+    .info
+    {
+        color: $font-color-grey-alert;
+    }
+}
+
+:host /deep/ .simple-notification .sn-title { 
+    padding: 0 50px 0 0;
+    line-height: unset;
+}
+
+:host /deep/ .simple-notification .sn-content { 
+    padding: 0 50px 0 0;
+}
+
+:host /deep/ .simple-notification-wrapper {
+    z-index: 1050;
+}

@@ -1,0 +1,180 @@
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+<div [ngClass]="{'self-classifier' :  (loginForm && user.type == 'self' ) || (forgetPasswordForm && forgetPasswordUser.type == 'self') || resetPasswordForm, 'team-classifier' : (loginForm && user.type == 'team') || (forgetPasswordForm && forgetPasswordUser.type == 'team'), 'admin-classifier' : (loginForm && user.type == 'admin' ) || (forgetPasswordForm && forgetPasswordUser.type == 'admin') }" *ngIf="!isModalOpen">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="parent-container">
+                <div class="leftDiv" style="width: 40%;">
+                    <p class="heading" style="margin-top:15%;">Welcome to</p>
+                    <!-- <p style="font-size: 1.7em;margin-top: 0px;margin-left: 3%">The New Face of Machine Learning and AI</p> -->
+                    <p style="font-size: 1.3em;margin-top: 0px;margin-left: 3%">Object Classification and Annotation for Computer Vision Models (OCLAVI)</p>
+                    <!-- Login form -->
+                    <form style="margin-top: 5%;margin-bottom: 5%;" name="form" *ngIf="loginForm">
+
+                        <div style="padding-right:10%;display:flex;padding-top:5%;margin-bottom:3%;" class="classifyType">
+                            <div style="width:30%">
+                                <input type="radio" id="input-radio-single" name="radio-group" [(ngModel)]="user.type" value="self">
+                                <label for="input-radio-single" class="single-user-block">
+                                    <span class="radio-label-span" style="font-size:0.8em;">Self Classifier</span>
+                                </label>
+                            </div>
+                            <div style="width:32%">
+                                <input type="radio" id="input-radio-team" name="radio-group" [(ngModel)]="user.type" value="team">
+                                <label for="input-radio-team" class="team-user-block">
+                                    <span class="radio-label-span" style="font-size:0.8em;">Team Classifier</span>
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" id="input-radio-admin" name="radio-group" [(ngModel)]="user.type" value="admin">
+                                <label for="input-radio-admin" class="admin-user-block">
+                                    <span class="radio-label-span" style="font-size:0.8em;">Admin</span>
+
+                                </label>
+                            </div>
+                            <!--<div >
+                                <input type="radio" id="input-radio-freelancer" name="radio-group" [(ngModel)]="user.type" value="freelancer">
+                                <label for="input-radio-freelancer" class="freelancer-user-block">
+                                    <span class="radio-label-span">Freelancer</span>
+                                </label>
+                            </div>-->
+                        </div>
+
+                        <p class="form-group inner-addon">
+                            <input type="email" class="padding-right" placeholder="E-mail address" [(ngModel)]="user.email" name="username" required="required" style="font-size: 1em;">
+                            <i class="fa fa-envelope" aria-hidden="true" style="font-size:1.2em;"></i>
+                        </p>
+
+                        <p class="form-group inner-addon">
+                            <input type="password" class="padding-right" placeholder="Password" [(ngModel)]="user.password" name="password" required style="font-size: 1em;">
+                            <i class="fa fa-lock" aria-hidden="true" style="font-size:1.4em;"></i>
+                        </p>
+
+                        <p style="float:right;margin-right:36%;margin-top: 1%;">
+                            <span class="checkmark">
+                                <span class="round">
+                                    <input type="checkbox" id="checkbox" [(ngModel)]="user.rememberMe" value="true" name="rememberMe">
+                                    <label for="checkbox"></label>
+                                    <span class="rem-text" style="font-size:0.8em;">Remember me</span>
+                                </span>
+                            </span>
+                        </p>
+
+                        <p class="loginButton" style="margin-left: 3%;width:85%;">
+                            <input type="submit" value="LOGIN" (click)="submit()">
+                        </p>
+                        <p class="forgot-password">
+                            <span class="fp-left">Forgot Password?</span>
+                            <span class="fp-right" style="cursor: pointer;" (click)="setForgetPassword()">Get Help</span>
+                        </p>
+                    </form>
+
+                    <!-- Forgot password form -->
+                    <form style="margin-top: 10%;margin-bottom: 5%;" name="form" *ngIf="forgetPasswordForm">
+                        <div style="padding-right:10%;display:flex;padding-top:5%">
+                            <div style="width:35%">
+                                <input type="radio" id="input-radio-single" name="radio-group" [(ngModel)]="forgetPasswordUser.type" value="self">
+                                <label for="input-radio-single">
+                                    <span class="radio-label-span">Self Classifier</span>
+                                </label>
+                            </div>
+
+                            <div style="width:35%">
+                                <input type="radio" id="input-radio-team" name="radio-group" [(ngModel)]="forgetPasswordUser.type" value="team">
+                                <label for="input-radio-team">
+                                    <span class="radio-label-span">Team Classifier</span>
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" id="input-radio-admin" name="radio-group" [(ngModel)]="forgetPasswordUser.type" value="admin">
+                                <label for="input-radio-admin">
+                                    <span class="radio-label-span">Admin</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <p class="form-group inner-addon">
+                            <input type="email" placeholder="E-mail address" [(ngModel)]="forgetPasswordUser.email" name="username" required="required" style="font-size: 22px;">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </p>
+
+                        <p style="margin-left: 3%;">
+                            <input type="submit" value="SUBMIT" (click)="forgetPassword()">
+                        </p>
+
+                        <p class="forgot-password">
+                            <span class="fp-left" style="cursor: pointer;" (click)="setLoginForm()">Ready to Login ?</span>
+                        </p>
+                    </form>
+
+                    <!-- Reset password form -->
+                    <form style="margin-top: 10%;margin-bottom: 5%;" name="form" *ngIf="resetPasswordForm">
+                        <div style="padding-right:10%;padding-top:5%" *ngIf="resetPasswordError">
+                            <p style="font-size: 1.8rem;color: red">{{resetPasswordErrorMsg}}</p>
+
+                            <p style="margin-left: 3%;">
+                                <input type="submit" value="LOGIN PAGE" (click)="setLoginForm()">
+                            </p>
+                        </div>
+
+                        <div *ngIf="!resetPasswordError">
+                            <p class="form-group inner-addon">
+                                <input type="password" placeholder="New password" [(ngModel)]="resetPassword.password" name="password" required="required" style="font-size: 22px;">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </p>
+
+                            <p class="form-group inner-addon">
+                                <input type="password" placeholder="Confirm password " [(ngModel)]="resetPassword.confirmPassword" name="confirmpassword" required="required" style="font-size: 22px;">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </p>
+
+
+                            <p style="margin-left: 3%;">
+                                <input type="submit" value="SUBMIT" (click)="savePassword()">
+                            </p>
+                        </div>
+
+                    </form>
+
+                    <p class="sign-up-main">
+                        <span class="su-left">Don't have an account?</span>
+                        <a routerLink="/signup" class="su-right">Sign Up</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!--*********************       Select Project Modal (Only for Team users)      *****************-->
+<div class="modal fade" id="selectProject" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 box-shadow">
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button> -->
+            <div class="modal-body">
+                <div class="mt-3 mb-3">
+                    <label for="driveSelect" class="mb-3">Select Project</label>
+                    <div style="position:relative">
+                        <div class="dropdown">
+                            <button class="btn select btn-block dropdown-toggle text-left" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ selectedProject?.NAME || 'Select Project'}}
+                            </button>
+                            <div class="dropdown-menu box-shadow" aria-labelledby="dropdownMenuButton" id="projectMenu">
+                                 <a class="dropdown-item" *ngFor="let project of PROJECTS |  keys" (click)="selectProject(project)">
+                                    {{ project.value.NAME }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 pt-0">
+                <!-- <button class="btn btn-rounded p-1 pr-4 pl-4 blue-border-btn box-shadow" data-dismiss="modal">Cancel</button> -->
+                <button class="btn btn-rounded p-1 pr-4 pl-4 blue-bg-btn box-shadow" (click)="classify()">Open</button>
+            </div>
+        </div>
+    </div>
+</div>

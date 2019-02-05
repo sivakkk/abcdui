@@ -1,0 +1,51 @@
+#flyer-component {
+    .modal {
+        font-family: 'helvetica-regular' !important;
+        text-align: center;
+        overflow: hidden;
+    
+        .modal-dialog {
+            max-width: 80%;
+            width: auto !important;
+            display: inline-block;
+        }
+
+        .overflow {
+            overflow: auto;
+        }
+
+        .modal-content {
+            max-height: 80vh;
+            border-radius: 2px;
+            margin-top: calc(50vh - 25px);
+            transform: translateY(-50%);
+        }
+        
+        .close {
+            position: absolute;
+            right: -40px;
+            top: -25px;
+            width: 32px;
+            height: 32px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #fff;
+            opacity: 1;
+        }
+
+        #image_flyer {
+            img {
+                width: 100%; 
+                max-height: calc(80vh - 2rem);
+            }
+        }
+
+        #video_flyer {
+            video {
+                max-height: calc(80vh - 2rem);
+            }
+        }
+    }
+}

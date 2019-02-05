@@ -1,0 +1,192 @@
+@import "../../assets/partials/_mixins.scss";
+
+.my-project{
+    font-family: 'helvetica-regular';
+    color: #7B7E91;
+
+    // Add project modal styles
+    .modal{
+        .modal-dialog{   
+            width: 375px;
+        }
+        .modal-content{
+            border-radius: 2px;
+        }
+        .close{
+            position: absolute;
+            right: -10%;
+            top: -10%;
+            width: 32px;
+            height: 32px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #fff;
+            opacity: 1;
+        }
+        input:focus, select:focus{
+            box-shadow: none;
+        }
+        .blue-border-btn{
+            border: 1px solid #3043EC;
+            background: transparent;
+            color: #3043EC;
+
+            @include button-hover(#413DF5,#fff);
+        }
+        .blue-bg-btn{
+            background: #3043EC;
+
+            @include button-hover(#fff,#413DF5);
+        }
+        label{
+            font-size: 1.1rem;
+        }
+        ::-webkit-input-placeholder {   // Placeholder color
+            color: rgba(72, 72, 92, 0.61);
+        }
+        ::-moz-placeholder {
+            color: rgba(72, 72, 92, 0.61);
+        }
+        :-ms-input-placeholder {
+            color: rgba(72, 72, 92, 0.61);
+        }
+        ::placeholder {
+            color: rgba(72, 72, 92, 0.61);
+        }
+        .select{
+            font-family: unset;
+            background: none;
+            color: rgba(72,72,92,1);
+            border: 1px solid rgba(116,121,132,0.61);
+            box-shadow: none;
+        }
+        .dropdown-toggle::after{
+            position: absolute;
+            right: 20px;
+            top: 18px;
+        }
+        #storageMenu, #annotateByMenu {
+            transform: translate3d(0px, 38px, 0px) !important;
+            width: 100%;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+    
+            a:active{
+                background: rgba(48,67,236,0.15);
+            }
+        }
+    }
+
+    .head{
+        .add-project{
+            font-weight: 600;
+            font-size: 1.15rem;
+            @include btn-twoColorLinearGradient(#149fda,#1fbcff, #3bccff, #3f86ed, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+
+        input, .select{
+            font-family: 'helvetica-regular';
+            border-radius: 60px;
+            color: #707070;
+            border: 1px solid rgba(112, 112, 112, 0.91);
+            font-size: 0.9rem;
+            width: 130px;
+            outline: none;
+            background: transparent;
+        }
+        .select:focus{
+            box-shadow: none;
+        }
+        .dropdown-toggle::after{
+            content: none;
+        }
+        input{
+            width: 100%;
+        }
+        ::-webkit-input-placeholder {
+            color: rgba(124, 127, 146, 0.33);
+        }
+        ::-moz-placeholder {
+            color: rgba(124, 127, 146, 0.33);
+        }
+        :-ms-input-placeholder {
+            color: rgba(124, 127, 146, 0.33);
+        }
+        ::placeholder {
+            color: rgba(124, 127, 146, 0.33);
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 15%;
+            left: 15px;
+            color:#1C9EE4;
+        }
+        .down-arrow{
+            position: absolute;
+            right: 11px;
+            font-size: 0.7rem;
+            top: 12px;
+            color:#1C9EE4;
+        }
+        .dropdown-menu {
+            font-size: 0.9rem; 
+        }
+        .dropdown-item:active{
+            background: rgba(28, 158, 228, 0.1)
+        }
+        .change-view-icon{
+            color:#1C9EE4;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+    }
+
+    .container {
+        @media(min-width: 1400px){
+            max-width: unset !important;
+        } 
+    }
+
+    .project-folders{
+        color: #505571;
+        font-weight:600;
+        transition: 1s;
+
+        @media(max-width: 998px){
+            font-size: 0.85rem;
+        }       
+
+        .folder{
+            cursor: pointer;
+
+            .folder-icon{
+                width: 1.7rem;
+                
+                @media(max-width: 998px){
+                    width: 1.15rem;
+                }                
+            }
+        }
+
+        #actions{
+            cursor: pointer;
+        }
+
+        .dropdown-menu{
+            min-width: unset !important;
+
+            .dropdown-item{
+                cursor: pointer;
+                
+                @media(max-width: 998px){
+                    font-size: 0.85rem;
+                }
+            }
+        }
+    }
+
+}

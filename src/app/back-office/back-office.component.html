@@ -1,0 +1,106 @@
+<div style="padding:10px;">
+    <div class="ui styled accordion">
+        <div class="active title">
+            <i class="dropdown icon"></i>
+            Users
+        </div>
+        <div class="active content">
+            <div class="ui statistic">
+                <div class="value">
+                    {{ this.totalUsers }}
+                </div>
+                <div class="label">
+                    Total Users
+                </div>
+            </div>
+            <div *ngFor="let user of this.userSegregation" class="ui statistic">
+                <div class="value">
+                    {{ user.COUNT }}
+                </div>
+                <div class="label">
+                    {{ user.USER_TYPE }}
+                </div>
+            </div>
+        </div>
+        <div class="title">
+            <i class="dropdown icon"></i>
+            Logins
+        </div>
+        <div class="content">
+            <div class="ui statistic">
+                <div class="value">
+                    {{loginsTodayCount}}
+                </div>
+                <div class="label">
+                    Today's Logins
+                </div>
+            </div>
+        </div>
+        <div class="title">
+            <i class="dropdown icon"></i>
+            Sign Ups
+        </div>
+        <div class="content">
+            <div class="ui statistic">
+                <div class="value">
+                    {{signUpsTodayCount}}
+                </div>
+                <div class="label">
+                    Today's Sign Ups
+                </div>
+            </div>
+        </div>
+        <div class="title">
+            <i class="dropdown icon"></i>
+            Synchronizer
+        </div>
+        <div class="content">
+            <div class="ui statistic">
+                <div class="value">
+                    {{synchronizerUsedCount}}
+                </div>
+                <div class="label">
+                    Have Used Synchronizer
+                </div>
+            </div>
+        </div>
+        <div class="title">
+            <i class="dropdown icon"></i>
+            Projects
+        </div>
+        <div class="content">
+            <div class="ui statistic">
+                <div class="value">
+                    {{ projectDetails.totalProjects }}
+                </div>
+                <div class="label">
+                    Projects
+                </div>
+            </div>
+            <div class="ui statistic">
+                <div class="value">
+                    {{ projectDetails.withStorageConnected }}
+                </div>
+                <div class="label">
+                    Projects with <br /> storage connected
+                </div>
+            </div>
+            <div class="ui statistic">
+                <div class="value">
+                    0
+                </div>
+                <div class="label">
+                    Projects with images
+                </div>
+            </div>
+            <div class="ui statistic">
+                <div class="value">
+                    0
+                </div>
+                <div class="label">
+                    Projects with atleast <br />1 classified image
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

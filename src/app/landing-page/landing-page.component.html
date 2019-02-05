@@ -1,0 +1,482 @@
+<!-- navbar-->
+<header class="header">
+    <nav class="navbar navbar-expand-lg fixed-top pr-lg-1 pr-xl-5">
+        <a class="navbar-brand p-0" href="">
+            <img src="../../assets/logo_wtm_c.png" />
+        </a>
+        <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><span></span><span></span><span></span></button>
+        <div id="navbarSupportedContent" class="collapse navbar-collapse" style="width:80%">
+            <ul class="navbar-nav ml-auto align-items-start align-items-lg-center">
+                <li class="nav-item">
+                    <a [ngx-scroll-to]="'#about-us'" class="nav-link link-scroll">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a [ngx-scroll-to]="'#features'" class="nav-link link-scroll">Features</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Annotation Tools
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/bounding-box-annotation">Bounding Box</a>
+                      <a class="dropdown-item" href="/polygonal-annotation">Polygonal</a>
+                      <a class="dropdown-item" href="/3d-cuboid-annotation">Cuboidal</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a [ngx-scroll-to]="'#pricing'" class="nav-link link-scroll">Pricing</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Use Cases
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/agriculture-tech-computer-vision-model">Agriculture Tech</a>
+                        <a class="dropdown-item" href="/oil-and-gas-computer-vision-model">Oil and Gas</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/faq" class="nav-link link-scroll">Faq's</a>
+                </li>
+                <li class="nav-item">
+                    <a [ngx-scroll-to]="'#contact-us'" class="nav-link">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/freelancer" class="nav-link">Freelancer</a>
+                </li>
+            </ul>
+            <div class="navbar-text">
+                <a href="/login" class="btn btn-outline-primary navbar-btn btn-shadow">Login</a>
+                <a href="#pricing" class="btn btn-primary navbar-btn btn-shadow btn-gradient">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section id="hero" class="hero hero-home">
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-lg-6 text order-2 order-lg-1">
+                <h2>The New Face of AI and Machine Learning is Here</h2>
+                <p class="hero-text">The fastest, smartest and collabrative way to
+                    <br /> classify objects for machine learning and AI models
+                    <br /> with API ready</p>
+                <div class="CTA">
+                    <a href="#features" class="btn btn-primary btn-shadow btn-gradient link-scroll">Discover More</a>
+                    <a href="#pricing" class="btn btn-outline-primary">Sign Up Now</a>
+                </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2">
+                <!-- <img src="../../assets/images/lp_main_vector_04.png" alt="..." class="img-fluid"> -->
+                <div class="dt-laptop-slider">
+                    <div class="laptop-screen">
+
+                        <img class='app-shot' src="../../assets/images/landing-page/intro-01.png" />
+
+                        <img class='app-shot' src="../../assets/images/landing-page/oclavi-intro-03.png" alt="Medical Imagery Annotation" />
+
+                        <img class='app-shot' src="../../assets/images/landing-page/intro-01.png" alt="Image Annotation" />
+
+                        <img class='app-shot' src="../../assets/images/landing-page/oclavi-intro-03.png" alt="DICOM annotation" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row d-flex align-items-center">
+            <div class="text col-lg-4 order-2 order-lg-1">
+                <div class="icon"><i class="fa fa-picture-o fa-3x" style="color:#3D6DE3; text-shadow: 1px 1px 1px #ccc;" aria-hidden="true"></i></div>
+                <h4>Image Annotation</h4>
+                <h6>Build high-quality datasets</h6>
+                <p>Our Image annotation solution enables you to annotate Bounding Box, Polygon, Circle, Point and Cuboidal annotations with precision and highest-quality. Auto-detection with <b>OCLAVI Predict<sup>TM</sup></b> <sup>&alpha;lpha</sup> will save humongous time in creating label data.</p>
+            </div>
+            <div class="text col-lg-4 order-2 order-lg-1">
+                <div class="icon"><i class="fa fa-medkit fa-3x" style="color:#3D6DE3; text-shadow: 1px 1px 1px #ccc;" aria-hidden="true"></i></div>
+                <h4>Medical Annotation</h4>
+                <h6>Improve patient care with AI</h6>
+                <p>Cognitive computing in medical AI, build highest-quality medical annotation data which in turn helps in building state-of-the-art CV models which is helpful in analyzing medical data to treat diseases. It enhances doctors’ ability to analyze medical images.</p>
+            </div>
+            <div class="text col-lg-4 order-2 order-lg-1">
+                <div class="icon"><i class="fa fa-check-circle-o fa-3x" style="color:#3D6DE3; text-shadow: 1px 1px 1px #ccc;" aria-hidden="true"></i></div>
+                <h4>Assured Quality</h4>
+                <h6>Highest quality training data for CV models.</h6>
+                <p>Our Image labeling solution delivers highest-quality results which helps in building state-of-the-art computer vision models. We've built a robust freelancer module which will help you crowdsouring the work with highest quality output.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="features">
+    <div class="container">
+        <h2 class="text-center">Features</h2>
+        <br /><br />
+        <div class="row d-flex align-items-center">
+            <div class="text col-lg-6 order-2 order-lg-1">
+                <div class="icon"><i class="fa fa-fighter-jet fa-3x" style="color:#3D6DE3;" aria-hidden="true"></i></div>
+                <h4>Fastest way to integrate</h4>
+                <h6>The most direct to model injection classified data through API.</h6>
+                <p>With our API, you get responses within seconds and you can easily concentrate on the model building.</p>
+                <a href="#extra-features" class="btn btn-primary btn-shadow btn-gradient">View More</a>
+            </div>
+            <div class="image col-lg-6 order-1 order-lg-2"><img src="../../assets/images/landing-page/lp-features-01.jpg" alt="..." class="img-fluid"></div>
+        </div>
+        <div class="row d-flex align-items-center">
+            <div class="image col-lg-6"><img src="../../assets/images/landing-page/lp-features-02.jpg" alt="..." class="img-fluid"></div>
+            <div class="text col-lg-6">
+                <div class="icon"><i class="fa fa-users fa-3x" style="color:#3D6DE3;" aria-hidden="true"></i></div>
+                <h4>Collaborative way to annotate</h4>
+                <h6>Bring in your own people to classify the objects and maintain the quality. </h6>
+                <p>Connect to your cloud storage and invite your team members to annotate the images, while you can focus on the model itself.</p>
+                <a href="#extra-features" class="btn btn-primary btn-shadow btn-gradient">View More</a>
+            </div>
+        </div>
+        <div class="row d-flex align-items-center">
+            <div class="text col-lg-6 order-2 order-lg-1">
+                <div class="icon"><i class="fa fa-lightbulb-o fa-3x" style="color:#3D6DE3;" aria-hidden="true"></i></div>
+                <h4>Smartest way to get the annotations</h4>
+                <h6>Auto populate the annotations based on the selected category. </h6>
+                <p>While you are labelling, OCLAVI Predict<sup>TM</sup> will suggest the annotations which makes your work 4x smarter, accurate and saves time.</p>
+                <a href="#extra-features" class="btn btn-primary btn-shadow btn-gradient">View More</a>
+            </div>
+            <div class="image col-lg-6 order-1 order-lg-2"><img src="../../assets/images/landing-page/lp-features-03.jpg" alt="..." class="img-fluid"></div>
+        </div>
+    </div>
+</section>
+
+<!-- More Features -->
+<section id="extra-features" class="extra-features bg-primary">
+    <div class="container text-center">
+        <header>
+            <h2>More great features</h2>
+            <div class="row">
+                <p class="lead col-lg-8 mx-auto">There are many great features in our product which will help you to get accurate annotations for your models.</p>
+            </div>
+        </header>
+        <div class="grid row">
+            <div class="item col-lg-4 col-md-6">
+                <div class="icon"> <i class="fa fa-search-plus" aria-hidden="true"></i></div>
+                <h3 class="h5">Zoom</h3>
+                <p>Zoom deep into images incredibly fast by slicing your image into thousands of small image tiles which will be easy for annotations.</p>
+            </div>
+            <div class="item col-lg-4 col-md-6">
+                <div class="icon"> <i class="fa fa-undo" aria-hidden="true"></i></div>
+                <h3 class="h5">Undo</h3>
+                <p>If you have annotated wrongly, you can now undo the last annotation by click of a button.</p>
+            </div>
+            <div class="item col-lg-4 col-md-6">
+                <div class="icon"> <i class="fa fa-trash-o" aria-hidden="true"></i></div>
+                <h3 class="h5">Delete</h3>
+                <p>Now, you can delete a particular annotation if you have done it incorrectly.</p>
+            </div>
+            <div class="item col-lg-4 col-md-6">
+                <div class="icon"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
+                <h3 class="h5">Shapes</h3>
+                <p>Annotate the images with Bound Box, Polygon, Circle, Point, Cuboidal shapes.<br /><i>Coming Soon - Line, Lidar, Video and Text annotations.</i></p>
+            </div>
+            <div class="item col-lg-4 col-md-6">
+                <div class="icon"> <i class="fa fa-floppy-o" aria-hidden="true"></i></div>
+                <h3 class="h5">Auto Save</h3>
+                <p>The annotations are auto save every 15 seconds and if there is any inactivity we pause the timer.</p>
+            </div>
+            <div class="item col-lg-4 col-md-6">
+                <div class="icon"> <i class="fa fa-code" aria-hidden="true"></i></div>
+                <h3 class="h5">API Support</h3>
+                <p>Inject the classified data to your model using our API.</p>
+            </div>
+            <div class="item col-lg-4 col-md-6">
+                <div class="icon"> <i class="fa fa-cloud" aria-hidden="true"></i></div>
+                <h3 class="h5">Storage</h3>
+                <p>You can now bring in your images from Azure, Google Drive and Amazon S3 to annotate on the platform.</p>
+            </div>
+            <div class="item col-lg-4 col-md-6">
+                <div class="icon"> <i class="fa fa-users" aria-hidden="true"></i></div>
+                <h3 class="h5">Team</h3>
+                <p>Bring in your own team members to annotate the images, so that you can maintain the quality.</p>
+            </div>
+            <div class="item col-lg-4 col-md-6">
+                <div class="icon"> <i class="fa fa-tachometer" aria-hidden="true"></i></div>
+                <h3 class="h5">Dashboard</h3>
+                <p>Real-Time insights on annotations done by your invited users.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing" class="pricing">
+    <div class="container" style="width: 1200px">
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Pricing</h1>
+            <p class="lead">By default, we sign-up all the <strong>Pro</strong> accounts with its respective <strong>Student</strong> accounts, upon successful sign-up you can upgrade any time from <strong>your profile</strong> page.</p>
+        </div>
+
+        <div class="container mb-5 mt-5">
+            <div class="pricing card-deck flex-column flex-md-row mb-3">
+                <div class="card card-pricing text-center px-3 mb-4">
+                    <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Student Self</span>
+                    <div class="bg-transparent card-header pt-4 border-0">
+                        <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="15">&#8377;<span class="price">0</span><span class="h6 text-muted ml-2"> for university</span></h1>
+                    </div>
+                    <div class="card-body pt-0">
+                        <ul class="list-unstyled mb-4">
+                            <li></li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> 100 Objects</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Unlimited labels</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> 1 seat</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Boundbox Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Polygon Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Cuboid Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Circle Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Dot Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Crowdsource</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Google Drive</li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> Amazon S3</li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> Azure</li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> OCLAVI Predict<sup>TM</sup> <sup>&alpha;lpha</sup></li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> Segmentation <sup>&beta;eta</sup></li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> API Support</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Email Support</li>
+                        </ul>
+                        <a href="/signup/student-self" class="btn btn-outline-secondary mb-3">Signup Now for Free</a>
+                    </div>
+                </div>
+                <div class="card card-pricing text-center px-3 mb-4">
+                    <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Student Admin</span>
+                    <div class="bg-transparent card-header pt-4 border-0">
+                        <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="30">&#8377;<span class="price">0</span><span class="h6 text-muted ml-2"> for university</span></h1>
+                    </div>
+                    <div class="card-body pt-0">
+                        <ul class="list-unstyled mb-4">
+                            <li></li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> 100 Objects</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Unlimited labels</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> 3 seats</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Boundbox Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Polygon Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Cuboid Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Circle Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Dot Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Crowdsource</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Google Drive</li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> Amazon S3</li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> Azure</li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> OCLAVI Predict<sup>TM</sup> <sup>&alpha;lpha</sup></li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> Segmentation <sup>&beta;eta</sup></li>
+                            <li><i class="fa fa-times fa-lg" aria-hidden="true"></i> API Support</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Email Support</li>
+                        </ul>
+                        <a href="/signup/student-admin" class="btn btn-outline-secondary mb-3">Signup Now for Free</a>
+                    </div>
+                </div>
+                <div class="card card-pricing popular shadow text-center px-3 mb-4">
+                    <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Pro Self</span>
+                    <div class="bg-transparent card-header pt-4 border-0">
+                        <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="45">&#8377;<span class="price">999</span><span class="h6 text-muted ml-2">/ per month</span></h1>
+                    </div>
+                    <div class="card-body pt-0">
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Unlimited Objects</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Unlimited labels</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> 1 seat</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Boundbox Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Polygon Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Cuboid Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Circle Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Dot Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Crowdsource</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Google Drive</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Amazon S3</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Azure</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> OCLAVI Predict<sup>TM</sup> <sup>&alpha;lpha</sup></li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Segmentation <sup>&beta;eta</sup></li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> API Support</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Chat & Email Support</li>
+                        </ul>
+                        <a href="/signup/student-self" class="btn btn-primary mb-3">Free 3-days Trial</a>
+                    </div>
+                </div>
+                <div class="card card-pricing popular shadow text-center px-3 mb-4">
+                    <span class="h6 w-60 mx-auto px-4 py-1 rounded-bottom bg-primary text-white shadow-sm">Pro Admin</span>
+                    <div class="bg-transparent card-header pt-4 border-0">
+                        <h1 class="h1 font-weight-normal text-primary text-center mb-0" data-pricing-value="60">&#8377;<span class="price">999<sup>*</sup></span><span class="h6 text-muted ml-2">/ per seat / month</span></h1>
+                    </div>
+                    <div class="card-body pt-0">
+                        <ul class="list-unstyled mb-4">
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Unlimited Objects</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Unlimited labels</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Unlimited seats (Min 3 seats)</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Boundbox Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Polygon Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Cuboid Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Circle Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Dot Annotation</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Crowdsource</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Google Drive</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Amazon S3</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Azure</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> OCLAVI Predict<sup>TM</sup> <sup>&alpha;lpha</sup></li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Segmentation <sup>&beta;eta</sup></li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> API Support</li>
+                            <li><i class="fa fa-check fa-lg" aria-hidden="true"></i> Chat & Email Support</li>
+                        </ul>
+                        <a href="/signup/student-admin" class="btn btn-primary mb-3">Free 3-days Trial</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="lead" style="font-size: 0.8em">* 1-10 seats the monthly price per seat is <i class="fa fa-inr" aria-hidden="true"></i> 999, 11-20 seats the monthly price per seat is <i class="fa fa-inr" aria-hidden="true"></i> 945, 21-30 seats the monthly price per seat is <i class="fa fa-inr"
+                aria-hidden="true"></i> 909, 31-50 seats the monthly price per seat is <i class="fa fa-inr" aria-hidden="true"></i> 874, 51-100 seats the monthly price per seat is <i class="fa fa-inr" aria-hidden="true"></i> 810 and for more than 100 seats
+            kindly contact sales for pricing.</p>
+    </div>
+</section>
+
+<!--- About us -->
+<section id="about-us" class="about-us bg-gray">
+    <div class="container">
+        <h2>About Us</h2>
+        <div class="row">
+            <p class="lead col-lg-10">At OCLAVI we provide annotation tools help models learn precisely and work accurately in the real world. Our product helps to classify the data for any machine learning and artificial intelligence model. We provide one stop solutions where label and annotation can be done at a time.</p>
+            <br />
+            <p class="lead col-lg-10" style="font-weight: 600;margin-top: -2%">
+                <strong>Our team</strong>
+            </p>
+            <p class="lead col-lg-10" style="margin-top: -2%">The OCLAVI team is comprised of innovative people who work together to solve real world problems with machine learning and artificial intelligence. The only way to innovate things every day is with innovative people who truly enjoy their job.
+                OCLAVI’s mission is to make the machine learning and Ai easy for the developers by providing API ready classified data.
+            </p>
+        </div>
+        <a href="https://www.carabinertech.com/about" class="btn btn-primary btn-shadow btn-gradient">Discover More</a>
+    </div>
+</section>
+
+<!--- Contact us -->
+<section id="contact-us" class="contact-us">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <form role="form">
+            <br style="clear:both">
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" [(ngModel)]="email" required>
+            </div>
+            <div class="form-group">
+                <input type="phone" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" [(ngModel)]="mobile" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" [(ngModel)]="subject" required>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" type="textarea" id="message" name="message" placeholder="Message Box" [(ngModel)]="message" maxlength="140" rows="7"></textarea>
+            </div>
+            <button type="button" id="submit" name="submit" class="btn btn-primary pull-right sendButton" (click)="save(name, email, mobile, subject, message)" style="width:38%;">SEND NOW</button>
+        </form>
+    </div>
+</section>
+
+<!--- Customers -->
+<section id="customers" class="customers">
+    <div class="container">
+        <h2 style="align-content: center">Some of our users</h2>
+        <a href="https://www.tue.nl/en/" target="_blank"><img src="../../assets/images/landing-page/clients/tue.nl.png" style="width:180px;height:120px;margin:13px;float:left" alt="Eindhoven University of Technology" title="Eindhoven University of Technology" /></a>
+        <a href="https://www.usc.edu/" target="_blank"><img src="../../assets/images/landing-page/clients/usc-logo.jpg" style="width:240px;height:120px;margin:13px;float:left"  alt="University of Southern California" title="University of Southern California" /></a>
+        <a href="http://www.clemson.edu/" target="_blank"><img src="../../assets/images/landing-page/clients/clemson_edu.png" style="width:220px;height:120px;margin:13px;float:left" alt="Clemson University, South Carolina" title="Clemson University, South Carolina" /></a>
+        <a href="http://www.gus-uav.com/" target="_blank"><img src="../../assets/images/landing-page/clients/gus-uav.png" class="marq_image" alt="Global Unmanned Systems" title="Global Unmanned Systems" /></a>
+        <a href="http://www.kit.edu" target="_blank"><img src="../../assets/images/landing-page/clients/kit_logo_V2_de.svg" class="marq_image" alt="Karlsruhe Institute of Technology" title="Karlsruhe Institute of Technology" /></a>
+        <a href="https://www.kth.se/en" target="_blank"><img src="../../assets/images/landing-page/clients/KTH.svg" class="marq_image" alt="KTH Royal Institute of Technology" title="KTH Royal Institute of Technology, Sweden" /></a>
+        <a href="https://alixir.ai/" target="_blank"><img src="../../assets/images/landing-page/clients/alixir_ai.jpg" class="marq_image" alt="alixir.ai" title="alixir.ai" /></a>
+        <a href="https://www.augmenta.ag/" target="_blank"><img src="../../assets/images/landing-page/clients/augmenta.webp" class="marq_image" alt="Augmenta.ag" title="Augmenta.ag" /></a>
+        <a href="https://case.edu/" target="_blank"><img src="../../assets/images/landing-page/clients/Case-Western-Reserve-University-Logo.jpg" style="width:330px;height:150px;margin:13px;float:left" alt="Case Western Reserve University" title="Case Western Reserve University" /></a>
+        <a href="https://www.railvision.io/" target="_blank"><img src="../../assets/images/landing-page/clients/railvision.png" style="width:150px;height:120px;margin:13px;float:left" alt="Rail Vision" title="Rail Vision" /></a>
+        <a href="https://www.rdm.ox.ac.uk/about/our-divisions/division-of-cardiovascular-medicine" target="_blank"><img src="../../assets/images/landing-page/clients/rdm-main-logo.png" style="width:280px;height:120px;margin:13px;float:left" alt="Division of Cardiovascular Medicine" title="Division of Cardiovascular Medicine" /></a>
+        <a href="https://www.stonybrook.edu/" target="_blank"><img src="../../assets/images/landing-page/clients/stony-brook-university-logo.png" style="width:270px;height:120px;margin:13px;float:left" alt="Stony Brook University" title="Stony Brook University" /></a>
+        <a href="https://www.stjude.org/" target="_blank"><img src="../../assets/images/landing-page/clients/stjude.svg" style="width:250px;height:120px;margin:13px;float:left" alt="St. Jude Children's Research Hospital" title="St. Jude Children's Research Hospital" /></a>
+        <a href="https://starshipdeliveries.com/" target="_blank"><img src="../../assets/images/landing-page/clients/starship.svg" class="marq_image" alt="Starship" title="Starship" /></a>
+        <a href="https://www.lboro.ac.uk/" target="_blank"><img src="../../assets/images/landing-page/clients/lu.png" style="width:250px;height:120px;margin:13px;float:left" alt="Loughborough University" title="Loughborough University" /></a>
+        <a href="https://www.visteon.com/" target="_blank"><img src="../../assets/images/landing-page/clients/visteon.jpg" style="width:120px;height:40px;margin:13px;float:left" alt="Visteon Corporation" title="Visteon Corporation" /></a>
+        <a href="https://www.surrey.ac.uk/" target="_blank"><img src="../../assets/images/landing-page/clients/University_of_Surrey_Logo.png" style="width:120px;height:40px;margin:13px;float:left" alt="University of Surrey" title="University of Surrey" /></a>
+        <a href="https://www.huawei.com/en/" target="_blank"><img src="../../assets/images/landing-page/clients/huawei.png" style="width:120px;height:75px;margin:13px;float:left" alt="Huawei" title="Huawei" /></a>
+    </div>
+</section>
+
+<div id="scrollTop">
+    <div class="d-flex align-items-center justify-content-end"><i class="fa fa-long-arrow-up"></i>To Top</div>
+</div>
+
+<!--- Footer -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <a href="#" class="brand">OCLAVI</a>
+                <ul class="contact-info list-unstyled">
+                    <li>
+                        <a href="mailto:support@oclavi.com">Support@Oclavi.com</a>
+                    </li>
+                    <li>
+                        <a href="tel:445603750100">+44 56 0375 0100</a>
+                    </li>
+                </ul>
+                <ul class="social-icons list-inline">
+                    <li class="list-inline-item">
+                        <a href="https://www.facebook.com/oclavi" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/oclavi_" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.linkedin.com/company/carabinertechnologies/" target="_blank" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5>Resources</h5>
+                <ul class="links list-unstyled">
+                    <li>
+                        <a href="https://medium.com/oclavi" target="_blank">Blog</a>
+                    </li>
+                    <li>
+                        <a href="/faq">FAQ's</a>
+                    </li>
+                    <li>
+                        <a href="/terms">Terms & Conditions</a>
+                    </li>
+                    <li>
+                        <a href="/privacypolicy">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="/gdpr-compliance">GDPR Compliance</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h5>Carabiner Technologies</h5>
+                <ul class="links list-unstyled">
+                    <li>
+                        <a href="https://www.carabinertech.com/about">About Carabiner</a>
+                    </li>
+                    <li>
+                        <a href="https://angel.co/carabiner-technologies/jobs">Careers</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="copyrights">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <p>&copy; 2018 Oclavi.com. All rights reserved. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="//code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>

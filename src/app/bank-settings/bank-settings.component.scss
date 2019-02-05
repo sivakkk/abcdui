@@ -1,0 +1,22 @@
+$theme-color-grey: #f5f5f5;
+$theme-color-grey-dark: #ddd;
+$theme-color-blue: royalblue;
+$theme-color-blue-light: #0083ff;
+$theme-color-blue-dark: blue;
+
+.parent-container
+{
+    .content
+    {
+        .right-side
+        {
+            .tab-content
+            {
+                .detail
+                {
+                    margin-right: 5%;
+                }
+            }
+        }
+    }
+}

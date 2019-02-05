@@ -1,0 +1,28 @@
+<div id="flyer-component">
+
+  <div class="modal fade" id="flyerModal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 box-shadow" id="ad_modal_content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style="font-family: open-sans-regular;">&times;</span>
+            </button>
+            <div class="modal-body" *ngIf="flyer_details.length !== 0" [class.overflow]="flyer_details[currentFlyerIndex].ADVT_DISPLAY_TYPE === 'HTML'">
+              <div *ngIf="flyer_details[currentFlyerIndex].ADVT_DISPLAY_TYPE === 'HTML'" id="html_flyer">  <!--****    If flyer is HTML    ****-->
+                <div [innerHTML]="flyer_details[currentFlyerIndex].ADVT_DISPLAY_HTML"></div>
+              </div>
+
+              <div *ngIf="flyer_details[currentFlyerIndex].ADVT_DISPLAY_TYPE === 'IMAGE'" id="image_flyer">  <!--****    If flyer is IMAGE    ****-->
+                <img [src]="flyer_details[currentFlyerIndex].ADVT_DISPLAY_IMAGE" class="img-fluid">
+              </div>
+
+              <div *ngIf="flyer_details[currentFlyerIndex].ADVT_DISPLAY_TYPE === 'VIDEO'" id="video_flyer">  <!--****    If flyer is VIDEO    ****-->
+                <video id="video" autoplay loop>
+                  <source [src]="flyer_details[currentFlyerIndex].ADVT_DISPLAY_VIDEO">
+                </video>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</div>

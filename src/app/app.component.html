@@ -1,0 +1,90 @@
+<router-outlet></router-outlet>
+
+<div id="loader" [hidden]="!loaderService.loading"></div>
+<div id="loaderContent" [hidden]="!loaderService.loading">
+    <img src="../assets/loader.gif">
+    <label>{{loaderService.loadingText}}</label>
+</div>
+
+<!-- <div class="modal fade hide" id="confirmPasswordContent" tabindex="-1" role="dialog" aria-hidden="true" style="">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0" style="border: 1px solid grey !important">
+            <div class="modal-body" style="padding:30px;">
+                <span>Enter your password: </span>
+                <input type="password" id="confirmPasswordContentInput" style="width:250px;line-height: 30px;" />
+            </div>
+            <div class="modal-footer border-0 justify-content-center pt-0" style="padding-top:20px !important; display: flex;justify-content: space-around !important;">
+                <button class="btn btn-rounded px-5 mx-2 blue-bg-btn box-shadow" (click)="confirmPasswordService.confirmPressed()">Confirm</button>
+                <button class="btn btn-rounded px-5 mx-2 blue-border-btn box-shadow" (click)="confirmPasswordService.cancelPressed()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div id="confirm-container">
+    <div class="modal fade" id="confirmPasswordContent" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 box-shadow">
+                <button type="button" class="close" (click)="confirmPasswordService.cancelPressed()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body pb-0">
+                    <div class="text-center">
+                        <h5 class="h5 text-red">
+                                JUST CHECKING...
+                        </h5>
+                    </div>
+                    <div class="mt-3 mb-3 text-center alert-message">
+                        <span>Enter your password: </span>
+                        <input type="password" id="confirmPasswordContentInput" style="width:250px;line-height: 30px;" />
+                    </div>
+                </div>
+                <div class="modal-footer text-right border-0 pr-5 pl-5 pb-0 pt-0">
+                    <button type="button" class="btn btn-rounded pb-1 pt-1 pr-5 pl-5 m-2 blue-bg-btn box-shadow" (click)="confirmPasswordService.confirmPressed()">Confirm</button>
+                    <button type="button" class="btn btn-rounded pb-1 pt-1 pr-5 pl-5 m-2 blue-border-btn box-shadow" (click)="confirmPasswordService.cancelPressed()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="alert-container">
+    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 box-shadow">
+                <button type="button" class="close" (click)="alertService.negativeCallback()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body pb-0">
+                    <div [hidden]="alertService.alertType != 'warn'" class="text-center">
+                        <h4 class="h4 text-red">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                WARNING
+                        </h4>
+                    </div>
+                    <div [hidden]="alertService.alertType != 'info'" class="text-center">
+                        <h4 class="h4 info">
+                            Information
+                        </h4>
+                    </div>
+                    <div [hidden]="alertService.alertType != 'error'" class="text-center">
+                        <h4 class="h4 text-red">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        ERROR
+                        </h4>
+                    </div>
+                    <div class="mt-3 mb-3 alert-message">
+                        <div [innerHTML]="alertService.alertMessage"></div>
+                    </div>
+                </div>
+                <div class="modal-footer text-right border-0 pr-5 pl-5 pb-0 pt-0" [ngClass]="{'justify-content-between': alertService.alertType == 'warn', 'bg-red':alertService.alertType == 'error'}">
+                    <button type="button" class="btn btn-rounded pb-1 pt-1 pr-5 pl-5 m-2 blue-border-btn box-shadow" [class.light-border-btn]="alertService.alertType == 'error'" (click)="alertService.negativeCallback()" *ngIf="alertService.alertType != 'info'">{{alertService.alertType == 'warn' ? 'No' : 'Dismiss'}}</button>
+                    <button type="button" class="btn btn-rounded pb-1 pt-1 pr-5 pl-5 m-2 blue-bg-btn box-shadow" (click)="alertService.positiveCallback()" *ngIf="alertService.alertType != 'error'">{{alertService.alertType == 'info' ? 'OK' : 'Yes'}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-marketing></app-marketing>
+<simple-notifications [options]="options"></simple-notifications>

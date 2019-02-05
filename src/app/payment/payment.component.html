@@ -1,0 +1,146 @@
+<div>
+    <div class="heading" style="font-size:1.2em;">
+        PAYMENTS
+    </div>
+    <div class="tab-content mt-3 px-3" style="display: grid;padding-bottom: 4%;">
+        <div class="p-2 px-4 bg-white upgrade-info" *ngIf="session.USER_TYPE == environment.USER_TYPE.SELF.NAME && isPlanActive">
+            <div class="d-flex justify-content-between align-items-center m-0">
+                <div>
+                    <span>Cancel your current payment plan</span>
+                    <span>Your plan would be converted to Student Self Plan.</span>
+                </div>
+                <button class="cancelButton btn btn-rounded px-5" (click)="cancelSubscription()">Cancel Subscription</button>
+            </div>
+        </div>
+        <div class="p-2 px-4 bg-white upgrade-info" *ngIf="session.USER_TYPE == environment.USER_TYPE.ADMIN.NAME && isPlanActive">
+            <div class="d-flex justify-content-between align-items-center m-0">
+                <div>
+                    <span>Cancel your current payment plan</span>
+                    <span>Your plan would be converted to Student Admin Plan.</span>
+                </div>
+                <button class="cancelButton btn btn-rounded px-5" (click)="cancelSubscription()">Cancel Subscription</button>
+            </div>
+        </div>
+        <div class="p-2 px-4 bg-white upgrade-info" *ngIf="session.USER_TYPE == environment.USER_TYPE.STUDENT_SELF.NAME || (session.USER_TYPE == environment.USER_TYPE.SELF.NAME && !isPlanActive)">
+            <div class="d-flex justify-content-between align-items-center m-0">
+                <div>
+                    <span>Upgrage your plan.</span>
+                    <span>Your plan will be upgraded to Professional Self Plan.</span>
+                </div>
+                <button class="btn btn-rounded upgrade-btn px-5" (click)="showPaymentModal()">Upgrade Plan</button>
+                <ng-select [items]="durations" bindLabel="durationLabel" bindValue="durationValue" placeholder="Select Duration" markFirst="true" [(ngModel)]="currentDuration" class="custom" (change)="durationChanged($event)"></ng-select>
+            </div>
+        </div>
+        <div class="p-2 px-4 bg-white upgrade-info" *ngIf="session.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME || (session.USER_TYPE == environment.USER_TYPE.ADMIN.NAME && !isPlanActive)">
+            <div class="d-flex justify-content-between align-items-center m-0">
+                <div>
+                    <span>Upgrage your plan</span>
+                    <span>Your plan will be upgraded to Professional Admin Plan.</span>
+                </div>
+                <button class="btn btn-rounded upgrade-btn px-5" (click)="showPaymentModal()">Upgrade Plan</button>
+                <ng-select [items]="durations" bindLabel="durationLabel" bindValue="durationValue" placeholder="Select Duration" markFirst="true" [(ngModel)]="currentDuration" class="custom" (change)="durationChanged($event)"></ng-select>
+            </div>
+        </div>
+
+        <div class="mt-5 p-2 px-lg-4 bg-white box-shadow" id="invoices" *ngIf="payments && payments.length != 0">
+            <div class="header">
+                <span style="font-weight: bold;color: #4f4f4f;font-size: 1.2rem">INVOICES</span>
+            </div>
+
+            <div class="row m-0 mt-3" style="color:#757575;">
+                <h6 class="col-4 px-1 px-lg-3">DESCRIPTION</h6>
+                <h6 class="col-2 px-1 px-lg-3 text-center">BILLING DATE</h6>
+                <h6 class="col-2 px-1 px-lg-3 text-center">PLAN END DATE</h6>
+                <h6 class="col-2 px-1 px-lg-3 text-center">AMOUNT</h6>
+                <h6 class="col-2 px-1 px-lg-3 text-center">STATUS</h6>
+            </div>
+            <div class="row m-0 py-3 border-top" style="color:#212121;font-size: 0.9rem;cursor: pointer;" *ngFor="let payment of payments; index as i" (click)="setCurrentInvoice(i)">
+                <span class="col-4 px-1 px-lg-3">{{ payment.description }}</span>
+                <span class="col-2 px-1 px-lg-3 text-center">{{ payment.billing_date | date }}</span>
+                <span class="col-2 px-1 px-lg-3 text-center">{{ payment.plan_end_date | date }}</span>
+                <span class="col-2 px-1 px-lg-3 text-center">
+                  {{ payment.regularAmount.currency }}
+                  {{ payment.paymentMethod == 'RAZOR_PAY' ? payment.regularAmount.total_amount / 100 : payment.regularAmount.total_amount }}</span>
+                <div class="col-2 px-1 px-lg-3 text-center">
+                    <span class="p-1 px-3 payment-state  paid" [ngClass]="{'green': payment.paymentStatus == 'ACTIVE', 'orange': payment.paymentStatus == 'CANCELLED', 'red': payment.paymentStatus == 'FAILED', 'yellow': payment.paymentStatus == 'CREATED'}">{{ payment.paymentStatus}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="invoice_container" class="my-4" *ngIf="currentInvoice">  <!--  Single Invoice -->
+        <div id="invoice" class="mx-4 box-shadow">
+            <div class="text-white header p-4">
+                <button class="back_btn" (click)="setCurrentInvoice(null)"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+                <h5 class="font-weight-bold mb-4" style="margin-top:50px;">INVOICE</h5>
+                <p class="mb-1"><span class="field_name">INVOICE :</span><span>{{ currentInvoice?._id }}</span></p>
+                <p><span class="field_name">DATE :</span><span>{{ currentInvoice?.billing_date | date }}</span></p>
+                <p class="pay_status m-0" [ngClass]="{'green': currentInvoice?.paymentStatus == 'ACTIVE', 'orange': currentInvoice?.paymentStatus == 'CANCELLED', 'red': currentInvoice?.paymentStatus == 'FAILED', 'yellow': currentInvoice?.paymentStatus == 'CREATED'}">
+                    <span>STATUS: {{ currentInvoice?.paymentStatus }}</span>
+                </p>
+            </div>
+            <div class="body">
+                <div class="container w-75 py-5">
+                    <table class="table border">
+                        <tbody>
+                            <tr class="table-info">
+                                <td>Description</td>
+                                <td>{{ currentInvoice?.description }}</td>
+                            </tr>
+                            <tr>
+                                <td>Purpose</td>
+                                <td>{{ currentInvoice?.purpose }}</td>
+                            </tr>
+                            <tr class="table-info">
+                                <td>Payment Method</td>
+                                <td>{{ currentInvoice?.paymentMethod }}</td>
+                            </tr>
+                            <tr>
+                                <td>Plan Start Date</td>
+                                <td>{{ currentInvoice?.plan_start_date }}</td>
+                            </tr>
+                            <tr class="table-info">
+                                <td>Plan end Date</td>
+                                <td>{{ currentInvoice?.plan_end_date }}</td>
+                            </tr>
+                            <tr>
+                                <td>Card</td>
+                                <td *ngIf="currentInvoice?.card_last4">**** **** **** {{ currentInvoice?.card_last4 }}</td>
+                            </tr>
+                            <tr class="table-info">
+                                <td>Billing Days</td>
+                                <td>{{ currentInvoice?.billingDays }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-right mt-5">
+                        <strong class="font-weight-bold">TOTAL AMOUNT: {{ currentInvoice?.regularAmount.currency }}
+                                {{ currentInvoice?.paymentMethod == 'RAZOR_PAY' ? currentInvoice?.regularAmount?.total_amount / 100 : currentInvoice?.regularAmount?.total_amount }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade p-0" tabindex="-1" role="dialog" id="upgradePaymentModal">
+    <div class="modal-dialog m-0" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-0">
+                <button type="button" class="close p-0 m-0 ml-auto mr-4" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body container">
+                <div class="mb-4" style="color:#646466;">
+                    <img src="../../assets/logo_wtm_c.png" height="60">
+                    <span style="line-height: 1;vertical-align: middle;">{{ activeAccordion | titlecase}}</span>
+                </div>
+                <div style="box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.35)">
+                    <app-accordion [data]="step1" [billingAmount]="billingAmount" [payNow]="payNow" [vm]="this"></app-accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

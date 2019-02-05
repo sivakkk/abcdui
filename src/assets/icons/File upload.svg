@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.87 31.465">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #7788f6;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <g id="if_icon-81-document-add_314764" transform="translate(-5 -2)">
+    <g id="icon-81-document-add" transform="translate(5 2)">
+      <path id="document-add" class="cls-1" d="M22.36,26.955V23.7h1.085v3.255H26.7V28.04H23.445v3.255H22.36V28.04H19.1V26.955Zm-5.4,4.34H7.167A2.17,2.17,0,0,1,5,29.117V4.178A2.178,2.178,0,0,1,7.179,2H18.02V8.512A2.167,2.167,0,0,0,20.2,10.68h5.419V20.985a7.054,7.054,0,0,0-8.656,10.309ZM19.1,2V8.507A1.087,1.087,0,0,0,20.18,9.595h5.435L19.1,2Zm3.8,31.465A5.967,5.967,0,1,0,16.935,27.5,5.967,5.967,0,0,0,22.9,33.465Z" transform="translate(-5 -2)"/>
+    </g>
+  </g>
+</svg>

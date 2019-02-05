@@ -1,0 +1,147 @@
+<!-- <div *ngIf="tab == 'docs'">     -->
+<div>    
+    <div class="heading" style="font-size:1.2em;">
+        GET STARTED
+    </div>
+    <div class="tab-content" style="display:grid;padding-bottom: 10%">
+        <div class="container" id="faq-main-container">
+            <section class="faq-main-tab">
+                <main>
+                    <input class="tab-input" id="tab1" type="radio" name="tabs" checked>
+                    <label class="tab-label" for="tab1">Import Images</label>
+    
+                    <input class="tab-input" id="tab2" type="radio" name="tabs">
+                    <label class="tab-label" for="tab2">Syncronizer</label>
+    
+                    <input class="tab-input" id="tab3" type="radio" name="tabs">
+                    <label class="tab-label" for="tab3">Label Settings</label>
+    
+                    <input class="tab-input" id="tab4" type="radio" name="tabs">
+                    <label class="tab-label" for="tab4">Invite Users</label>
+    
+                    <section class="tab-section" id="content1">
+                        <div class="tab-sec-accor">
+                          <p>Go to <strong>Image Settings</strong> tab in profile page and select the preferrect <strong>Storage Type</strong>. Below are the respective storage type steps to syncronize your images,</p>
+                          <input class="tab-sec-input" id="ac-11" name="accordion-1" type="radio">
+                          <label class="tab-sec-label" for="ac-11"><i class="fa fa-google"></i> - Google Drive</label>
+                          <article class="ac-small">
+                            <p>By default you can connect to your Personal or Business Google Drive account by clicking on <strong>Connect to Google Drive</strong> button.
+                              <br />
+                              <br />Below is the screenshot for the same,
+                              <br />
+                              <br />
+                              <img src="../../assets/images/oc-gdrive-01.png" width="70%" height="70%" style="border:1px solid #4DA9F7;" />
+                              <br />
+                              <br /> 
+                              Upon connecting there will be a folder titled <strong>OCLAVI</strong> onto your connected Google Drive, now, <strong>upload/move</strong> the images into the newly created folder titled <strong>OCLAVI</strong>.
+                              <br />
+                              <br />  
+                              Once, the files are moved, click on <strong>Start Syncronizer</strong> button, below is the screenshot for the same,
+                              <br /><br />
+                              <img src="../../assets/images/oc-sync-01.png" width="70%" height="70%" style="border:1px solid #4DA9F7;" /> 
+                            </p>
+                          </article>
+                        </div>
+                        <div class="tab-sec-accor">
+                            <input class="tab-sec-input" id="ac-12" name="accordion-1" type="radio">
+                            <label class="tab-sec-label" for="ac-12"><i class="fa fa-amazon"></i> - AWS S3</label>
+                            <article class="ac-small">
+                                <p>
+                                  In AWS S3, you have provide the below list of items to syncronize the images,
+                                  <br /><br />
+                                  <!-- Access Key -->
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 2em;">Access Key</span>
+                                  <span style="text-indent:0.2em;list-style-type:square;display:list-item;margin-left: 3em;">How do I get an access key for Amazon S3?</span>
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 4em;">
+                                    Go to <strong>Amazon Web Services</strong> console and click on the name of your account (it is located in the top right corner of the console). Then, in the expanded drop-down list, select <strong>Security Credentials</strong>.
+                                    <br />
+                                    <img src="/assets/images/docs/s3-1.png" width="60%" height="50%" style="border:1px solid #4DA9F7;" />
+                                  </span>
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 4em;">
+                                      Click the <strong>Continue to Security Credentials</strong> button.
+                                      <br />
+                                      <img src="/assets/images/docs/s3-2.png" width="60%" height="50%" style="border:1px solid #4DA9F7;" />
+                                  </span>
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 4em;">
+                                      Expand the <strong>Access Keys (Access Key ID and Secret Access Key)</strong> option. You will see the list of your active and deleted access keys.
+                                      <br />
+                                      <img src="/assets/images/docs/s3-3.png" width="60%" height="50%" style="border:1px solid #4DA9F7;" />
+                                  </span>
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 4em;">
+                                      To generate new access keys, click the <strong>Create New Access Key</strong> button.
+                                      <br />
+                                      <img src="/assets/images/docs/s3-4.png" width="60%" height="50%" style="border:1px solid #4DA9F7;" />
+                                  </span>
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 4em;">
+                                      Click <strong>Show Access Key</strong> to have it displayed on the screen. Note, that you can download it to your machine as a file and open it whenever needed. To download it, just click the <strong>Download Key File</strong> button.
+                                      <br />
+                                      <img src="/assets/images/docs/s3-5.png" width="60%" height="50%" style="border:1px solid #4DA9F7;" />
+                                  </span>
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 4em;">
+                                      <strong>Attention!</strong> If you do not write down the key or download the key file to your computer before you press "Close" or "Cancel" you will not be able to retrieve the secret key in future. Then you'll have to delete the keys which you created and start to create new keys.
+                                  </span>
+
+                                  <!--- Secret Key -->
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 2em;">Secret Key</span>
+                                  <span style="text-indent:0.2em;list-style-type:square;display:list-item;margin-left: 3em;">How do I get an secret access key for Amazon S3?</span>
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 4em;">
+                                      When you create the new access key, at that time you also get the secret access key.
+                                      <br />
+                                      <img src="/assets/images/docs/s3-5.png" width="60%" height="50%" style="border:1px solid #4DA9F7;" />
+                                  </span>
+
+                                  <!--- Region -->
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 2em;">Bucket Region</span>
+                                  <span style="text-indent:0.2em;list-style-type:square;display:list-item;margin-left: 3em;">Select the region from the dropdown where the bucket is available.</span>
+
+                                  <!-- Bucket Name -->
+                                  <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 2em;">Bucket Name</span>
+                                  <span style="text-indent:0.2em;list-style-type:square;display:list-item;margin-left: 3em;">Give the exact <strong>bucket name</strong></span>
+                                </p>
+                            </article>
+                        </div>
+                    </section>
+    
+                    <section class="tab-section" id="content2">
+                        <div class="tab-sec-accor">
+                            <p>Upon Image settings click on the
+                                <strong>Syncronizer</strong> button which is there on the
+                                <strong>Image Settings</strong> tab on your
+                                <strong>OCLAVI Profile Page</strong>.
+                                <br />
+                                <br /> Below is the screenshot for the same,
+                                <br />
+                                <br />
+                                <img src="../../assets/images/oc-sync-01.png" width="70%" height="70%" style="border:1px solid #4DA9F7;" />
+                                <br />
+                                <br />
+                            </p>
+                        </div>
+                    </section>
+    
+                    <section class="tab-section" id="content3">
+                        <div class="tab-sec-accor">
+                          <p>
+                            Once the Syncronizer is run, then go to <strong>Label Settings</strong> tab in profile page and follow the below steps to add labels.
+                            <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 2em;">Add a label name, category and click on <strong>Add Label button</strong>.</span>
+                          </p>
+                        </div>
+                    </section>
+    
+                    <section class="tab-section" id="content4">
+                        <div class="tab-sec-accor">
+                          <p>
+                            If, signed up as Admin user, then follow the below steps to invite users to annotate,
+                            <span style="text-indent:0.2em;list-style-type:disc;display:list-item;margin-left: 2em;">Go to <strong>Invite Users</strong> tab in profile page and follow the below steps to invite your own team members to classify the objects.</span>
+                            <span style="text-indent:0.2em;list-style-type:square;display:list-item;margin-left: 3em;">Add inviting user <strong>full name</strong>.</span>
+                            <span style="text-indent:0.2em;list-style-type:square;display:list-item;margin-left: 3em;">Add inviting user <strong>email address</strong>, ensure to provide a valid email as it needs to verified.</span>
+                            <span style="text-indent:0.2em;list-style-type:square;display:list-item;margin-left: 3em;">Add a <strong>password</strong> for the inviting user and click on <strong>Send Invite</strong> button.</span>
+                            <span style="text-indent:0.2em;list-style-type:square;display:list-item;margin-left: 3em;">In case if you are running out of seats to invite user, please increase the seats via <strong>"+"</strong> and click on <strong>Buy Now</strong> button.</span>
+                          </p>
+                          </div>
+                    </section>
+                </main>
+            </section>
+        </div>
+    </div>
+</div>

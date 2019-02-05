@@ -1,0 +1,201 @@
+<nav class="navbar navbar-expand-md fixed-top bg-faded justify-content-center navbar-light">
+  <a class="navbar-brand d-flex w-50 mr-auto" href="">
+    <img src="../../assets/images/Logo@Oclavi.png" />
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse w-100" id="navbarResponsive">
+      <ul class="navbar-nav w-100 justify-content-center smooth-scroll list-unstyled">
+          <li class="nav-item active">
+              <a class="nav-link" [ngx-scroll-to-offset]="-100" [ngx-scroll-to]="'#how-it-works'">HOW IT WORKS?</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" [ngx-scroll-to]="'#what-type-of-work'" style="width:100%;margin-right:20px;border-right: 2px solid rgba(0,0,0,0.5);">WHAT TYPE OF WORK?</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" style="margin-left:20%" href="/">BUSINESS</a>
+          </li>
+      </ul>
+      <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/freelancer/login">Log In</a>
+          </li>
+          <li class="nav-item">
+              <a routerLink="/freelancer/signup" class="btn oc-login active" role="button" aria-pressed="true">
+                  Sign up
+                  <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+          </li>
+      </ul>
+  </div>
+</nav>
+
+<!-- Masthead -->
+<header class="masthead text-white text-center">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 mx-auto">
+        <h2 class="mb-3">Become a freelancer and be part of Machine Learning, Deep Learning and Artificial Intelligence era!</h2>
+        <h4 class="fl-head-tag">Make money by annotating in your spare time</h4>
+      </div>
+      <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter your email...">
+            <div class="input-group-btn">
+                <a routerLink="/freelancer/signup" role="button" class="btn btn-block btn-lg">Sign up!</a>                  
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Steps Grid -->
+<section class="features-icons bg-light text-center" id="how-it-works">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 mx-auto">
+        <h2 class="mb-3 text-center">How It works</h2>
+        <h4 class="text-center">Steps to Get started as a freelancer with OCLAVI</h4>
+      </div>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fa fa-hourglass fa-2x m-auto text-primary"></i>
+          </div>
+          <h3>Training</h3>
+          <p class="lead mb-0">Complete 40 hr, 5-level training certification!</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fa fa-tasks fa-2x m-auto text-primary"></i>
+          </div>
+          <h3>Tasks</h3>
+          <p class="lead mb-0">Tasks are assigned on availability and we track your performance</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+          <div class="features-icons-icon d-flex">
+            <i class="fa fa-credit-card-alt fa-2x m-auto text-primary"></i>
+          </div>
+          <h3>Money Transfer</h3>
+          <p class="lead mb-0">Upon successful feedback by the task owner, money is disbursed!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- Image Showcases -->
+ <section class="showcase" id="what-type-of-work">
+  <div class="container-fluid p-0">
+    <br />
+    <div class="row">
+      <div class="col-xl-9 mx-auto">
+        <h2 class="mb-5 text-center">What kind of tasks need to be done?</h2>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../../assets/images/freelancer/fl-lp-showcase-01.jpg');"></div>
+      <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+        <h2>Image Annotations</h2>
+        <p class="lead mb-0">Your work helps in solving real world problems with Machine Learning, Deep Learning and Artificial Intelligence!</p>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-lg-6 text-white showcase-img" style="background-image: url('../../assets/images/freelancer/fl-lp-showcase-04.jpg');"></div>
+      <div class="col-lg-6 my-auto showcase-text">
+        <h2>Quality Check of Annotations</h2>
+        <p class="lead mb-0">Perform a quality check on the images that were already annotated by other contributors!</p>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('../../assets/images/freelancer/fl-lp-showcase-03.jpg');"></div>
+      <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+        <h2>Video Annotation, Text Annotation and many more coming soon</h2>
+        <p class="lead mb-0">Classify text by assigning one or more classes to a document according to their content.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="call-to-action text-white text-center">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 mx-auto">
+        <h2 class="mb-4">Ready to get started? <br />Become a freelancer on OCLAVI!</h2>
+        <h4 class="mb-4">It’s easy to find something which fits your skills with growing Machine Learning, Deep Learning and Artificial Intelligence market,  Sign up now!</h4>
+      </div>
+      <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter your email...">
+            <div class="input-group-btn">
+                <a href="/freelancer/login?signup" role="button" class="btn btn-block btn-lg">Sign up!</a>                 
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+        <ul class="list-inline mb-2">
+          <li class="list-inline-item">
+            <a href="/#about-us">About</a>
+          </li>
+          <li class="list-inline-item">&sdot;</li>
+          <li class="list-inline-item">
+            <a href="/#contact-us">Contact</a>
+          </li>
+          <li class="list-inline-item">&sdot;</li>
+          <li class="list-inline-item">
+            <a href="/terms">Terms of Use</a>
+          </li>
+          <li class="list-inline-item">&sdot;</li>
+          <li class="list-inline-item">
+            <a href="/privacypolicy">Privacy Policy</a>
+          </li>
+          <li class="list-inline-item"> <a href="/gdpr-compliance">GDPR Compliance</a></li>
+        </ul>
+        <p class="text-muted small mb-4 mb-lg-0">&copy; OCLAVI 2018. All Rights Reserved.</p>
+      </div>
+      <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item mr-3">
+            <a href="https://www.facebook.com/oclavi">
+              <i class="fa fa-facebook fa-2x fa-fw"></i>
+            </a>
+          </li>
+          <li class="list-inline-item mr-3">
+            <a href="https://twitter.com/oclavi_">
+              <i class="fa fa-twitter fa-2x fa-fw"></i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/company/carabinertechnologies/">
+              <i class="fa fa-linkedin fa-2x fa-fw"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="//code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

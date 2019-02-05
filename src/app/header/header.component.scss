@@ -1,0 +1,137 @@
+/************************New Header Design*****************************/
+@import "../../assets/partials/_mixins.scss";
+
+$border-color-light-grey: #CBCFD8;
+$theme-color-grey: #7b7e91;
+$font-color-grey-dark: #505571;
+$theme-color-btn-skyblue: #14d4ed;
+$theme-color-btn-darkSkyBlue: #1a91ca;
+$theme-color-blue-dark: #1124b5;
+$theme-color-purple: #765DFF;
+
+.header-component{
+    font-family: 'helvetica-medium';
+    color: $font-color-grey-dark;
+
+    .app-logo
+    {
+        height: 60px;
+
+        img
+        {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+        }
+    }
+    .dropdown-menu{
+        border: 0.6px;
+        left: unset;
+        right: -50%;
+        box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+        
+        .dropdown-item{
+            margin: .25rem 1rem;
+            width: auto;
+            color: $font-color-grey-dark;
+            border-bottom: 1px solid $border-color-light-grey;
+        }
+        .dropdown-item:active{
+            background: rgba(28, 158, 228, 0.1)
+        }
+
+        .upgrade-btn{
+            color: $theme-color-purple;
+            border-left: 1px solid $border-color-light-grey;
+        }
+    }
+    .user-name{
+        color: $theme-color-grey;
+    }
+    .user-type{
+        border-left: 3px solid grey;
+    }
+    .btn-rounded{
+        @include btn-twoColorLinearGradient(#149fda,#1fbcff, #3bccff, #3f86ed, to right, 200% 150%);
+        @include btn-twoColorLinearGradient-hover( right center);
+    }
+    .user-thumb // User Avatar
+    {
+        width: 42px;
+        height: 42px;
+        border: 2px solid $theme-color-blue-dark;
+    }
+    .user-thumb-big{
+        width: 60px;
+        height: 60px;
+        border: 2px solid $theme-color-purple;
+    }
+}
+.navbar{
+    z-index: 1;
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+}
+
+// Select Project modal styles
+.modal{
+    font-family: 'helvetica-regular' !important;
+
+    .modal-dialog{   
+        width: 375px;
+    }
+    .modal-content{
+        border-radius: 2px;
+    }
+    .close{
+        position: absolute;
+        right: -10%;
+        top: -10%;
+        width: 32px;
+        height: 32px;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #fff;
+        opacity: 1;
+    }
+    .select{
+        font-family: unset;
+        background: none;
+        color: rgba(72,72,92,0.61);
+        border: 1px solid rgba(116,121,132,0.61);
+        box-shadow: none;
+    }
+    .dropdown-toggle::after{
+        position: absolute;
+        right: 20px;
+        top: 18px;
+    }
+    #projectMenu {
+        transform: translate3d(0px, 38px, 0px) !important;
+        width: 100%;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+
+        a:active{
+            background: rgba(48,67,236,0.15);
+        }
+    }
+    .blue-border-btn {
+        border: 1px solid #3043EC;
+        background: transparent;
+        color: #3043EC;
+
+        @include button-hover(#413DF5,#fff);
+    }
+    .blue-bg-btn {
+        background: #3043EC;
+
+        @include button-hover(#fff,#413DF5);
+    }
+    label {
+        font-size: 1.1rem;
+        color: #3043EC;
+    }
+}

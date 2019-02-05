@@ -1,0 +1,12 @@
+<div class="row mx-0 mt-4">
+    <div *ngFor="let videoItem of channelVideos" class="col-md-6 col-lg-4 p-2">
+        <div class="d-flex align-items-center bg-white box-shadow p-md-2">
+            <div class="thumbnail p-2 w-100">
+                <div class="caption text-truncate">
+                   <strong> {{videoItem.title}} </strong>
+                </div>
+                <iframe [src]="byPassUrlTrust(videoItem.videoUrl)" frameborder="0" allowfullscreen class="p-2"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

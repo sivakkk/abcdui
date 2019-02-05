@@ -1,0 +1,73 @@
+<div *ngIf="tab == 'bank-settings'">
+  <div class="heading">
+    BANK ACCOUNT SETTINGS
+  </div>
+  <div class="tab-content">
+    <p style="" class="payment-method" style="line-height: 2">
+      <span>Choose payment method</span>
+      <br />
+      <span>
+        <input type="radio" id="input-radio-credit-card" name="payment-method" checked ng-model="user.paymentMethod" value="creditCard">
+        <label for="input-radio-credit-card">
+                    <span style="">Credit Card</span>
+                </label>
+      </span>
+      <span>
+        <input type="radio" id="input-radio-debit-card" name="payment-method" ng-model="user.paymentMethod" value="debitCard">
+        <label for="input-radio-debit-card">
+                    <span style="">Debit Card</span>
+                </label>
+      </span>
+    </p>
+    <p style="" class="card-type" style="line-height: 2">
+      <span>Choose Card Type</span>
+      <br />
+      <span>
+        <input type="radio" id="input-radio-visa" name="card-type" ng-model="user.cardType" value="visa">
+        <label for="input-radio-visa">
+                    <span style="">VISA</span>
+                </label>
+      </span>
+      <span>
+        <input type="radio" id="input-radio-master-card" name="card-type" ng-model="user.cardType" value="masterCard">
+        <label for="input-radio-master-card">
+                    <span style="">Master Card</span>
+                </label>
+      </span>
+      <span>
+        <input type="radio" id="input-radio-maestro" name="card-type" ng-model="user.cardType" value="maestro">
+        <label for="input-radio-maestro">
+                    <span style="">Maestro</span>
+                </label>
+      </span>
+      <span>
+        <input type="radio" id="input-radio-paypal" name="card-type" ng-model="user.cardType" value="paypal">
+        <label for="input-radio-paypal">
+                    <span style="">Paypal</span>
+                </label>
+      </span>
+    </p>
+    <p>
+      <span class="detail">
+        Card Number :
+        <input type="text" placeholder="Card Number" ng-model="user.cardNumber" name="cardNumber" style="width:20%;" required>
+      </span>
+
+      <span class="detail">
+        CVV :
+        <input type="password" placeholder="CVV" ng-model="user.cvv" name="cvv" style="width:8%;" required>
+      </span>
+
+      <span class="detail">
+        Expiry Date :
+        <input type="text" placeholder="Expiry" ng-model="user.expiryDate" name="expiryDate" style="width:10%;" required>
+      </span>
+    </p>
+  </div>
+  <div class="bottom-button" style="margin-top: -43px;text-align: center;">
+    <p>
+      <button style="background-color:royalblue;margin-right: 5%;">SAVE</button>
+      <button style="background-color:#0083FF;">EDIT</button>
+    </p>
+  </div>
+</div>

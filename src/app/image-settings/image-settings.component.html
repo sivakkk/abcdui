@@ -1,0 +1,300 @@
+<!-- EXPORT CLASSIFICATION DATA MODAL -->
+<div class="modal fade" id="export-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-header bg-white">
+                <h4>Export classification Data</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="columnList" style="column-count: 3">
+                    <li *ngFor="let item of exportColumns" style="list-style: none;" class="p-1">
+                        <span class="checkmark">
+                            <span class="round">
+                                <input type="checkbox" id="checkbox" [(ngModel)]="item.value" (ngModelChange)="item.name" value="true" name="item.name" [disabled]="item.disable">
+                                <label for="checkbox"></label>
+                                <span class="rem-text">{{item.name}}</span>
+                            </span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer border-0 justify-content-center pt-0">
+                <button class="btn btn-rounded px-5 mx-2 blue-bg-btn box-shadow" (click)="startExport()">Start</button>
+                <button class="btn btn-rounded px-5 mx-2 blue-border-btn box-shadow" (click)="closeModal('export-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="image-settings container px-4" *ngIf="dataAvaiable == true">
+    <!-- Active storage details for current project -->
+    <div id="storage-details" class="detail-block py-5 border-bottom">
+        <input style="display:none" type="email" name="fakeusernameremembered"/>
+        <input style="display:none" type="password" name="fakepasswordremembered"/>
+
+        <!-- s3 data -->
+        <div *ngIf="activeStorage == 'S3' && user?.SUBSCRIPTION_FLAG?.STORAGE?.S3 && this.session?.USER_TYPE != environment.USER_TYPE.TEAM.NAME" id="s3" class="S3 row storageRow">
+            <div class="detail custom-struct col-6 my-3">
+                <div class="row align-items-center">
+                    <p class="col-3 m-0">Access Key</p>
+                    <div class="col-9 px-4">
+                        <input type="text" placeholder="Access Key" name="accessKey" autocomplete="off"
+                        class="p-3 w-100" [(ngModel)]="imageSettingsDataModel.storage.S3.ACCESS_KEY">
+                    </div>
+                </div>
+            </div>
+            <div class="detail custom-struct col-6 my-3">
+                <div class="row align-items-center">
+                    <p class="col-3 m-0">Secret Key</p>
+                    <div class="col-9 px-4">
+                        <input type="text" placeholder="Secret Key" name="accessKey" autocomplete="off"
+                        class="p-3 w-100" [(ngModel)]="imageSettingsDataModel.storage.S3.SECRET_KEY">
+                    </div>
+                </div>
+            </div>
+            <div class="detail custom-struct col-6 my-3">
+                <div class="row align-items-center">
+                    <p class="col-3 m-0">Region Name</p>
+                    <div class="col-9 px-4">
+                        <ng-select [items]="objectStorageData.S3.FIELDS.REGION_NAME.VALUES" bindLabel="LABEL"
+                        bindValue="VALUE" placeholder="Region Name" class="custom w-100 py-3" [searchable]="false"
+                        [(ngModel)]="imageSettingsDataModel.storage.S3.REGION_NAME" (change)="saveDetails()"></ng-select>
+                    </div>
+                </div>
+            </div>
+            <div class="detail custom-struct col-6 my-3">
+                <div class="row align-items-center">
+                    <p class="col-3 m-0">Bucket Name</p>
+                    <div class="col-9 px-4">
+                        <input type="text" placeholder="Bucket Name" name="accessKey" autocomplete="off"
+                        class="p-3 w-100" [(ngModel)]="imageSettingsDataModel.storage.S3.BUCKET_NAME">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Azure Storage data -->
+        <div *ngIf="activeStorage == 'AZURE_STORAGE' && user?.SUBSCRIPTION_FLAG?.STORAGE?.AZURE_STORAGE && this.session?.USER_TYPE != environment.USER_TYPE.TEAM.NAME" id="s3" class="S3 row storageRow">
+            <div class="detail custom-struct col-6 my-3">
+                <div class="row align-items-center">
+                    <p class="col-3 m-0">Connection String</p>
+                    <div class="col-9 px-4">
+                        <input type="text" placeholder="Connection String" name="connectionString" autocomplete="off"
+                        class="p-3 w-100" [(ngModel)]="imageSettingsDataModel.storage.AZURE_STORAGE.CONNECTION_STRING">
+                    </div>
+                </div>
+            </div>
+            <div class="detail custom-struct col-6 my-3">
+                <div class="row align-items-center">
+                    <p class="col-3 m-0">Azure Storage Types</p>
+                    <div class="col-9 px-4">
+                        <ng-select [items]="objectStorageData.AZURE_STORAGE.FIELDS.AZURE_STORAGE_TYPE.VALUES" bindLabel="LABEL"
+                        bindValue="VALUE" placeholder="Azure Storage Type" class="custom w-100 py-3" [searchable]="false"
+                        [(ngModel)]="imageSettingsDataModel.storage.AZURE_STORAGE.AZURE_STORAGE_TYPE" (change)="blueEvent($event)"></ng-select>
+                    </div>
+                </div>
+            </div>
+            <div class="detail custom-struct col-6 my-3" *ngIf="imageSettingsDataModel.storage.AZURE_STORAGE.AZURE_STORAGE_TYPE == 'file-storage'">
+                <div class="row align-items-center">
+                    <p class="col-3 m-0">Share Name</p>
+                    <div class="col-9 px-4">
+                        <input type="text" placeholder="Share Name" name="shareName" autocomplete="off"
+                        class="p-3 w-100" [(ngModel)]="imageSettingsDataModel.storage.AZURE_STORAGE.SHARE_NAME">
+                    </div>
+                </div>
+            </div>
+            <div class="detail custom-struct col-6 my-3" *ngIf="imageSettingsDataModel.storage.AZURE_STORAGE.AZURE_STORAGE_TYPE == 'file-storage'">
+                <div class="row align-items-center">
+                    <p class="col-3 m-0">Directory Name</p>
+                    <div class="col-9 px-4">
+                        <input type="text" placeholder="Directory Name" name="directoryName" autocomplete="off"
+                        class="p-3 w-100" [(ngModel)]="imageSettingsDataModel.storage.AZURE_STORAGE.DIRECTORY_NAME">
+                    </div>
+                </div>
+            </div>
+            <div class="detail custom-struct col-6 my-3" *ngIf="imageSettingsDataModel.storage.AZURE_STORAGE.AZURE_STORAGE_TYPE == 'blob-storage'">
+                <div class="row align-items-center">
+                    <p class="col-3 m-0">Container Name</p>
+                    <div class="col-9 px-4">
+                        <input type="text" placeholder="Container Name" name="containerName" autocomplete="off"
+                        class="p-3 w-100" [(ngModel)]="imageSettingsDataModel.storage.AZURE_STORAGE.CONTAINER_NAME">
+                    </div>
+                </div>
+            </div>
+            <button class="saveDetailsButton btn-rounded px-5 py-3 box-shadow" (click)="saveDetails()">Save Details</button>
+        </div>
+
+        <div *ngIf="activeStorage == 'GOOGLE_DRIVE' && this.session?.USER_TYPE != environment.USER_TYPE.TEAM.NAME">
+            <!-- If user has connected google drive account, Show 'PICK FOLDER' button -->
+            <div *ngIf="user.PROJECTS[projectId].STORAGE_DETAILS.GOOGLE_DRIVE?.IS_CONNECTED && !user.PROJECTS[projectId].STORAGE_DETAILS.GOOGLE_DRIVE?.FOLDER_ID" class="content-block box-shadow p-4">
+                <p>
+                    You have been connected with google drive. Now Pick folder from your Google Drive.
+                </p>
+                <button class="disconnectButton btn-rounded box-shadow" (click)="disconnectGoogleDrive()">
+                    <i class="google drive icon"></i>Disconnect Google Drive
+                </button>
+                <button class="connectButton btn-rounded box-shadow px-5" (click)="loadPicker()" [disabled]="currentStatus == STATUS_SAVING">
+                    <i class="google drive icon"></i>Pick folder
+                </button>
+            </div>
+            <!-- Connect google drive button -->
+            <div *ngIf="!user.PROJECTS[projectId].STORAGE_DETAILS.GOOGLE_DRIVE?.IS_CONNECTED" class="content-block box-shadow p-4">
+                <p>Connecting to google drive allows you to sync google drive folder images and then classified them from the Dashboard.</p>
+                <button class="connectButton btn-rounded box-shadow" (click)="connectGoogleDrive()">
+                    <i class="google drive icon"></i>Connect Google Drive
+                </button>
+            </div>
+        </div>
+        <!-- Google drive connected folder details (Show if user has connected google drive and selected a folder for project) -->
+        <div id="folder-connected-details" *ngIf="user.PROJECTS[projectId].STORAGE_DETAILS.GOOGLE_DRIVE?.IS_CONNECTED && user.PROJECTS[projectId].STORAGE_DETAILS.GOOGLE_DRIVE?.FOLDER_ID && this.session?.USER_TYPE != environment.USER_TYPE.TEAM.NAME" class="storageRow">
+            <div class="content-block p-4 box-shadow">
+                <p>
+                    Connected Account : {{ user.PROJECTS[projectId].STORAGE_DETAILS.GOOGLE_DRIVE?.CONNECTED_ACCOUNT }}
+                </p>
+                <p>
+                    Last Connected At : {{ user.PROJECTS[projectId].STORAGE_DETAILS.GOOGLE_DRIVE?.LAST_CONNECTED_AT | date:'long' }}
+                </p>
+                <p>
+                    Folder Name : {{ user.PROJECTS[projectId].STORAGE_DETAILS.GOOGLE_DRIVE?.FOLDER_NAME }}
+                </p>
+                <button class="changeFolderButton btn-rounded box-shadow px-5" (click)="loadPicker()" [disabled]="currentStatus == STATUS_SAVING">
+                    <i class="google drive icon"></i>Change folder
+                </button>
+                <button class="disconnectButton btn-rounded box-shadow" (click)="disconnectGoogleDrive()">
+                    <i class="google drive icon"></i>Disconnect Google Drive
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--******   New and classified Image counts and time spent for classification for current project -->
+    <div id="images-details" class="row py-5 border-bottom text-white">
+        <div class="col-lg-4 px-xl-4 my-sm-2 my-lg-0">
+            <div class="card border-0 p-3 px-xl-4 box-shadow">
+                <h6>Total Images:</h6>
+                <div class="row m-0 justify-content-between detail">
+                    <div><i class="fa fa-picture-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="value text-center rounded-circle" [class.reduced-font]="imageSettingsDataModel.totalImages > 99">
+                        {{imageSettingsDataModel.totalImages}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 px-xl-4 my-sm-2 my-lg-0">
+            <div class="card card-2 border-0 p-3 px-xl-4 box-shadow">
+                <h6>Total Image Classified:</h6>
+                <div class="row m-0 justify-content-between detail">
+                    <div><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="value text-center rounded-circle" [class.reduced-font]="imageSettingsDataModel.classifiedImages > 99">
+                        {{imageSettingsDataModel.classifiedImages}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 px-xl-4 my-sm-2 my-lg-0">
+            <div class="card border-0 p-3 px-xl-4 box-shadow">
+                <h6>Total Time Spent:</h6>
+                <div class="row m-0 justify-content-between detail">
+                    <div><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i></div>
+                    <div class="value text-center rounded-circle" [class.reduced-font]="imageSettingsDataModel.totalTimeSpent > 99">
+                        {{ imageSettingsDataModel.totalTimeSpent}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API EXPORT TOKEN and regenerate API export token details (Only for PRO users) -->
+    <div id="token-details" class="py-5 border-bottom" *ngIf="this.session?.USER_TYPE != environment['USER_TYPE']['TEAM']['NAME'] && this.session['SUBSCRIPTION_FLAG']['FEATURES']['API_EXPORT']">
+        <div class="content-block p-4 box-shadow">
+            <p class="detail">
+                Export Token : {{ this.session?.PROJECTS[projectId]?.EXPORT_TOKEN }}
+            </p>
+            <p class="value">
+                You can use this token to export the classified image data using REST API.
+                <i class="fa fa-question-circle-o" style="color:#3D6DE3;cursor:pointer" (click)="showApiExportInfo()" aria-hidden="true"></i>
+            </p>
+            <button class="regenrateTokenButton btn-rounded px-5 py-3 box-shadow" (click)="regenerateExportToken()">Regenerate Token</button>
+        </div>
+    </div>
+
+    <!-- Image Synchronizer (Not for team users) -->
+    <div id="synchonizer-details" class="py-5" *ngIf="this.session?.USER_TYPE != environment['USER_TYPE']['TEAM']['NAME']">
+        <div class="content-block p-4 box-shadow">
+            <h6 class="h6 mb-3">Synchronizer</h6>
+            <div>
+                <p [hidden]="progressText == ''">{{progressText}}</p>
+
+                <div id="synchonizerProgress" class="progress" [hidden]="progress == 0">
+                    <div id="synchonizerBar" class="bar" [style.width]="progress + '%'" [style.border-top-right-radius.px]="progress - 92" [style.border-bottom-right-radius.px]="progress - 92"></div>
+                </div>
+                <p [hidden]="progress == 0">{{progress}}%</p>
+                <p [hidden]="!this.session?.PROJECTS[projectId]?.LAST_SYNCHRONIZATION_DATE">Last Synchronization : {{this.session?.PROJECTS[projectId]?.LAST_SYNCHRONIZATION_DATE | date:"MMM d, y h:mm:ss a" }}</p>
+            </div>
+            <!-- <button id="pt-image-synchronizer" class="synchronizerButton btn-rounded px-5 py-3 box-shadow" [style.opacity]="synchronizerRunning ? 0.5 : 1" (click)="startSynchonizer()" *ngIf="!synchronizerRunning">
+                    Start Synchronizer
+                </button> -->
+            <!-- If user has added PHONE NUMBER to his account, start synchronizer    -->
+            <button id="pt-image-synchronizer" class="synchronizerButton btn-rounded px-5 py-3 box-shadow" [style.opacity]="synchronizerRunning ? 0.5 : 1" (click)="startSynchonizer()" *ngIf="!synchronizerRunning && user.PHONE_NUMBER">
+                Start Synchronizer
+            </button>
+            <!-- If user has not added PHONE NUMBER to his account, Open 'ADD PHONE NUMBER' modal    -->
+            <button id="pt-image-synchronizer" class="synchronizerButton btn-rounded px-5 py-3 box-shadow" [style.opacity]="synchronizerRunning ? 0.5 : 1" (click)="openModal('phone-number-modal')" *ngIf="!synchronizerRunning && !user.PHONE_NUMBER">
+                Start Synchronizer
+            </button>
+        </div>
+    </div>
+
+    <!-- Delete Project (Not for team users) -->
+    <div id="delete-project" class="py-5" *ngIf="this.session?.USER_TYPE != environment['USER_TYPE']['TEAM']['NAME']">
+        <div class="content-block p-4 box-shadow">
+            <h6 class="h6 mb-3">Delete Project</h6>
+            <div *ngIf="this.session?.PROJECTS[projectId]?.STATUS == 'ACTIVE'">
+                <p>It takes 7 days for a project to be deleted. You can revert back deletion if you change your mind.</p>
+                <button id="pt-delete-project" class="deleteProjectButton btn-rounded px-5 py-3 box-shadow" (click)="confirmPassword()">
+                    Delete Project
+                </button>
+            </div>
+            <div *ngIf="this.session?.PROJECTS[projectId]?.STATUS == 'TO_BE_DELETED'">
+                <p>You have scheduled this project for deletion. This project will be deleted after {{ toBeDeletedOn | date }}. You can cancel the deleteion any time before that.</p>
+                <button id="pt-cancel-deletion" class="cancelDeletionButton btn-rounded px-5 py-3 box-shadow" (click)="cancelDeletion()">
+                    Cancel Deletion
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export CSV data and Save S3 tokens button (Not for team users)-->
+    <div id="footer" class="py-5" *ngIf="this.session?.USER_TYPE != environment['USER_TYPE']['TEAM']['NAME']">
+        <div class="buttons w-100 text-center">
+            <!-- Export CSV data button -->
+            <button class="exportButton btn-rounded box-shadow py-3 mr-lg-5" id="pt-image-export-data" (click)="openModal('export-modal')">CSV Export</button>
+            <!-- Save button (shown Only when 'S3' is active storage for current project ) -->
+            <button class="saveButton btn-rounded box-shadow py-3 ml-lg-5" (click)="saveDetails()" *ngIf="this.session?.PROJECTS[projectId]?.ACTIVE_STORAGE == 'S3'">Save</button>
+        </div>
+    </div>
+</div>
+
+
+<!--*************      ADD PHONE NUMBER MODAL          ***************-->
+<div class="modal fade" id="phone-number-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body" style="font-size: 1rem;">
+                <p>In order to serve you better, please provide your mobile number, as in future this will help us in securing your account via enabling two-step verification</p>
+                <p>Enter Phone Number</p>
+                <international-phone-number *ngIf="countryCode" [(ngModel)]="phone_number" placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="countryCode" [required]="true" name="phone_number"></international-phone-number>
+            </div>
+            <div class="modal-footer border-0 justify-content-center pt-0">
+                <button class="btn btn-rounded px-5 mx-2 blue-bg-btn box-shadow" (click)="savePhoneNumber()">Save</button>
+                <button class="btn btn-rounded px-5 mx-2 blue-border-btn box-shadow" (click)="closeModal('phone-number-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

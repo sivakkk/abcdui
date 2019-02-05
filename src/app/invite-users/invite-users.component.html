@@ -1,0 +1,131 @@
+<!-- Only for admin and student admin users -->
+<div id="invite-user" *ngIf="(session?.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME) || (session?.USER_TYPE == environment.USER_TYPE.ADMIN.NAME)">
+    <div class="conatiner-fluid bg-white my-4">
+
+        <div id="add-member" class="p-3">
+            <div class="content-block p-4 box-shadow">
+                <p class="detail">
+                    Add team members.
+                </p>
+                <p class="seats text-right">
+                    Your Total Seat -
+                    <img src="../../assets/icons/armchair.svg">
+                    <span style="color:#2437E9; opacity: 0.6" class="font-weight-bold">{{ settings.usedSeat }} / {{ settings.totalseat }}</span>
+                </p>
+                <!-- Seats Information  -->
+                <p class="seats text-right mb-5">
+                    <span style="font-size:0.9em;">Number of seats : </span>
+                    <button class="btn btn-rounded box-shadow" (click)="decreaseSeat()"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                    <input type="number" [(ngModel)]="settings.tobuy" name="seats" min="1" required="required" class="p-2 text-center">
+                    <button class="btn btn-rounded box-shadow" (click)="increaseSeat()"><i class="fa fa-plus" aria-hidden="true" *ngIf="isPlanActive"></i></button>
+                    <button class="btn-rounded px-md-3 px-lg-4 py-2 box-shadow ml-lg-3" (click)="showPaymentModal()">Buy Seat</button>
+                </p>
+
+                <!-- If global invite user, showing 'ADD TEAM MEMBERS' -->
+                <p class="value" *ngIf="projectId == undefined">
+                    <input type="email" class="w-100 p-md-2 p-lg-3 input" [(ngModel)]="invitedUser.EMAIL_ID" name="email" [disabled]="editFlag" placeholder="Enter email address of team member">
+                    <button class="btn-rounded px-md-3 py-md-2 px-lg-5 py-lg-3 box-shadow" (click)="openModal('inviteUserModal', false)"
+                  [disabled]="invitedUser.EMAIL_ID == ''" >Add team member</button>
+                </p>
+
+                <!-- If PROJECT INVITE USER (COLLABORATORS) -->
+                <div class="value mb-3" *ngIf="projectId != undefined && session?.PROJECTS[projectId]?.ANNOTATE_BY !== environment.USER_TYPE.FREELANCER.NAME">
+                    <input type="email" class="w-100 p-md-2 p-lg-3 input" [(ngModel)]="invitedUser.EMAIL_ID" name="email" (focus)="getTeamUsers()"
+                    placeholder="Search team member by email address" autocomplete="off" (blur)="hide()">
+
+                    <button class="btn-rounded px-md-3 py-md-2 px-lg-5 py-lg-3 box-shadow">Assign team member</button>
+
+                    <!-- Showing list of available users for project invitation -->
+                    <ul *ngIf="!hideResults" class="list-group box-shadow">
+                        <li *ngFor="let member of teamMembers" class="list-group-item border-0 mx-lg-2 mx-xl-3 mb-1" (click)="sendProjectInvite(member)">
+                            <img src="../../assets/profile.png" alt="Profile Picture" class="rounded-circle mr-2" width="40" />
+                            {{ member.NAME }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team members for both GLOBAL and PROJECT members -->
+        <div id="members" class="p-3 pb-5">
+            <p class="border-bottom">Your Team Members</p>
+            <div class="d-flex align-items-center border-bottom py-2" *ngFor="let invitedUser of invitedUsers; let i = index">
+                <div class="mr-md-2 mr-lg-4 profile">
+                    <img src="../../assets/profile.png" alt="Profile Picture" class="rounded-circle">
+                </div>
+                    <div class="">
+                        <p class="m-0">{{ invitedUser.NAME }}</p>
+                        <p class="m-0">{{ invitedUser.EMAIL_ID }}</p>
+                    </div>
+                    <div class="ml-auto">
+                        <button class="btn-rounded px-md-2 px-lg-4 py-2 box-shadow font-weight-normal" (click)="editDetails(i)">Edit Details</button>
+                    </div>
+                    <!-- Remove a team member globally -->
+                    <div class="ml-md-2 ml-lg-3 ml-xl-4" *ngIf="projectId == undefined">
+                        <button class="btn-rounded px-md-2 px-lg-4 py-2 box-shadow font-weight-normal" (click)="deleteUser(i)">Delete User</button>
+                    </div>
+                    <!-- Remove a team member from project only -->
+                    <div class="ml-md-2 ml-lg-3 ml-xl-4" *ngIf="projectId != undefined && session?.PROJECTS[projectId]?.ANNOTATE_BY !== environment.USER_TYPE.FREELANCER.NAME">
+                        <button class="btn-rounded px-md-2 px-lg-4 py-2 box-shadow font-weight-normal" (click)="removeProjectInvite(i)">Remove User</button>
+                    </div>
+                </div>
+                <!-- If not added any team member -->
+                <div class="invite-user text-center" *ngIf="invitedUsers?.length === 0">
+                    You have not invited any team members.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--************ Modal for Inviting users (GLOBAL INVITE USER) ************-->
+    <div class="modal fade" id="inviteUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 box-shadow">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-body">
+                    <div class="mb-3" style="opacity: 0.5;">
+                        <input type="email" [(ngModel)]="invitedUser.EMAIL_ID" name="email" required class="form-control" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" [(ngModel)]="invitedUser.NAME" name="name" placeholder="Enter Name" required class="form-control">
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Default Password" [(ngModel)]="invitedUser.defaultPassword" name="Password" required class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer border-0 justify-content-between pt-0">
+                    <button class="btn btn-rounded p-1 pr-4 pl-4 blue-border-btn box-shadow" data-dismiss="modal" (click)="resetDetails()">Cancel</button>
+                    <!-- Send invite to user -->
+                    <button class="btn btn-rounded p-1 pr-4 pl-4 blue-bg-btn box-shadow" (click)="sendInvite()"
+[disabled]="inviteButtonFlag" *ngIf="!editFlag">Invite</button>
+                    <!-- If Editing details of team member -->
+                    <button class="btn btn-rounded p-1 pr-4 pl-4 blue-bg-btn box-shadow" *ngIf="editFlag" (click)="saveDetails()">Save Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BUY MORE SEATS MODAL -->
+    <div class="modal fade p-0" tabindex="-1" role="dialog" id="buyMoreSeats">
+        <div class="modal-dialog m-0" role="document">
+            <div class="modal-content">
+                <div class="modal-header p-0">
+                    <button type="button" class="close p-0 m-0 ml-auto mr-4" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body container">
+                    <div class="mb-4" style="color:#646466;">
+                        <img src="../../assets/logo_wtm_c.png" height="60">
+                        <span style="line-height: 1;vertical-align: middle;">{{ activeAccordion | titlecase}}</span>
+                    </div>
+                    <div style="box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.35)">
+                        <app-accordion [data]="step1" [billingAmount]="billingAmount" [payNow]="payNow" [vm]="this"></app-accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

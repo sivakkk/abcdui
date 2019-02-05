@@ -1,0 +1,70 @@
+<!--***********       Main Header       ************-->
+<app-header [userData]=session [TAB]="tab" (openTab)="changeTab($event)"></app-header>
+
+<!-- Profile (Parent component for most of the components) -->
+<div class="container-fluid profile-component h-100">
+    <div class="row">
+        <!-- Left Sidebar -->
+        <div class="col-sm-4 col-md-4 col-lg-3 bg-white sidebar pl-0 pt-3">
+            <div class="d-flex flex-column text-center font-weight-bold" *ngIf="session?.USER_TYPE === environment.USER_TYPE.FREELANCER.NAME">
+                <div class="mb-2">
+                    <img class="rounded-circle user-thumb" *ngIf="this.session['USER_AVATAR']" [src]="environment.oclaviServer + 'avatar/' + this.session['USER_AVATAR']" width="100px" >
+                    <img class="rounded-circle user-thumb" *ngIf="!this.session['USER_AVATAR']" [src]="'./assets/profile.png'" alt="" width="100px">
+                </div>
+                <p class="mb-2">{{ this.session?.NAME }}</p>
+                <!-- Certification Level progress bar -->
+                <div>
+                    <p class="mb-2">Certification Level</p>
+                    <div id="certificationProgress" class="progress w-50 m-auto bg-white">
+                        <div id="progress_bar" class="bar" [style.width]="user?.BASIC_TRAINING_COMPLETED ? 100 + '%' : 0 + '%'" [style.border-top-right-radius.px]="progress - 92" [style.border-bottom-right-radius.px]="progress - 92"></div>
+                        <span class="progress-text">{{ user?.BASIC_TRAINING_COMPLETED ? 100 : 0 }}%</span>
+                    </div>
+                </div>       
+            </div>
+    
+            <ul class="nav nav-pills flex-column pr-xl-5">
+                <!-- <li class="nav-item" [ngClass]="{active : tab == 'dashboard'}" (click)="changeTab('dashboard')" *ngIf="session?.USER_TYPE === environment.USER_TYPE.FREELANCER.NAME">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/Dashbord.svg" alt="Dashbord" width="30" height="30" class="mr-md-3 mr-xl-4" />
+                        <span>Dashboard</span>        
+                    </a>
+                </li> -->
+                <li class="nav-item" [ngClass]="{active : (tab == 'my_project' || tab == 'project_settings')}" (click)="changeTab('my_project')">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/My Project.svg" alt="My Project" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>My Project</span> 
+                    </a>
+                </li>
+                <!-- <li class="nav-item" [ngClass]="{active : tab == 'docs'}" (click)="changeTab('docs')">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/Docs.svg" alt="Docs" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>Docs</span> 
+                    </a>
+                </li>  -->
+                <li class="nav-item" [ngClass]="{active : tab == 'payment'}" (click)="changeTab('payment')">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/Payments.svg" alt="Payments" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>Payments</span> 
+                    </a>
+                </li>
+                <!-- <li class="nav-item" [ngClass]="{active : tab == 'how_to_work'}" (click)="changeTab('how_to_work')">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/How to work.svg" alt="How to work" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>Video Tutorials</span> 
+                    </a>
+                </li> -->
+                <li class="nav-item" [ngClass]="{active : tab == 'logout'}" (click)="logOut()">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/Logout.svg" alt="Logout" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>Logout</span> 
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Child components will be shown on right side -->
+        <div class="col-sm-8 col-md-8 col-lg-9 ml-auto right-side">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

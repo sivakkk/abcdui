@@ -1,0 +1,159 @@
+@import '../../assets/partials/_mixins.scss';
+
+.instructions-settings{    
+
+    .content-block{
+        border-radius: 3px;        
+	}    
+	
+    #footer{
+        position: relative;
+        
+        .buttons{
+            position: absolute;   
+            bottom: -32px;
+        }
+        button{
+            font-size: 1.3rem;
+            font-weight: 400;
+            padding-left: 5rem;
+            padding-right: 5rem;
+
+            @media(max-width: 998px){
+                padding-left: 3rem;
+                padding-right: 3rem;
+            }
+        }
+        .previewButton{
+            @include btn-twoColorLinearGradient(#556df6, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+        .publishButton{
+            @include btn-twoColorLinearGradient(#556df6, #5142ff, #1fbcff, #2437e9, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+	}
+
+	.nav-text-color {
+		color : #3043EC;
+		font-size: 1.1rem;
+		font-weight: bold;
+	}
+
+	input, .select{
+		font-family: 'helvetica-regular';
+		border-radius: 5px;
+		color: #707070;
+		border: 1px solid  #2437E9;
+		font-size: 0.9rem;
+		width: 65px;
+		outline: none;
+		background: transparent;
+	}
+	.select:focus{
+		box-shadow: none;
+	}
+
+	.dropdown-toggle::after{
+		content: none;
+	}
+
+	.down-arrow{
+		position: relative;
+		right: -10px;
+		font-size: 0.7rem;
+		top: -1px;
+		color:#1C9EE4;
+	}
+	.dropdown-menu {
+		font-size: 0.9rem; 
+	}
+	.dropdown-item:active{
+		background: rgba(28, 158, 228, 0.1)
+	}
+
+	#actions{
+		cursor: pointer;
+	}
+	.dropdown-menu{
+		min-width: unset !important;
+
+		.dropdown-item{
+			cursor: pointer;
+			
+			@media(max-width: 998px){
+				font-size: 0.85rem;
+			}
+		}
+	}
+	
+}
+
+.modal .cross {
+    position: absolute;
+	right: 10%; 	   
+    width: 1.5rem;
+    height: 1.5rem;  
+    opacity: 1;
+}
+
+button.cross {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+	.modal.left .modal-dialog,
+	.modal.right .modal-dialog {
+		position: fixed;
+		margin: auto;
+		width: 400px;
+		height: 100%;
+		-webkit-transform: translate3d(0%, 0, 0);
+		    -ms-transform: translate3d(0%, 0, 0);
+		     -o-transform: translate3d(0%, 0, 0);
+		        transform: translate3d(0%, 0, 0);
+	}
+
+	.modal.left .modal-content,
+	.modal.right .modal-content {		
+		height: 100%;
+	}
+
+	.modal-header{		
+		padding: 25px;
+	}
+	
+	.modal.left  .modal-body,
+	.modal.right .modal-body {
+		padding: 25px 15px 25px 15px;
+		height: calc(100vh - 350px);
+		overflow-y: auto;
+	}
+
+	/*Left*/
+	.modal.left.fade .modal-dialog{
+		left: -25px;
+		-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+		   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+		     -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+		        transition: opacity 0.3s linear, left 0.3s ease-out;
+	}
+	
+	.modal.left.fade.in .modal-dialog{
+		left: 0;
+	}
+	
+	/*Right*/
+	.modal.right.fade .modal-dialog {
+		right: 0px;
+		-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+		   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+		     -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+		        transition: opacity 0.3s linear, right 0.3s ease-out;
+	}
+	
+	.modal.right.fade.in .modal-dialog {
+		right: 0;
+	}	
+

@@ -1,0 +1,129 @@
+<div class="my-project">
+
+    <!--************ Header of My Project Component ************-->
+    <div class="row m-0 mr-3 mb-3 justify-content-between align-items-center head">
+        <div *ngIf="user.USER_TYPE === environment.USER_TYPE.FREELANCER.NAME" [style.visibility]="user?.BASIC_TRAINING_COMPLETED ? 'hidden' : 'visible'">
+            <span class="font-weight-bold">
+                <img src="../../assets/icons/Certification.svg" style="width:2rem;"/>
+                Please complete your Certification Level
+            </span>
+        </div>
+        <!--*******        Change sorting Method for projects     *******-->
+        <div class="ml-md-5 ml-lg-auto">
+            <div style="position:relative">
+                <span class="mr-3">Sort By</span>
+                <div class="dropdown d-md-inline-block">
+                    <button class="btn select box-shadow dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ sortingMethod }}
+                        <span class="down-arrow">
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu box-shadow" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" (click)="changeSortingMethod('None')">None</a>
+                        <a class="dropdown-item" (click)="changeSortingMethod('Name A to Z')">Name A to Z</a>
+                        <a class="dropdown-item" (click)="changeSortingMethod('Name Z to A')">Name Z to A</a>
+                        <a class="dropdown-item" (click)="changeSortingMethod('Latest First')">Latest First</a>
+                        <a class="dropdown-item" (click)="changeSortingMethod('Oldest First')">Oldest First</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--********      Search box for searching project folder by name      *******-->
+        <div class="mt-md-2 mt-lg-0 ml-lg-auto">
+            <div style="position:relative;width:250px;">
+                <input type="text" class="p-2 pl-5 box-shadow" placeholder="Search Your Folder" [(ngModel)]="searchTerm">
+                <span class="search-icon">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </span>
+            </div>
+        </div>
+        <!--***********      Change layout (Grid mode <-> List mode)    *********-->
+        <div class="mt-md-2 mt-lg-0 ml-md-5 ml-lg-auto">
+            <span class="change-view-icon" (click)="changeViewMode()">
+                <i class="fa fa-th-large" aria-hidden="true" *ngIf="!gridViewMode" data-toggle="tooltip" data-placement="top" title="Grid Mode"></i>
+                <i class="fa fa-list" *ngIf="gridViewMode" data-toggle="tooltip" data-placement="top" title="List Mode"></i>
+            </span>
+        </div>
+    </div>
+
+    <!--************ My Projects (FREELANCER TRAINING PROJECTS) ************-->
+                  
+                    <!--********  GRID MODE  ***********-->  
+    <div class="container freelancer-project-folders p-md-0 px-xl-3 pb-xl-3" *ngIf="user.PROJECTS && hasTrainingProject">
+        <div class="row mt-2">
+            <div *ngFor="let project of user?.PROJECTS | sortSearch:sortingMethod:searchTerm | slice:0:4"  class="col-lg-6 p-2 folder">
+                <div class="d-flex bg-white box-shadow" *ngIf="project.value.STATUS === 'TRAINING'">
+                    <img src="../../assets/images/lp_bg_02.png" alt="Folder" class="" width="127" height="127">
+                    <div class="row w-100 m-0">
+                        <div class="col-7 h-100 py-2 px-2 text-truncate">
+                            <p class="mb-2 font-weight-bold project-title text-truncate">{{ project.value.NAME || 0}}</p>
+                            <p class="mb-1 info">Total Images: {{ project.value.TOTAL_IMAGES || 0 }}</p>
+                            <p class="mb-1 info">Total Time: {{ Math.floor(project.value.TOTAL_TIME/3600) }}hr</p>
+                        </div>
+                        <div class="col-5 py-2 px-1 px-lg-2 text-center align-self-center">
+                            <button class="btn btn-rounded px-md-2 py-md-1 px-xl-4 py-xl-2 blue-grad-btn box-shadow" (click)="classify(project.key)">Start Test</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    
+    <!--************ My Projects (FREELANCER OTHER PROJECTS) ************-->
+                  
+    <!--********  GRID MODE  ***********-->
+    <h5 class="h5" [hidden]="totalProjects === 1 && hasTrainingProject">My Other Projects</h5>
+    <div class="container freelancer-project-folders p-md-0 p-xl-2" *ngIf="gridViewMode && user.PROJECTS" [@myAnimation]="gridViewMode"> 
+        <div class="row">
+            <div *ngFor="let project of user?.PROJECTS | sortSearch:sortingMethod:searchTerm"  class="col-lg-6 p-2 folder" [hidden]="project.value.STATUS === 'TRAINING'">
+                <div class="d-flex bg-white box-shadow" *ngIf="project.value.STATUS !== 'TRAINING'">
+                    <img src="../../assets/images/lp_bg_02.png" alt="Folder" class="" width="127" height="127">
+                    <div class="row w-100 m-0">
+                        <div class="col-7 h-100 py-2 px-2 text-truncate">
+                            <p class="mb-2 font-weight-bold project-title text-truncate">{{ project.value.NAME || 0}}</p>
+                            <p class="mb-1 info">Total Images: {{ project.value.TOTAL_IMAGES || 0 }}</p>
+                            <p class="mb-1 info">Total Time: {{ Math.floor(project.value.TOTAL_TIME/3600) }}hr</p>
+                        </div>
+                        <div class="col-5 py-2 px-1 px-lg-2 text-center align-self-center" *ngIf="project.value.STATUS === 'ACTIVE'">
+                            <button class="btn btn-rounded px-md-2 py-md-1 px-xl-4 py-xl-2 blue-grad-btn box-shadow" (click)="classify(project.key)">Classify</button>
+                        </div>
+                        <div class="col-5 py-2 px-1 px-lg-2 text-center align-self-center" *ngIf="project.value.STATUS === 'COMPLETED'">
+                            <button class="btn btn-rounded px-md-2 py-md-1 px-xl-4 py-xl-2 blue-grad-btn box-shadow">Completed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div> 
+
+                          <!-- ********  LIST MODE  ***********--> 
+    <div class="container project-folders p-md-0 p-xl-2" *ngIf="!gridViewMode && user.PROJECTS" [@myAnimation]="!gridViewMode" [hidden]="totalProjects === 1 && hasTrainingProject">
+        <div  *ngFor="let project of user?.PROJECTS | sortSearch:sortingMethod:searchTerm" class="row m-0 bg-white border-top border-bottom p-md-3 p-lg-4">
+            <div class="col-11 folder" *ngIf="project.value.STATUS !== 'TRAINING'">
+                <div class="row align-items-center h-100">
+                    <div class="col-1 h-100 py-2 px-0">
+                        <img src="../../assets/icons/folder2.svg" alt="Folder" class="ml-xl-2 folder-icon">
+                    </div>
+                    <div class="col-2 h-100 py-2 px-2 text-truncate">
+                        <span>{{ project.value.NAME }}</span>
+                    </div>
+                    <div class="col-9 h-100 py-2">
+                        <div class="row">
+                            <div class="col-4 px-2 text-truncate">
+                                <span class="ml-xl-2">Total Images: {{ project.value.TOTAL_IMAGES || 0 }}</span>
+                            </div>
+                            <div class="col-4 px-0 text-truncate">
+                                <span class="ml-xl-2">Total Images Classified: {{ project.value.TOTAL_IMAGES_CLASSIFIED || 0 }}</span>
+                            </div>
+                            <div class="col-4 px-2 text-truncate">
+                                <span class="ml-xl-2">Total Time: {{ Math.floor(project.value.TOTAL_TIME/3600) }}hr</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>           
+
+</div>

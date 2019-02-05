@@ -1,0 +1,54 @@
+<div class="instructions-settings">
+    <div class="content-block py-5">
+        <div class="row mr-3 ml-3 pb-2 pt-2 pl-3 align-items-center">
+            <div class="col-md-12 col-lg-6">
+                <span>Version</span>
+                <div class="dropdown d-md-inline-block">
+                    <button class="btn select box-shadow dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        {{ currentVersion }}
+                        <span class="down-arrow">
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu box-shadow" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" *ngFor="let versionNo of allVersions" (click)='changeContentVersion(versionNo)'>
+                            {{ versionNo }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mr-3 ml-3 pb-2 pt-2 pl-3 align-items-center">
+            <div class="col-md-12 col-lg-12">
+                <app-ngx-editor [config]="editorConfig" [(ngModel)]="editorContent"></app-ngx-editor>
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="py-5">
+        <div class="buttons w-100 text-center">
+            <button class="previewButton btn-rounded box-shadow py-3 mr-lg-5" (click)="preview()">Preview</button>
+            <button class="publishButton btn-rounded box-shadow py-3 mr-lg-5" (click)="publish()">Publish</button>
+        </div>
+    </div>
+
+
+    <div class="modal right fade" id="readInstructions" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 box-shadow">
+                <div class="modal-header box-shadow">
+                    <h4 class="modal-title nav-text-color">Global Read Me</h4>
+                    <button type="button" class="cross" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="nav-text-color">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="readMeMsg">
+
+                </div>
+                <div class="modal-footer border-0 justify-content-between">
+                    <button class="btn btn-rounded p-1 pr-4 pl-4 blue-bg-btn box-shadow" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

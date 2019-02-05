@@ -1,0 +1,193 @@
+@import "../../assets/partials/_mixins.scss";
+
+#invite-user {
+    color: rgba(80, 85, 113, 0.63);
+
+    button {
+        font-weight: normal;
+        @include btn-twoColorLinearGradient(#556df6, #5142ff, #1fbcff, #2437e9, to right, 200% 150%);
+        @include btn-twoColorLinearGradient-hover( right center);
+    }
+
+    #add-member {
+        .content-block {
+            border-radius: 3px;
+
+            .seats {
+                button {
+                    font-size: 1rem;
+                }
+
+                input {
+                    color: rgba(80, 85, 113, 0.63);
+                    width: 70px;
+                    border-radius:4rem;
+                    border:1px solid grey;
+
+                    @media(max-width: 998px) {
+                        width: 55px;
+                    }
+                }
+
+                img {
+                    height: 1.2rem;
+                }
+            }
+            .value {
+                position: relative;
+
+                input {
+                    color: rgba(80, 85, 113, 0.63);
+                    border-radius: 4rem;
+                    border: 1px solid #2437E9;
+                    background: #F5F5F5;
+                    padding-right: 30%;
+
+                    @media(max-width: 1200px) {
+                        padding-right: 45%;
+                        font-size: 1rem;
+                    }
+                }
+                button {
+                    position: absolute;
+                    top: 0px;
+                    right: 0px;
+
+                    @media(max-width: 998px) {
+                        font-size: 1rem;
+                        top: 1px;
+                        right: 1px;
+                    }
+                }
+                .list-group-item {
+                    cursor: pointer;
+                }
+            }
+        }
+        ::placeholder {
+            color: rgba(80, 85, 113, 0.5);
+        }
+        ul {
+            background: #fff;
+            border: 1px solid #9f9ab8 !important;
+            border-radius: 3px;
+            width: calc(100% - 238px);    // Removing Button width from total input width
+
+            @media(max-width: 998px) {
+                width: calc(100% - 164px);
+            }
+
+            li {
+                color: #9194a5;
+                border-bottom: 1px solid #acafc4 !important;
+            }
+        }
+    }
+
+    #members {
+        font-size: 1rem !important;
+
+        @media(max-width: 998px) {
+            font-size: 0.9rem;
+        }
+
+        .profile {
+            img {
+                width: 4.5rem;
+                border: 1px solid #2437E9;
+
+                @media(max-width: 998px) {
+                    width: 3rem;
+                }
+            }
+        }
+        button {
+            @media(max-width: 998px) {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+#inviteUserModal{
+    .modal-dialog {
+        width: 375px;
+    }
+    .modal-content {
+        border-radius: 2px;
+        color: #495057;
+    }
+    .close {
+        position: absolute;
+        right: -10%;
+        top: -10%;
+        width: 32px;
+        height: 32px;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #fff;
+        opacity: 1;
+    }
+    input {
+        border-radius: 4rem;
+    }
+    input:focus, select:focus {
+        box-shadow: none;
+    }
+    .blue-border-btn {
+        border: 1px solid #3043EC;
+        background: transparent;
+        color: #3043EC;
+
+        @include button-hover(#413DF5,#fff);
+    }
+    .blue-bg-btn {
+        background: #3043EC;
+
+        @include button-hover(#fff,#413DF5);
+    }
+    ::placeholder {
+        color: rgba(80, 85, 113, 0.5);
+    }
+}
+
+#buyMoreSeats{
+
+    .modal-content {
+        background: #F9FAFE;
+        color: #212121;
+    }
+
+    .modal-header {
+        border-bottom: none;
+
+        .close {
+            width: unset;
+            height: unset;
+            font-size: 3rem;
+            color: #556DF6;
+            opacity: 1;
+            font-weight: 400;
+        }
+    }
+
+    .modal-dialog {
+        min-width: 100%;
+
+        .modal-content {
+            height: 100vh;
+            border: unset;
+            border-radius: unset;
+        }
+
+        .modal-body {
+
+            .cursor {
+                cursor: pointer;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,326 @@
+@import '../../assets/partials/_mixins.scss';
+
+/***************************     NEW STYLES   *****************************/
+
+.image-settings
+{
+    font-size: 1rem;
+
+    .content-block
+    {
+        color: rgba(112,112,112,.59);
+        border-radius: 3px;
+    }
+
+    #storage-details
+    {
+        .content-block
+        {
+            position: relative;
+        }
+        .connectButton
+        {
+            font-weight: 400;
+
+            position: absolute;
+            right: 3%;
+
+            @include btn-twoColorLinearGradient( #149fda, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+        .disconnectButton
+        {
+            font-weight: 400;
+
+            position: absolute;
+            right: 30%;
+
+            @include btn-twoColorLinearGradient( #149fda, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+
+        .changeFolderButton
+        {
+            font-weight: 400;
+
+            position: absolute;
+            right: 3%;
+
+            @include btn-twoColorLinearGradient( #149fda, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+        .S3
+        {
+            input {
+                border: 1px solid rgba(80, 85, 113,0.63);
+                border-radius: 3px;
+                color: #505571;
+                font-size: 0.9rem;
+            }
+            .ng-select.custom {
+                border: 1px solid rgba(80, 85, 113,0.63);
+
+                input {
+                    border: none;
+                }
+            }
+            .ng-select.custom > .ng-control {
+                padding-bottom: 12px;
+            }
+            .ng-select.focused:not(.opened) > .ng-control {
+                border-color: #fff;
+                box-shadow: none;
+            }
+            .ng-value-container {
+                color: #505571;
+                font-size: 0.9rem;
+            }
+        }
+        ::-webkit-input-placeholder { // Changing input placeholder color
+            color: rgba(80, 85, 113,0.5);
+        }
+        ::-moz-placeholder {
+            color: rgba(80, 85, 113,0.5);
+        }
+        :-ms-input-placeholder {
+            color: rgba(80, 85, 113,0.5);
+        }
+        ::placeholder {
+            color: rgba(80, 85, 113,0.5);
+        }
+    }
+
+    #images-details // Image count details styles
+    {
+        .card
+        {
+            font-size: 1.1rem;
+
+            background: rgba(74, 176, 233,.95);
+
+            h6
+            {
+                font-size: 1.05rem;
+            }
+            .detail
+            {
+                font-size: 2rem;
+            }
+            .value
+            {
+                width: 3rem;
+                height: 3rem;
+
+                color: #4ab0e9;
+                background: rgba(255,255,255,.72);
+            }
+            .reduced-font
+            {
+                font-size: 1.5rem;
+
+                padding-top: 5px;
+            }
+        }
+        .card-2
+        {
+            background: rgba(61, 120, 224,.95);
+
+            .value
+            {
+                color: rgb(61, 120, 224);
+            }
+        }
+    }
+
+    #token-details,
+    #synchonizer-details,
+    #delete-project
+    {
+        .content-block
+        {
+            font-size: .9rem;
+
+            position: relative;
+
+            color: rgba(112,112,112,.9);
+        }
+        .regenrateTokenButton,
+        .synchronizerButton,
+        .deleteProjectButton,
+        .cancelDeletionButton,
+        {
+            font-size: 1rem;
+            font-weight: 400;
+
+            position: absolute;
+            right: 3%;
+            bottom: -26px;
+
+            @include btn-twoColorLinearGradient( #149fda, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+    }
+
+    .saveDetailsButton {
+        font-size: 1rem;
+        font-weight: 400;
+
+        position: absolute;
+        right: 5%;
+        top: 25%;
+
+        @include btn-twoColorLinearGradient( #149fda, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+        @include btn-twoColorLinearGradient-hover( right center);
+    }
+
+    #synchonizer-details
+    {
+        .h6
+        {
+            font-weight: 600;
+        }
+        .synchronizerButton
+        {
+            @include btn-twoColorLinearGradient(#556df6, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+        .bar
+        {
+            @include gradButton(#fff, 155deg, #556df6, #2437e9);
+        }
+    }
+
+    #delete-project
+    {
+        .h6
+        {
+            font-weight: 600;
+        }
+        .deleteProjectButton
+        {
+            @include btn-twoColorLinearGradient( #149fda, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+
+        .cancelDeletionButton
+        {
+            @include btn-twoColorLinearGradient( #149fda, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+
+        .bar
+        {
+            @include gradButton(#fff, 155deg, #556df6, #2437e9);
+        }
+    }
+
+    // CSV Export and Save button styles
+    #footer
+    {
+        position: relative;
+
+        .buttons
+        {
+            position: absolute;
+            bottom: -32px;
+        }
+        button
+        {
+            font-size: 1.3rem;
+            font-weight: 400;
+
+            padding-right: 5rem;
+            padding-left: 5rem;
+
+            @media(max-width: 998px)
+            {
+                padding-right: 3rem;
+                padding-left: 3rem;
+            }
+        }
+        .exportButton
+        {
+            @include btn-twoColorLinearGradient(#556df6, #1fbcff, #1fbcff, #5142ff, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+        .saveButton
+        {
+            @include btn-twoColorLinearGradient(#556df6, #5142ff, #1fbcff, #2437e9, to right, 200% 150%);
+            @include btn-twoColorLinearGradient-hover( right center);
+        }
+    }
+}
+
+// Modal styles
+#export-modal, #phone-number-modal
+{
+    .modal-content
+    {
+        border-radius: 2px;
+    }
+    .modal-dialog
+    {
+        @media (min-width: 576px)
+        {
+            width: 576px;
+            max-width: unset;
+        }
+    }
+    .close
+    {
+        font-size: 1.5rem;
+        font-weight: 400;
+
+        position: absolute;
+        top: -10%;
+        right: -10%;
+
+        width: 32px;
+        height: 32px;
+
+        opacity: 1;
+        color: #fff;
+        border: 3px solid #fff;
+        border-radius: 50%;
+    }
+    .blue-border-btn
+    {
+        color: #505571;
+        border: 1px solid #3043ec;
+        background: transparent;
+
+        @include button-hover(#3043ec, #fff);
+    }
+    .blue-bg-btn
+    {
+        background: #3043ec;
+
+        @include button-hover( #fff, #3043ec);
+    }
+}
+
+#phone-number-modal
+{
+    .dropbtn, .form-control {
+        border: 1px solid #ced4da;
+        box-shadow: none;
+    }
+    .arrow-down {
+        margin-top: 10px;
+    }
+    .scrollable-menu {
+        width: 544px;
+    }
+    ::-webkit-input-placeholder {
+        color: rgba(80, 85, 113,0.5);
+    }
+    ::-moz-placeholder {
+        color: rgba(80, 85, 113,0.5);
+    }
+    :-ms-input-placeholder {
+        color: rgba(80, 85, 113,0.5);
+    }
+    ::placeholder {
+        color: rgba(80, 85, 113,0.5);
+    }
+}

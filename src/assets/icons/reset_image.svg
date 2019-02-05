@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.73 32.067">
+  <defs>
+    <style>
+      .cls-1, .cls-4 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #455cf1;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        fill: #3d53ef;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Group_5489" data-name="Group 5489" transform="translate(-282.595 -1364.653)">
+    <g id="Group_1150" data-name="Group 1150" transform="translate(282.665 1364.653)">
+      <g id="Group_5415" data-name="Group 5415" transform="translate(0 0)">
+        <g id="Rectangle_3067" data-name="Rectangle 3067" class="cls-1">
+          <rect class="cls-3" width="41.6" height="32" rx="3"/>
+          <rect class="cls-4" x="1.5" y="1.5" width="38.6" height="29" rx="1.5"/>
+        </g>
+        <path id="Path_5863" data-name="Path 5863" class="cls-1" d="M3031.156,191.463l9.379-8.327,17.448,18.668" transform="translate(-3030.23 -170.762)"/>
+        <path id="Path_5864" data-name="Path 5864" class="cls-1" d="M3056.515,194.626l7.432-6.158,14.448,12.245" transform="translate(-3037.703 -174.938)"/>
+      </g>
+    </g>
+    <circle id="Ellipse_862" data-name="Ellipse 862" class="cls-2" cx="2.115" cy="2.115" r="2.115" transform="translate(298.648 1372.193)"/>
+  </g>
+</svg>

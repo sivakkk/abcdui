@@ -1,0 +1,163 @@
+.tab-content .upgrade-info {
+  border: 1px solid #9e9e9e;
+  border-radius: 3px;
+  font-size: 0.9rem;
+}
+
+.tab-content .upgrade-btn {
+  border-radius: unset;
+  border: none;
+  background-image: linear-gradient(to right, #4ea9f8, #4ea9f8, #3bccff, #3f86ed);
+  background-image: -webkit-linear-gradient(to right, #4ea9f8, #4ea9f8, #3bccff, #3f86ed);
+  background-image: -moz-linear-gradient(to right, #4ea9f8, #4ea9f8, #3bccff, #3f86ed);
+  background-image: -o-linear-gradient(to right, #4ea9f8, #4ea9f8, #3bccff, #3f86ed);
+  background-image: -ms-linear-gradient(to right, #4ea9f8, #4ea9f8, #3bccff, #3f86ed);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  background-size: 200% 150%;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.tab-content .upgrade-btn:hover {
+  background-position: right center;
+}
+
+.tab-content .cancelButton {
+  border-radius: unset;
+  border: none;
+  background-image: linear-gradient(to right, #d475a6, #F190C1, #ffa2d1, #fd49a4);
+  background-image: -webkit-linear-gradient(to right, #d475a6, #F190C1, #ffa2d1, #fd49a4);
+  background-image: -moz-linear-gradient(to right, #d475a6, #F190C1, #ffa2d1, #fd49a4);
+  background-image: -o-linear-gradient(to right, #d475a6, #F190C1, #ffa2d1, #fd49a4);
+  background-image: -ms-linear-gradient(to right, #d475a6, #F190C1, #ffa2d1, #fd49a4);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  background-size: 200% 150%;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.tab-content .cancelButton:hover {
+  background-position: right center;
+}
+
+.tab-content h6 {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.tab-content .payment-state {
+  border-radius: 4rem;
+}
+
+.tab-content .green {
+  background-color: #5fd855;
+}
+
+.tab-content .yellow {
+  background-color: #fec107;
+}
+
+.tab-content .orange {
+  background-color: orange;
+}
+
+.tab-content .red {
+  background-color: red;
+}
+
+.tab-content .info {
+  font-size: 18px;
+  display: grid;
+  margin-bottom: 2%;
+}
+
+.tab-content .info .key {
+  font-size: 0.7em;
+  margin-top: 3%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.tab-content .info .value {
+  font-size: 0.8em;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.tab-content ul {
+  padding-left: 30px;
+  list-style: none;
+  vertical-align: middle;
+}
+
+.tab-content ul li {
+  font-size: 18px;
+  line-height: 2;
+  height: 40px;
+  cursor: pointer;
+}
+
+.tab-content .invoice {
+  width: 100%;
+}
+
+.tab-content .invoice .invoice-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tab-content .invoice .invoice-row .info {
+  font-size: 18px;
+  display: grid;
+  margin-bottom: 2%;
+}
+
+.tab-content .invoice .invoice-row .info .key {
+  font-size: 12px;
+  margin-top: 3%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.tab-content .invoice .invoice-row .info .value {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#upgradePaymentModal .modal-content {
+  background: #F9FAFE;
+  color: #212121;
+}
+
+#upgradePaymentModal .modal-header {
+  border-bottom: none;
+}
+
+#upgradePaymentModal .modal-header .close {
+  width: unset;
+  height: unset;
+  font-size: 3rem;
+  color: #556DF6;
+  opacity: 1;
+  font-weight: 400;
+}
+
+#upgradePaymentModal .modal-dialog {
+  min-width: 100%;
+}
+
+#upgradePaymentModal .modal-dialog .modal-content {
+  height: 100vh;
+  border: unset;
+  border-radius: unset;
+}
+
+#upgradePaymentModal .modal-dialog .modal-body .cursor {
+  cursor: pointer;
+}

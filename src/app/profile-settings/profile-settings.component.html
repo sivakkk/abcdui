@@ -1,0 +1,205 @@
+<!-- <div class="profile-settings mt-4 bg-white" *ngIf="tab == 'profile_settings'"> -->
+<div class="profile-settings mt-4 bg-white">
+  <!-- Settings tab names -->
+  <div class="nav ml-3 mr-3 mt-2 mb-2">
+    <a class="nav-link pt-3 pb-3" [class.active]="settingsTab == 'general'" (click)="changeSettingsTab('general')">General</a>
+    <a class="nav-link pt-3 pb-3" [class.active]="settingsTab == 'plan'" (click)="changeSettingsTab('plan')" *ngIf="this.user.USER_TYPE != environment.USER_TYPE.TEAM.NAME && this.user.USER_TYPE != environment.USER_TYPE.FREELANCER.NAME && this.user.USER_TYPE != environment.USER_TYPE.SELF.NAME && this.user.USER_TYPE != environment.USER_TYPE.ADMIN.NAME">Plan</a>
+    <a class="nav-link pt-3 pb-3" [class.active]="settingsTab == 'change_password'" (click)="changeSettingsTab('change_password')">Change Password</a>
+    <!--<a class="nav-link pt-3 pb-3" [class.active]="settingsTab == 'security'" (click)="changeSettingsTab('security')">Security</a>-->
+    <a class="nav-link pt-3 pb-3" [class.active]="settingsTab == 'developer'" (click)="changeSettingsTab('developer')" *ngIf="this.user.USER_TYPE != environment.USER_TYPE.TEAM.NAME && this.user.USER_TYPE != environment.USER_TYPE.FREELANCER.NAME">Developer</a>
+  </div>
+
+  <!-- General settings -->
+  <div id="general" *ngIf="settingsTab == 'general'">
+    <!-- profile Avatar -->
+    <div class="row mr-3 ml-3 pb-2 pt-2 pl-3 align-items-center">
+      <div class="col-md-4 col-lg-6 pl-0">
+        <span>Photo</span>
+      </div>
+      <div class="col-md-8 col-lg-6">
+        <!-- If user avatar available -->
+        <img class="rounded-circle user-thumb" *ngIf="this.user['USER_AVATAR']" [src]="environment.oclaviServer + 'avatar/' + this.user['USER_AVATAR']" >
+        <!-- If no user avatar available, showing the default one -->
+        <img class="rounded-circle user-thumb" *ngIf="!this.user['USER_AVATAR']" [src]="'./assets/profile.png'" alt="">
+        <label class="link pr-2 pl-2" for="change-image">Edit</label>
+        <input type="file" id="change-image" class="pt-2" name="avatar" (change)="selectImage($event)" [disabled]="currentStatus === STATUS_SAVING" accept="image/*">
+        <!--<span class="link pr-2 pl-2" (click)="deleteUserAvatar()" [class.disabled]="currentStatus == STATUS_SAVING" >Delete</span>-->
+        <!-- Modal for cropping image (opens after selecting an image) -->
+        <div class="modal fade" id="imageCroppingModal" tabindex="-1" role="dialog" aria-labelledby="imageCroppingModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cancel('image')"  [disabled]="currentStatus == STATUS_SAVING">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-body pb-0">
+                <h4 class="h5 mb-3 text-center">Drag or zoom the image to set an area as profile picture.</h4>
+                <div #croppingImg></div>
+              </div>
+              <div class="modal-footer border-0 justify-content-center pt-0">
+                  <button class="btn btn-rounded pr-4 pl-4 mr-2 ml-2 blue-border-btn box-shadow" (click)="cancel('image')" data-dismiss="modal" [disabled]="currentStatus == STATUS_SAVING">Cancel</button>
+                  <button (click)="filesChange()" class="btn btn-rounded pr-4 pl-4 mr-2 ml-2 blue-bg-btn box-shadow" [disabled]="currentStatus == STATUS_SAVING">Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- User name -->
+    <div class="row mr-3 ml-3 pb-4 pt-4 pl-3">
+      <div class="col-md-4 col-lg-6 pl-0">
+        <span>Name</span>
+      </div>
+      <div class="col-md-8 col-lg-6" *ngIf="!editName">
+        <span>{{ user.NAME }}</span>
+        <span class="link pr-2 pl-2" (click)="edit()" [class.disabled]="currentStatus == STATUS_SAVING">Edit</span>
+      </div>
+      <div class="col-md-8 col-lg-6" *ngIf="editName">
+        <input type="text" class="pt-1 pb-1 pr-3 pl-3 w-100" name="name" [(ngModel)]="userName" [disabled]="currentStatus === STATUS_SAVING" autocomplete="off" placeholder="Enter Name">
+        <button class="btn btn-rounded mt-2 pr-4 pl-4" (click)="saveName()" >Save</button>
+        <button class="btn btn-rounded mt-2 pr-4 pl-4" (click)="cancel('name')">Cancel</button>
+      </div>
+    </div>
+    <!-- Registered Email address -->
+    <div class="row mr-3 ml-3 pb-4 pt-4 pl-3">
+      <div class="col-md-4 col-lg-6 pl-0">
+        <span>Registered Email</span>
+      </div>
+      <div class="col-md-8 col-lg-6">
+        <span>{{ user.EMAIL_ID }}</span>
+      </div>
+    </div>
+    <div class="row mr-3 ml-3 pb-4 pt-4 pl-3">
+      <div class="col-md-4 col-lg-6 pl-0">
+        <span>Account Type</span>
+      </div>
+      <div class="col-md-8 col-lg-6">
+        <span>{{ user.USER_TYPE | titlecase }}</span>
+        <span class="link pr-2 pl-2" (click)="upgradePlan()" *ngIf="(user.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME || user.USER_TYPE == environment.USER_TYPE.STUDENT_SELF.NAME)">Upgrade</span>
+        <!--<span class="link pr-2 pl-2" (click)="accountSwitch()" *ngIf="(user.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME || user.USER_TYPE == environment.USER_TYPE.ADMIN.NAME)">Switch To Self</span>
+        <span class="link pr-2 pl-2" (click)="accountSwitch()" *ngIf="(user.USER_TYPE == environment.USER_TYPE.SELF.NAME || user.USER_TYPE == environment.USER_TYPE.STUDENT_SELF.NAME)">Switch To Admin</span>  
+        <span class="link pr-2 pl-2" (click)="accountDowngrade()" *ngIf="(user.USER_TYPE == environment.USER_TYPE.SELF.NAME || user.USER_TYPE == environment.USER_TYPE.ADMIN.NAME)">Downgrade</span>-->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Plan settings -->
+  <div id="plan" *ngIf="settingsTab == 'plan' && this.user?.USER_TYPE != environment.USER_TYPE.TEAM.NAME">
+    <div class="row mr-3 ml-3 pb-4 pt-4 pl-3">
+      <div>
+        <section class="pricing py-4">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="card mb-5 mb-lg-0">
+                  <div class="card-body">
+                    <h5 class="card-title text-muted text-uppercase text-center" *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_SELF.NAME">Student Self</h5>
+                    <h5 class="card-title text-muted text-uppercase text-center" *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME">Student Admin</h5>
+                    <h6 class="card-price text-center">Your current plan</h6>
+                    <hr>
+                    <ul class="fa-ul">
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>100 Objects</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Unlimited labels</li>
+                      <li *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_SELF.NAME"><span class="fa-li"><i class="fa fa-check"></i></span>1 seat</li>
+                      <li *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME"><span class="fa-li"><i class="fa fa-check"></i></span>3 seats</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Google Drive storage support</li>
+                      <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>AWS S3 storage support</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Boundbox annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Polygon annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Cuboid annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Circle annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Dot annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Crowdsource</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Multiple Projects</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Zoom, Undo, Reset, Delete Controls</li>
+                      <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>OCLAVI Predict<sup>TM</sup> <sup>&alpha;lpha</sup></li>
+                      <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Segmentation <sup>&beta;eta</sup></li>
+                      <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>API Support</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Email support</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card mb-5 mb-lg-0">
+                  <div class="card-body">
+                    <h5 class="card-title text-muted text-uppercase text-center" *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_SELF.NAME">Pro Self</h5>
+                    <h5 class="card-title text-muted text-uppercase text-center" *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME">Pro Admin</h5>
+                    <h6 class="card-price text-center" *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_SELF.NAME"><i class="fa fa-inr" aria-hidden="true"></i> 999<span class="period">/month</span></h6>
+                    <h6 class="card-price text-center" *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME"><i class="fa fa-inr" aria-hidden="true"></i> 999<span class="period">/month/seat<sup>*</sup></span></h6>
+                    <hr>
+                    <ul class="fa-ul">
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Unlimited Objects</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Unlimited labels</li>
+                      <li *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_SELF.NAME"><span class="fa-li"><i class="fa fa-check"></i></span>1 account</li>
+                      <li *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME"><span class="fa-li"><i class="fa fa-check"></i></span>Unlimited seats (Min 3 seats)</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Google Drive storage support</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>AWS S3 storage support</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Boundbox annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Polygon annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Cuboid annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Circle annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Dot annotation</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Crowdsource</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Multiple Projects</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Zoom, Undo, Reset, Delete Controls</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>OCLAVI Predict<sup>TM</sup> <sup>&alpha;lpha</sup></li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Segmentation <sup>&beta;eta</sup></li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>API Support</li>
+                      <li><span class="fa-li"><i class="fa fa-check"></i></span>Email support</li>
+                    </ul>
+                    <a href="/profile/payment" class="btn btn-block btn-primary text-uppercase">Upgrade</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <br />
+        <div *ngIf="user.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME">
+          <sup>*</sup>1-10 seats the monthly price per seat is <i class="fa fa-inr" aria-hidden="true"></i> 999, 11-20 seats the monthly price per seat is <i class="fa fa-inr" aria-hidden="true"></i> 945, 21-30 seats the monthly price per seat is <i class="fa fa-inr" aria-hidden="true"></i> 909, 31-50 seats the monthly price per seat is <i class="fa fa-inr" aria-hidden="true"></i> 874, 51-100 seats the monthly price per seat is <i class="fa fa-inr" aria-hidden="true"></i> 810 and for more than 100 seats kindly contact sales for pricing.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Change password -->
+  <div id="change_password" *ngIf="settingsTab == 'change_password'">
+    <app-change-password></app-change-password>
+  </div>
+
+  <!--<<div id="security" *ngIf="settingsTab == 'security'">
+    <div class="mr-3 ml-3 mb-3 p-3 account">
+      p class="link" (click)="deleteAccount()">Delete Account</p>
+    </div>
+  </div>-->
+
+  <!-- Developer key settings -->
+  <div id="developer" *ngIf="settingsTab == 'developer' && this.user?.USER_TYPE != environment.USER_TYPE.TEAM.NAME && this.user?.USER_TYPE != environment.USER_TYPE.FREELANCER.NAME">
+    <div class="row mr-3 ml-3 pb-4 pt-4 pl-3">
+      <div class="col-md-3 col-lg-5 pl-0">
+        <span>User Id</span>
+      </div>
+      <div class="col-md-9 col-lg-7" *ngIf="!editName">
+        <span>{{ user?._id }}</span>
+      </div>
+    </div>
+    <div class="row mr-3 ml-3 pb-4 pt-4 pl-3">
+      <div class="col-md-3 col-lg-5 pl-0">
+        <span>API key</span>
+      </div>
+      <div class="col-md-9 col-lg-7">
+        <span>{{ user?.API_KEY }}</span>
+        <button class="btn btn-rounded regenerate-key ml-3" (click)="regenerateAPI_KEY()">Regenerate</button>
+      </div>
+    </div>
+    <div class="row mr-3 ml-3 pb-4 pt-4 pl-3">
+      <div class="col-md-3 col-lg-5 pl-0">
+        <span>API call count</span>
+      </div>
+      <div class="col-md-9 col-lg-7">
+        <span>{{ user?.API_CALL_COUNT }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>

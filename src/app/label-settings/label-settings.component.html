@@ -1,0 +1,72 @@
+<!-- <div class="label-settings" *ngIf="tab == 'label_settings'">    -->
+<div class="label-settings">
+    <div class="container my-3 px-sm-0 px-lg-3">
+        <div id="labels" class="mx-2">
+            <!-- headings of labels -->
+            <div id="label-heading" class="row m-0 text-center text-white">
+                <div class="col-3 py-2 border-left border-right">Label</div>
+                <div class="col-3 py-2 border-left border-right">Category</div>
+                <div class="col-2 py-2 border-left border-right">Color</div>
+                <div class="col-2 py-2 border-left border-right">Edit</div>
+                <div class="col-2 py-2 border-left border-right">Delete</div>
+            </div>
+
+            <!-- List of added labels -->
+            <div id="label-list">
+                <div *ngFor="let label of labels; let i = index" class="row m-0 text-center">
+                    <div class="col-3 py-3 px-sm-0 px-lg-3 border text-truncate">
+                        <input type="text" placeholder="Name" [hidden]="!label.edit" [(ngModel)]="label.LABEL_NAME" class="text-center w-75">
+                        <span class="label-details" [hidden]="label.edit">{{label.LABEL_NAME}}</span>
+                    </div>
+                    <div class="col-3 py-3 px-sm-0 px-lg-3 border text-truncate">
+                        <input type="text" placeholder="Category" [hidden]="!label.edit" [(ngModel)]="label.LABEL_CATEGORY" class="text-center w-75">
+                        <span class="label-details" [hidden]="label.edit">{{label.LABEL_CATEGORY}}</span>
+                    </div>
+                    <div class="col-2 py-2 px-sm-0 px-lg-3 border">
+                        <input [value]="label.LABEL_COLOR" [hidden]="!label.edit" [(colorPicker)]="label.LABEL_COLOR" readonly class="color_input text-center w-100" [style.background]="label.LABEL_COLOR">
+                        <input [value]="label.LABEL_COLOR" [hidden]="label.edit" [(colorPicker)]="label.LABEL_COLOR" disabled class="color_input text-center w-100" [style.background]="label.LABEL_COLOR">
+                    </div>
+                    <div class="col-2 py-3 px-sm-0 px-lg-3 border">
+                        <span class="editButton" aria-hidden="true" [hidden]="label.edit" (click)="editLabel(i, label._id);">
+                            Edit
+                            <i class="fa fa-pencil ml-lg-2 text-dark" aria-hidden="true"></i>
+                        </span>
+                        <span class="saveButton" aria-hidden="true" [hidden]="!label.edit" (click)="saveLabel(i, label._id);">
+                            Save
+                            <i class="fa fa-bookmark-o ml-lg-2 text-dark" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="col-2 py-3 px-sm-0 px-lg-3 border">
+                        <span class="deleteButton" aria-hidden="true" (click)="deleteLabel(i, label._id)">
+                            Delete
+                            <i class="fa fa-trash ml-lg-2 text-dark" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Inputs for Adding labels -->
+                <div class="row m-0 text-center align-items-center">
+                    <div class="col-4 py-3">
+                        <input type="text" placeholder="Label Name" [(ngModel)]="label.LABEL_NAME" class="text-center w-100">
+                        <!-- <span class="label-details" [hidden]="label.edit">{{label.LABEL_NAME}}</span> -->
+                        <!-- <ng-select [items]="segmentationLabels" bindLabel="LABEL_NAME" bindValue="LABEL_NAME" addTag="true"
+                        placeholder="Label" class="custom" (change)="labelChanged($event)"
+                        [(ngModel)]="label.LABEL_NAME"></ng-select> -->
+                    </div>
+                    <div class="col-4 py-3">
+                        <input type="text" placeholder="Category Name" [(ngModel)]="label.LABEL_CATEGORY" class="text-center w-100">
+                    </div>
+                    <div class="col-md-1 col-xl-2 px-md-0 px-xl-3 py-3">
+                        <input [value]="label.LABEL_COLOR" [(colorPicker)]="label.LABEL_COLOR" class="color_input text-center w-100" [style.background]="label.LABEL_COLOR" readonly [cpPosition]="'bottom'" >
+                    </div>
+                    <div class="col-md-3 col-xl-2 py-3 px-sm-1 px-lg-2">
+                        <button class="btn-rounded box-shadow addButton py-2 px-md-1 px-lg-3" (click)="addLabel()" id="pt-add-label">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Add Label
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<!-- <div class="project-settings conatiner mr-2" *ngIf="tab == 'project_settings'"> -->
+<div class="project-settings conatiner mr-2">
+
+  <div class="align-items-center d-flex justify-content-between">
+    <p class="mb-0">
+      <span class="mr-2">
+        <img src="../../assets/icons/folder2.svg" style="width: 1.2rem;" />
+      </span>
+      <span class="mr-1">{{ user?.PROJECTS[projectID]?.NAME }}</span> <!-- Project Name-->
+      <span class="mr-1">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </span>
+      <span>{{ environment.BACKOFFICE_TAB[settingsTab] }}</span>  <!-- Current tab name (e.g. - IMAGE settings, LABEL settings) -->
+    </p>
+
+    <div>
+      <!-- Start button will be showed if project has to be annotated by freelancer -->
+      <button id="start_btn" class="btn btn-rounded box-shadow px-4 py-1" (click)="openModal('freelancerProjectPay')" *ngIf="!disableStartBtn">
+        Start
+      </button>
+      <!-- Classify button will be showed if project has to be annotated by freelancer -->
+      <button *ngIf="user?.PROJECTS[projectID]?.ANNOTATE_BY == environment.USER_TYPE.FREELANCER.NAME && (user?.USER_TYPE != environment.USER_TYPE.TEAM.NAME) && disableStartBtn"
+        class="btn btn-rounded py-md-1 px-sm-4 px-md-2 px-lg-4 classify" (click)="classify()" [class.disabled]="!imgCounts || imgCounts?.totalImages === 0">
+          Classify
+      </button>
+    </div>
+  </div>
+
+  <div class="box-shadow px-2 mt-3 bg-white settings">
+    <!-- Headings for settings (IMAGE, LABEL, VIEW IMAGE, Collaborators and READ ME settings) -->
+    <div class="nav mt-2">
+      <!-- IMAGE settings available for all users -->
+      <a class="nav-link py-3 mx-2" routerLinkActive="active" routerLink="image_settings" (click)="changeSettingsTab('image_settings')">
+        <span><i class="fa fa-cogs" aria-hidden="true"></i></span>
+        Image Settings
+      </a>
+      <!-- LABEL settings not available for team users -->
+      <a class="nav-link py-3 mx-2" routerLinkActive="active" routerLink="label_settings" (click)="changeSettingsTab('label_settings')" *ngIf="this.user?.USER_TYPE != environment['USER_TYPE']['TEAM']['NAME']">
+        <span class="mr-2"><i class="fa fa-plus" aria-hidden="true"></i></span>
+        Label Settings
+      </a>
+      <!-- VIEW IMAGE available for all users -->
+      <a class="nav-link py-3 mx-2" routerLinkActive="active" routerLink="view_image" (click)="changeSettingsTab('view_image')">
+        <span><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+        View Image
+      </a>
+      <!-- Add Collaborators available only for admin users and if project is not to be annotated by freelancer -->
+      <a class="nav-link py-3 mx-2" routerLinkActive="active" routerLink="invite_users" (click)="changeSettingsTab('invite_users')" *ngIf="((user?.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME) || (user?.USER_TYPE == environment.USER_TYPE.ADMIN.NAME)) && user?.PROJECTS[projectID]?.ANNOTATE_BY !== environment.USER_TYPE.FREELANCER.NAME">
+        <span><i class="fa fa-users" aria-hidden="true"></i></span>
+        Add Collaborators
+      </a>
+      <!-- INSTRUCTIONS not available for team users -->
+      <a class="nav-link py-3 mx-2" routerLinkActive="active" routerLink="read_instruction_settings" (click)="changeSettingsTab('read_instruction_settings')" *ngIf="this.user?.USER_TYPE != environment['USER_TYPE']['TEAM']['NAME']">
+        <span class="mr-2"><i class="fa fa-book" aria-hidden="true"></i></span>
+        Instructions
+      </a>
+    </div>
+
+    <!-- The settings will be shown inside the div (IMAGE, LABEL, VIEW IMAGE, Collaborators and READ ME settings) -->
+    <div class="components">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>
+
+
+  <!--************ Modal for freelancer project payment ************-->
+<div class="modal fade p-0" tabindex="-1" role="dialog" id="freelancerProjectPay" *ngIf="user?.PROJECTS[projectID]?.ANNOTATE_BY === environment.USER_TYPE.FREELANCER.NAME">
+  <div class="modal-dialog m-0" role="document">
+    <div class="modal-content">
+      <div class="modal-header p-0">
+          <button type="button" class="close p-0 m-0 ml-auto mr-4" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body container">
+        <div class="mb-4" style="color:#646466;">
+          <img src="../../assets/logo_wtm_c.png" height="60">
+          <span style="line-height: 1;vertical-align: middle;">/ Options / {{ activeAccordion | titlecase}}</span>
+        </div>
+        <div style="box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.35)">
+          <app-accordion [data]="step1" (stepId)="changeStep($event)"></app-accordion>
+          <app-accordion [data]="step2" (stepId)="changeStep($event)" [billingAmount]="billingAmount" [payNow]="payNow" [vm]="this"></app-accordion>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

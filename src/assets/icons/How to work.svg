@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 51.097 50">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        opacity: 0.426;
+      }
+
+      .cls-4 {
+        opacity: 0.473;
+      }
+
+      .cls-5 {
+        filter: url(#Rectangle_864);
+      }
+
+      .cls-6 {
+        filter: url(#Rectangle_863);
+      }
+
+      .cls-7 {
+        filter: url(#Rectangle_862);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#765dff"/>
+      <stop offset="1" stop-color="#08b6d6"/>
+    </linearGradient>
+    <filter id="Rectangle_862" x="3.696" y="9.285" width="47.4" height="22.809" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_863" x="3.696" y="17.373" width="42.481" height="22.809" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_864" x="3.696" y="25.46" width="37.345" height="22.809" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_5805" data-name="Group 5805" transform="translate(-75 -733)">
+    <g id="Group_5503" data-name="Group 5503" transform="translate(-198 -935)">
+      <circle id="Ellipse_845" data-name="Ellipse 845" class="cls-1" cx="25" cy="25" r="25" transform="translate(273 1668)"/>
+      <g id="Group_1113" data-name="Group 1113" transform="translate(285.696 1683.285)">
+        <g class="cls-7" transform="matrix(1, 0, 0, 1, -12.7, -15.28)">
+          <rect id="Rectangle_862-2" data-name="Rectangle 862" class="cls-2" width="29.4" height="4.809" rx="2.404" transform="translate(12.7 15.28)"/>
+        </g>
+        <g class="cls-6" transform="matrix(1, 0, 0, 1, -12.7, -15.28)">
+          <rect id="Rectangle_863-2" data-name="Rectangle 863" class="cls-3" width="24.482" height="4.809" rx="2.404" transform="translate(12.7 23.37)"/>
+        </g>
+        <g class="cls-5" transform="matrix(1, 0, 0, 1, -12.7, -15.28)">
+          <rect id="Rectangle_864-2" data-name="Rectangle 864" class="cls-4" width="19.345" height="4.809" rx="2.404" transform="translate(12.7 31.46)"/>
+        </g>
+      </g>
+    </g>
+    <circle id="Ellipse_3" data-name="Ellipse 3" class="cls-1" cx="25" cy="25" r="25" transform="translate(75 733)"/>
+    <g id="businessman-in-apresentation-with-a-graphic-on-a-board" transform="translate(88.166 738.302)">
+      <g id="Group_5679" data-name="Group 5679" transform="translate(0.002 8.918)">
+        <path id="Path_5936" data-name="Path 5936" class="cls-2" d="M22.839,21.135H17.586V20.118a.508.508,0,1,0-1.017,0v1.017H11.316A1.357,1.357,0,0,0,9.96,22.491v1.785l-.706-.235a13.376,13.376,0,0,0-3.344-.713l-.2.4H5.7l.571,4.444L5.6,29.36l-.678-1.185.571-4.444H5.483l-.2-.4a13.423,13.423,0,0,0-3.364.721.672.672,0,0,0-.072.044.835.835,0,0,0-.155.094.749.749,0,0,0-.109.1.8.8,0,0,0-.1.133.853.853,0,0,0-.068.153.8.8,0,0,0-.037.085l-1.356,6.1a.847.847,0,1,0,1.655.367L2.928,25.5c.087-.027.186-.056.294-.086V31.2l-.674,8.386a1.016,1.016,0,0,0,.932,1.094c.028,0,.055,0,.083,0a1.017,1.017,0,0,0,1.012-.935l.609-7.579a1.006,1.006,0,0,0,.82,0l.61,7.579a1.017,1.017,0,0,0,1.012.935c.028,0,.055,0,.083,0a1.016,1.016,0,0,0,.932-1.094L7.966,31.2V25.413c.431.122.721.226.729.228h.011l.009.005,1.243.414v4.563a1.357,1.357,0,0,0,1.356,1.356h2.468l-2.164,8.08a.508.508,0,1,0,.982.262l2.236-8.343h1.733v5.912a.508.508,0,1,0,1.017,0V31.981h1.733l2.235,8.343a.508.508,0,1,0,.982-.262l-2.164-8.08h2.468a1.357,1.357,0,0,0,1.356-1.356V22.491A1.357,1.357,0,0,0,22.839,21.135Zm.678,9.49a.679.679,0,0,1-.678.678H11.316a.679.679,0,0,1-.678-.678V26.289L12.784,27a.864.864,0,0,0,.269.043.848.848,0,0,0,.8-.58.788.788,0,0,0,.022-.18l5.094-2.357a.17.17,0,0,0-.143-.307l-4.988,2.308a.832.832,0,0,0-.52-.536L10.638,24.5V22.491a.678.678,0,0,1,.678-.678H22.84a.679.679,0,0,1,.678.678v8.134h0Z" transform="translate(-0.002 -18.448)"/>
+        <path id="Path_5937" data-name="Path 5937" class="cls-2" d="M33.881,13.616a2.535,2.535,0,0,0,2.142-2.555,2.143,2.143,0,1,0-4.285,0A2.535,2.535,0,0,0,33.881,13.616Z" transform="translate(-28.287 -8.918)"/>
+        <path id="Path_5938" data-name="Path 5938" class="cls-2" d="M135.978,76.826l.351-.219-.344-.55-.35.219a1.74,1.74,0,0,0-.557-.4l.093-.4-.632-.146-.092.4a1.682,1.682,0,0,0-.675.113l-.22-.351-.55.344.22.351a1.706,1.706,0,0,0-.4.557l-.4-.093-.146.632.4.093a1.707,1.707,0,0,0,.114.675l-.351.219.344.55.351-.22a1.661,1.661,0,0,0,.557.4l-.093.4.632.146.093-.4a1.7,1.7,0,0,0,.675-.113l.219.351.549-.344-.218-.351a1.717,1.717,0,0,0,.4-.556l.4.093.145-.632-.4-.094A1.7,1.7,0,0,0,135.978,76.826Zm-.977,1.6a1.165,1.165,0,1,1,.371-1.605A1.166,1.166,0,0,1,135,78.428Z" transform="translate(-117.895 -68.109)"/>
+        <path id="Path_5939" data-name="Path 5939" class="cls-2" d="M172.77,72.39l-.312.106a1.37,1.37,0,0,0-.359-.411l.146-.295-.464-.229-.145.3a1.354,1.354,0,0,0-.544-.035l-.107-.312-.489.166.105.312a1.357,1.357,0,0,0-.41.359l-.3-.146-.229.464.3.146a1.356,1.356,0,0,0-.036.545l-.312.106.165.49.313-.106a1.348,1.348,0,0,0,.359.411l-.146.295.463.229.146-.295a1.35,1.35,0,0,0,.545.035l.105.312.49-.166-.106-.312a1.36,1.36,0,0,0,.411-.36l.3.146.228-.463-.295-.146a1.364,1.364,0,0,0,.036-.544l.312-.106Zm-1.2,1.66a.929.929,0,1,1,.581-1.178A.929.929,0,0,1,171.574,74.05Z" transform="translate(-151.175 -64.704)"/>
+      </g>
+    </g>
+  </g>
+</svg>

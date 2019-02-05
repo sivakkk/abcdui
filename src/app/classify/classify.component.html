@@ -1,0 +1,375 @@
+<app-header [userData]=session.user></app-header>
+
+<!-- <div class="parent-container"> -->
+<div class="container-fluid parent-container">
+    Frames Status: {{ this.currentFrameIndex }} / {{this.imageFrames.length}}
+    <mat-slider
+        thumbLabel
+        [max]="this.imageFrames.length"
+        [min]="0"
+        [step]="1"
+        tickInterval="auto"
+        [(ngModel)]="this.currentFrameIndex"
+        (input)="onSleekBarChange($event)">
+    </mat-slider>
+    <button type="button" data-dismiss="modal" aria-label="Play Video" (click)="playVideo()" *ngIf="!isVideoPlaying">
+        <span aria-hidden="true" style="font-size: 1rem;">Play</span>
+    </button>
+    <button type="button" data-dismiss="modal" aria-label="Pause Video" (click)="pauseVideo()" *ngIf="isVideoPlaying">
+        <span aria-hidden="true" style="font-size: 1rem;">Pause</span>
+    </button>
+    <ng-select [items]="videoSpeedOptions" bindLabel="label" bindValue="value" placeholder="Video Speed" [(ngModel)]="currentVideoSpeed" class="custom" (change)="videoSpeedChanged($event)"></ng-select>
+    <!--************ Modal for read Instructions ************-->
+    <div class="modal right fade" id="readInstructions" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 box-shadow">
+                <div class="modal-header box-shadow">
+                    <h4 class="modal-title nav-text-color">Global Read Me</h4>
+                    <button type="button" class="cross" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="nav-text-color" style="font-size: 2.5rem; cursor: pointer;">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" id="readMeMsg">
+
+                </div>
+                <div class="modal-footer border-0 justify-content-between">
+                    <button class="btn btn-rounded p-1 pr-4 pl-4 blue-bg-btn box-shadow" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+
+        <!--******************************NEW CLASSIFY HEADER CODE**************************************-->
+        <div class="classify-header row p-2 pr-lg-4 pl-lg-4 align-items-center">
+            <!-- Label Details and number of shapes drawn details -->
+            <div class="d-flex left-side box-shadow bg-white" [hidden]="!projectId || session?.admin?.PROJECTS[projectId].PROJECT_TYPE == environment.PROJECT_TYPE.image_tagging">
+                <ng-select [items]="labels" bindLabel="LABEL_NAME" bindValue="LABEL_NAME" placeholder="Search Label and Category" [(ngModel)]="currentLabel" class="custom" (change)="labelChanged($event)" id="pt-label-dropdown"></ng-select>
+                <div class="category p-1 m-1 pr-2 pl-2 left-border">
+                    <span class="align-middle">{{currentCategory}}</span>
+                </div>
+                <div class="p-1 m-1 pr-2 pl-2 left-border">
+                    <span class="clear-all align-middle" (click)="clearArea()">
+                        Clear All&nbsp;
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="count text-white p-2 left-border">
+                    <span class="align-middle">COUNT : {{ imageFrames[currentFrameIndex]?.data[currentLabel]?.rect?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.poly?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.circle?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.point?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.cuboid?.length }}</span>
+                    <span class="pl-2 align-middle">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </span>
+                </div>
+            </div>
+            <!-- Timer -->
+            <div class="middle-side text-center ml-auto">
+                <div class="time-elapsed pb-1">TIME ELASPED</div>
+                <div *ngIf="inactivityTimer" class="timer">{{ objectDetails.timeSpentByUser }}</div>
+                <div *ngIf="!inactivityTimer" class="time-pause  p-1 pr-2 pl-2 pr-lg-3 pl-lg-3 pr-xl-4 pl-xl-4 box-shadow">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Paused
+                </div>
+                <div class="hour-min-sec pt-1">
+                    <span class="mr-1 mr-lg-2 mr-xl-3">HOUR</span>
+                    <span class="min mr-1 mr-lg-2 mr-xl-3">MIN</span>
+                    <span class="sec">SEC</span>
+                </div>
+            </div>
+            <!-- Total images classified progrees bar -->
+            <div class="right-side ml-auto">
+                <div class="total-image-classified text-center mb-1">TOTAL IMAGES CLASSIFIED</div>
+                <div class="progress bg-white box-shadow ml-auto">
+                    <div class="progress-bar" [style.width]="this.progress + '%'"></div>
+                    <span class="progress-text" [class.progress-text-right]="this.progress > 40 && this.progress < 65" [class.text-white]="this.progress > 65">{{ totalClassified }}/{{ totalImages }}</span>
+                </div>
+            </div>
+            <div *ngIf="projectId && session?.admin?.PROJECTS[projectId].PROJECT_TYPE == environment.PROJECT_TYPE.image_segmentation" class="show_layers box-shadow text-center ml-md-4 ml-xl-5" id="toggle_sidebar_button" style="cursor: pointer;" (click)="toggleSidebar()">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+            </div>
+        </div>
+
+    <!-- <div style="width: 90%; margin: 0 auto;" class="canvas-ele"> -->
+    <!--**OLD CANVAS CONTAINER**-->
+    <div class="canvas-ele row pt-1 pb-1" style="justify-content: space-between">
+        <!-- Only show when project type is segmentation -->
+        <div class="shps pl-2 pl-lg-4" *ngIf="projectId && session?.admin?.PROJECTS[projectId].PROJECT_TYPE == environment.PROJECT_TYPE.image_segmentation">
+            <!--*******SHAPES******-->
+            <div class="shp" (click)="changeMode('rectangle')" [ngClass]="{ 'shape-selected' : (mode == 'rectangle'), 'shape-disabled' : !session.admin?.SUBSCRIPTION_FLAG.SHAPES.RECTANGLE }">
+                <img src="../../assets/icons/rectangle icon.svg" alt="Rectangle" class="align-middle shape" matTooltip="Rectangle" matTooltipPosition="right" />
+            </div>
+
+                <div class="shp" (click)="changeMode('cuboid')" [ngClass]="{ 'shape-selected' : (mode == 'cuboid'), 'shape-disabled' : !session.admin?.SUBSCRIPTION_FLAG.SHAPES.CUBOID }">
+                    <img src="../../assets/icons/cuboid.svg" alt="Cuboid" class="align-middle shape" matTooltip="Cuboid" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.SHAPES.CUBOID" />
+                    <img src="../../assets/icons/cuboid_disabled.svg" alt="Cuboid" class="align-middle shape" matTooltip="Cuboid" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.SHAPES.CUBOID" />
+                </div>
+
+                <div class="shp" (click)="changeMode('point')" [ngClass]="{ 'shape-selected' : (mode == 'point'), 'shape-disabled' : !session.admin?.SUBSCRIPTION_FLAG.SHAPES.POINT }">
+                    <img src="../../assets/icons/point.svg" alt="Point" class="align-middle shape point" matTooltip="Point" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.SHAPES.POINT" />
+                    <img src="../../assets/icons/point_disabled.svg" alt="Point" class="align-middle shape point" matTooltip="Point" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.SHAPES.POINT" />
+                </div>
+
+                <div class="shp" (click)="changeMode('circle')" [ngClass]="{ 'shape-selected' : (mode == 'circle'), 'shape-disabled' : !session.admin?.SUBSCRIPTION_FLAG.SHAPES.CIRCLE }">
+                    <img src="../../assets/icons/circle.svg" alt="Circle" class="align-middle shape" matTooltip="Circle" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.SHAPES.CIRCLE" />
+                    <img src="../../assets/icons/circle_disabled.svg" alt="Circle" class="align-middle shape" matTooltip="Circle" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.SHAPES.CIRCLE" />
+                </div>
+
+                <div class="shp" (click)="changeMode('polygon')" [ngClass]="{ 'shape-selected' : (mode == 'polygon'), 'shape-disabled' : !session.admin?.SUBSCRIPTION_FLAG.SHAPES.POLYGON }">
+                    <img src="../../assets/icons/polygon.svg" alt="Polygon" class="align-middle shape" matTooltip="Polygon" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.SHAPES.POLYGON" />
+                    <img src="../../assets/icons/polygon_diabled.svg" alt="Polygon" class="align-middle shape" matTooltip="Polygon" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.SHAPES.POLYGON" />
+                </div>
+                <!--***********************THESE TWO SHAPES ARE NEW SHAPES***************************-->
+                <!-- <div class="shp">
+                    <img src="../../assets/icons/6.svg" alt="Polyline" class="align-middle shape" matTooltip="Polyline" matTooltipPosition="right" />
+                </div>
+                <div class="shp">
+                    <img src="../../assets/icons/7.svg" alt="Full Screen" class="align-middle shape" matTooltip="Full Screen" matTooltipPosition="right" />
+                </div> -->
+            </div>
+
+            <!-- Only show when project type is tagging -->
+            <div class="pl-2 pl-lg-4 box-shadow bg-white" *ngIf="projectId && session?.admin?.PROJECTS[projectId].PROJECT_TYPE == environment.PROJECT_TYPE.image_tagging" id="img_tagging_labels">
+                <h4 class="text-center mt-2">Select Labels</h4>
+                <div *ngIf="this.imageFrames[currentFrameIndex]?.data" class="p-2">
+                    <p *ngFor="let label of this.imageFrames[currentFrameIndex]?.data | keys">
+                        <img src="../../assets/icons/check-box-empty.svg" height="16" *ngIf="!label.value" style="cursor:pointer; position: relative; top:-2px;" (click)="selectTags(label.key, true)">
+                        <i class="fa fa-check-square" aria-hidden="true" *ngIf="label.value" style="font-size:1.1rem; color:#3043EC; cursor: pointer;" (click)="selectTags(label.key, false)"></i>
+                        {{ label.key }}
+                    </p>
+                </div>
+            </div>
+            <!--***************  Canvas  ******************-->
+            <div class="canvas-container col p-0 mr-3 ml-3">
+                <!-- Canvas for Image -->
+                <canvas id="canvasImage" width="{{canvasWidth}}" height="{{canvasHeight}}" class="box-shadow"></canvas>
+                <!-- Canvas for drawing shapes -->
+                <canvas id="canvas" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas>
+            </div>
+
+            <div class="ctrls pr-2 pr-lg-4">
+                <!--*******CONTROLS******-->
+                <div class="ctrl" (click)="zoomPlus()" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.ZOOM || scale == zoomThreshold || controlToolProcessing }">
+                    <img src="../../assets/icons/zoom_in.svg" alt="Zoom In" class="align-middle control" matTooltip="Zoom In" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.ZOOM && scale != zoomThreshold && !controlToolProcessing" />
+                    <img src="../../assets/icons/zoom_in_disabled.svg" alt="Zoom In" class="align-middle control" matTooltip="Zoom In" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.ZOOM || scale == zoomThreshold || controlToolProcessing" />
+                </div>
+
+                <div class="ctrl" (click)="zoomMinus()" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.ZOOM || scale == 1 || controlToolProcessing}">
+                    <img src="../../assets/icons/zoom_out.svg" alt="Zoom Out" class="align-middle control" matTooltip="Zoom Out" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.ZOOM && scale != 1 && !controlToolProcessing" />
+                    <img src="../../assets/icons/zoom_out_disabled.svg" alt="Zoom Out" class="align-middle control" matTooltip="Zoom Out" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.ZOOM || scale == 1 || controlToolProcessing" />
+                </div>
+
+                <div class="ctrl" (click)="changeMode('move')" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || controlToolProcessing, 'control-selected' : mode == 'move' && scale != 1}">
+                    <img src="../../assets/icons/move_image.svg" alt="MOVE IMAGE" class="align-middle control" matTooltip="MOVE IMAGE" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE && scale != 1 && !controlToolProcessing" />
+                    <img src="../../assets/icons/move_image_disabled.svg" alt="MOVE IMAGE" class="align-middle control" matTooltip="MOVE IMAGE" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || controlToolProcessing" />
+                </div>
+
+                <div class="ctrl" (click)="moveImage(0, moveStep);" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || moveTop >= moveTopThreshold || controlToolProcessing }">
+                    <img src="../../assets/icons/move_up.svg" alt="MOVE UP" class="align-middle control" matTooltip="MOVE UP" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE && scale != 1 && moveTop < moveTopThreshold && !controlToolProcessing" />
+                    <img src="../../assets/icons/move_up_disabled.svg" alt="MOVE UP" class="align-middle control" matTooltip="MOVE UP" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || moveTop >= moveTopThreshold || controlToolProcessing" />
+                </div>
+
+                <div class="ctrl" (click)="moveImage(-moveStep, 0);" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || moveRight >= moveRightThreshold || controlToolProcessing }">
+                    <img src="../../assets/icons/move_right.svg" alt="MOVE RIGHT" class="align-middle control" matTooltip="MOVE RIGHT" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE && scale != 1 && moveRight < moveRightThreshold && !controlToolProcessing" />
+                    <img src="../../assets/icons/move_right_disabled.svg" alt="MOVE RIGHT" class="align-middle control" matTooltip="MOVE RIGHT" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || moveRight >= moveRightThreshold || controlToolProcessing" />
+                </div>
+
+                <div class="ctrl" (click)="moveImage(0, -moveStep);" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || moveBottom >= moveBottomThreshold || controlToolProcessing }">
+                    <img src="../../assets/icons/move_down.svg" alt="MOVE DOWN" class="align-middle control" matTooltip="MOVE DOWN" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE && scale != 1 && moveBottom < moveBottomThreshold && !controlToolProcessing" />
+                    <img src="../../assets/icons/move_down_disabled.svg" alt="MOVE DOWN" class="align-middle control" matTooltip="MOVE DOWN" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || moveBottom >= moveBottomThreshold || controlToolProcessing" />
+                </div>
+
+                <div class="ctrl" (click)="moveImage(moveStep, 0);" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || moveLeft >= moveLeftThreshold || controlToolProcessing }">
+                    <img src="../../assets/icons/move_left.svg" alt="MOVE LEFT" class="align-middle control" matTooltip="MOVE LEFT" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE && scale != 1 && moveLeft < moveLeftThreshold && !controlToolProcessing" />
+                    <img src="../../assets/icons/move_left_disabled.svg" alt="MOVE LEFT" class="align-middle control" matTooltip="MOVE LEFT" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1 || moveLeft >= moveLeftThreshold || controlToolProcessing" />
+                </div>
+
+                <div
+                    class="ctrl"
+                    (click)="changeMode('pointer');"
+                    [ngClass]="{
+                        'control-selected' : mode == 'pointer',
+                        'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.SELECT || (imageFrames[currentFrameIndex]?.data[currentLabel]?.rect?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.poly?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.circle?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.point?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.cuboid?.length == 0)
+                    }">
+                    <img
+                        src="../../assets/icons/select.svg"
+                        alt="SELECT"
+                        class="align-middle control select"
+                        matTooltip="SELECT"
+                        matTooltipPosition="right"
+                        *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.SELECT && (imageFrames[currentFrameIndex]?.data[currentLabel]?.rect?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.poly?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.circle?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.point?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.cuboid?.length != 0)"
+                    />
+                    <img
+                        src="../../assets/icons/select_disabled.svg"
+                        alt="SELECT"
+                        class="align-middle control select"
+                        matTooltip="SELECT"
+                        matTooltipPosition="right"
+                        *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.SELECT || (imageFrames[currentFrameIndex]?.data[currentLabel]?.rect?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.poly?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.circle?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.point?.length + imageFrames[currentFrameIndex]?.data[currentLabel]?.cuboid?.length == 0)"
+                    />
+                </div>
+
+                <div class="ctrl" (click)="removeObject();" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.REMOVE || pointerSelectedIndex == null }">
+                    <img src="../../assets/icons/remove_shape.svg" alt="REMOVE SHAPE" class="align-middle control" matTooltip="REMOVE SHAPE" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.REMOVE && pointerSelectedIndex != null" />
+                    <img src="../../assets/icons/remove_shape_disabled.svg" alt="REMOVE SHAPE" class="align-middle control" matTooltip="REMOVE SHAPE" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.REMOVE || pointerSelectedIndex == null" />
+                </div>
+
+                <div class="ctrl" (click)="resetImage()" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1}">
+                    <img src="../../assets/icons/reset_image.svg" alt="RESET IMAGE" class="align-middle control" matTooltip="RESET IMAGE" matTooltipPosition="right" *ngIf="session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE && scale != 1" />
+                    <img src="../../assets/icons/reset_image_disabled.svg" alt="RESET IMAGE" class="align-middle control" matTooltip="RESET IMAGE" matTooltipPosition="right" *ngIf="!session.admin?.SUBSCRIPTION_FLAG.FEATURES.MOVE || scale == 1" />
+                </div>
+
+                <div class="ctrl mb-0" (click)="undo()" [ngClass]="{ 'control-disabled' : !session.admin?.SUBSCRIPTION_FLAG.FEATURES.UNDO || lastShape.length == 0}">
+                    <i class="fa fa-undo control align-middle" aria-hidden="true" matTooltip="Undo" matTooltipPosition="right"></i>
+                </div>
+            </div>
+        </div>
+
+
+        <!--**********UNCOMMENT BELOW CODE (LINE 223 - LINE 244) TO MAKE FOOTER FIXED AT BOTTOM && In SCSS file check LINE 976************************** -->
+        <!-- <div class="classify-footer row p-2 pb-2 pr-lg-4 pl-lg-4 fixed-bottom bg-white">
+            <div class="bg-white p-2 pr-lg-4 pl-lg-4 m-1 ml-lg-3 mr-lg-4 box-shadow" >
+                <img src="../../assets/icons/Read Instructions.svg" alt="Read Instructions Icon" style="height:1.2rem;" class="align-middle" />
+                <span class="pl-2 align-middle">Read Instructions</span>
+            </div>
+            <div class="bg-white p-2 pr-lg-4 pl-lg-4 m-1 mr-lg-4 box-shadow">
+                <span class="align-middle">Hotkeys</span>
+            </div>
+            <div class="bg-white p-2 pr-lg-4 pl-lg-4 m-1 mr-lg-4 box-shadow folder-label-info">
+                    <img src="../../assets/icons/folder2.svg" alt="Folder Icon" style="height:1.2rem;" class="align-middle" />
+                <span class="align-middle pl-1">
+                    Folder Name
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    Label Name : {{ currentLabel }}
+                </span>
+            </div>
+            <div class="pl-lg-4 m-1 mr-lg-3 ml-auto">
+                <button class="btn-next box-shadow p-2 pr-4 pl-4 pr-lg-5 pl-lg-5" (click)="saveImage();">
+                    Next
+                </button>
+            </div>
+        </div> -->
+
+        <!--********************BELOW CODE IS OF REGULAR (not fixed at bottom) CLASSIFY FOOTER********************-->
+        <div class="classify-footer row p-2 pb-2 pr-lg-4 pl-lg-4">
+            <div class="bg-white p-2 pr-lg-4 pl-lg-4 m-1 mr-lg-4 box-shadow">
+
+                <span class="pr-4 pl-2 align-middle" (click)="showInstruction()">
+                    <img src="../../assets/icons/Read Instructions.svg" alt="Read Instructions Icon" style="height:1.2rem;" class="align-middle" /> Read Instructions
+                </span>
+
+
+                <!-- <img src="../../assets/icons/Read Instructions.svg" alt="Read Instructions Icon" style="height:1.2rem;" class="align-middle" />
+                <span class="pl-2 align-middle">Read Instructions</span> -->
+            </div>
+            <!-- <div class="bg-white p-2 pr-lg-4 pl-lg-4 m-1 mr-lg-4 box-shadow">
+                <span class="align-middle">Hotkeys</span>
+            </div> -->
+            <!-- Folder name and Current label name -->
+            <div class="bg-white p-2 pr-lg-4 pl-lg-4 m-1 mr-lg-4 box-shadow folder-label-info">
+                <img src="../../assets/icons/folder2.svg" alt="Folder Icon" style="height:1.2rem;" class="align-middle" />
+                <span class="align-middle pl-1">
+                    <span *ngIf="session.user?.PROJECTS && projectId">{{ session.user?.PROJECTS[projectId]?.NAME }}</span>
+                    <span *ngIf="!session.user?.PROJECTS != null && projectId != null">{{ session.admin?.PROJECTS[projectId]?.NAME }}</span>
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i> Label Name : {{ currentLabel }}
+                </span>
+            </div>
+            <div class="pl-lg-4 m-1 ml-auto">
+                <!-- Skip Image Button, not available for freelancer -->
+                <button class="btn-next box-shadow p-2 pr-4 pl-4 pr-lg-5 pl-lg-5" (click)="skipImage();" *ngIf="!alreadyClassified && (session.user?.USER_TYPE == environment.USER_TYPE.TEAM.NAME || session.user?.USER_TYPE == environment.USER_TYPE.STUDENT_SELF.NAME || session.user?.USER_TYPE == environment.USER_TYPE.SELF.NAME)">
+                    Skip
+                </button>
+                <!-- Save and Fetch next Image -->
+                <button class="btn-next box-shadow p-2 pr-4 pl-4 pr-lg-5 pl-lg-5" (click)="saveImage();" *ngIf="!alreadyClassified">
+                    Next
+                </button>
+                <!-- Save an already classified Image, Appears only when user clicks on edit icon on view image page -->
+                <button class="btn-next box-shadow p-2 pr-4 pl-4 pr-lg-5 pl-lg-5" (click)="saveImage();" *ngIf="alreadyClassified">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!--*********************    Sidebar (Layers)     *************************-->
+    <div id="sidebar_layers" class="sidebar bg-white box-shadow">
+        <!-- Area of Information e.g. width, height, x and y positions of drawn shapes -->
+        <div>
+            <p class="heading d-flex justify-content-between px-2 py-1 m-0 text-truncate">
+                <span>Area of information</span>
+                <span style="cursor: pointer;" data-toggle="collapse" data-target="#area_of_info" aria-controls="area_of_info" id="area_of_info_button" class="collapse_btn">
+                    <i class="fa fa-forward" aria-hidden="true"></i>
+                </span>
+            </p>
+            <div class="row m-0 collapse" id="area_of_info" *ngIf="mode === 'pointer' && pointerSelectedIndex != null && (pointerSelectedShape != null && pointerSelectedShape != 'cuboid' && pointerSelectedShape != 'poly')" style="background: #F9FAFE;">
+                <div class="col-6 p-2" *ngIf="imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].width">
+                    <div class="text-blue px-2 py-1 box-shadow">
+                        <span>Width</span>
+                        <p class="mb-0 dimension">{{ imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].width.toFixed(2) }}</p>
+                    </div>
+                </div>
+                <div class="col-6 p-2" *ngIf="imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].height">
+                    <div class="text-blue px-2 py-1 box-shadow">
+                        <span>Height</span>
+                        <p class="mb-0 dimension">{{ imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].height.toFixed(2) }}</p>
+                    </div>
+                </div>
+                <div class="col-6 p-2" *ngIf="imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].radius">
+                    <div class="text-blue px-2 py-1 box-shadow">
+                        <span>Radius</span>
+                        <p class="mb-0 dimension">{{ imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].radius.toFixed(2) }}</p>
+                    </div>
+                </div>
+                <div class="col-6 p-2" *ngIf="imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].coordinate.x">
+                    <div class="text-blue px-2 py-1 box-shadow">
+                        <span>X</span>
+                        <p class="mb-0 dimension">{{ imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].coordinate.x.toFixed(2) }}</p>
+                    </div>
+                </div>
+                <div class="col-6 p-2"  *ngIf="imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].coordinate.y">
+                    <div class="text-blue px-2 py-1 box-shadow">
+                        <span>Y</span>
+                        <p class="mb-0 dimension">{{ imageFrames[currentFrameIndex]?.data[currentLabel][pointerSelectedShape][pointerSelectedIndex].coordinate.y.toFixed(2) }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div>
+            <p class="heading px-2 py-1 mb-0 d-flex justify-content-between">
+                <span>Histogram</span>
+                <span style="cursor: pointer;" data-toggle="collapse" data-target="#histogram" aria-controls="histogram" id="histogram_button" class="collapse_btn">
+                    <i class="fa fa-forward" aria-hidden="true"></i>
+                </span>
+            </p>
+            <div id="histogram" class="collapse"></div>
+        </div> -->
+
+        <div *ngIf="session?.admin?.PROJECTS[projectId]?.PROJECT_TYPE == environment.PROJECT_TYPE.image_segmentation">
+            <!-- Layers... user can check here all drawn shapes -->
+            <p class="heading px-2 py-1 mb-0 d-flex justify-content-between">
+                <span>Layers</span>
+                <span style="cursor: pointer;" data-toggle="collapse" data-target="#layers" aria-controls="layers" id="layers_button" class="collapse_btn">
+                    <i class="fa fa-forward" aria-hidden="true"></i>
+                </span>
+            </p>
+
+            <div id="layers" class="collapse" *ngIf="showLayers">
+                <div *ngFor="let label of imageFrames[currentFrameIndex]?.data | keys">
+                    <div *ngFor="let shapes of label.value | keys">
+                        <div *ngFor="let shape of shapes.value; let i = index" class="layer d-flex" [class.active]="mode === 'pointer' && pointerSelectedIndex === i && pointerSelectedShape === shapes.key && currentLabel === label.key" style="position: relative;">
+                            <p (click)="selectShapeFromLayers(label.key, shapes.key, i)" class="border-right cursor px-2">
+                                <img src="../../assets/icons/eye.svg" alt="Show Shape" style="width: 1rem;" *ngIf="mode !== 'pointer' || pointerSelectedIndex !== i || pointerSelectedShape !== shapes.key || currentLabel !== label.key">
+                                <img src="../../assets/icons/active_eye.svg" alt="Hide Shape" style="width: 1rem;" *ngIf="mode === 'pointer' && pointerSelectedIndex === i && pointerSelectedShape === shapes.key && currentLabel === label.key">
+                            </p>
+                            <p class="text-truncate" style="padding-right: 30px;">{{ environment.SHAPES_FULL_NAME[shapes.key].CANVAS_NAME }}{{ i + 1 }} - {{ label.key }}</p>
+                            <p (click)="removeObject()" class="cursor px-2" *ngIf="mode === 'pointer' && pointerSelectedIndex === i && pointerSelectedShape === shapes.key && currentLabel === label.key" style="position: absolute; right: 0;">
+                                &times;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- </div> -->

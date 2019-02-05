@@ -1,0 +1,111 @@
+<div *ngIf="tab == 'admin-dashboard'">
+    <!-- <div class="heading" style="font-size:1.2em;">
+        DASHBOARD
+    </div> -->
+    <div class="tab-content" style="display: flex; flex-direction: column; align-content: space-between; padding: 1%;">
+        <div class="row m-b-30 dashboard-header">
+            <div class="col-lg-1 col-sm-1">
+                <h1 *ngIf="date.getHours() < 12"><i class="fa fa-coffee fa-5x" style="color:royalblue" aria-hidden="true"></i></h1>
+                <h1 *ngIf="date.getHours() > 12 && date.getHours() < 18"><i class="fa fa-sun-o fa-5x" style="color:royalblue" aria-hidden="true"></i></h1>
+                <h1 *ngIf="date.getHours() > 18"><i class="fa fa-moon-o fa-5x fa-fw" style="color:royalblue" aria-hidden="true"></i></h1>
+            </div>
+            <div class="col-lg-11 col-sm-11">
+                <h2 *ngIf="date.getHours() < 12" style="color:royalblue"> Good Morning, {{ this.localUser.NAME }}!</h2>
+                <h2 *ngIf="date.getHours() > 12 && date.getHours() < 18" style="color:royalblue"> Good Afternoon, {{ this.localUser.NAME }}!</h2>
+                <h2 *ngIf="date.getHours() > 18" style="color:royalblue"> Good Evening, {{ this.localUser.NAME }}!</h2>
+                <br /> You have udpates on the number of images classified and the number of new users who have classified images on the platform
+            </div>
+        </div>
+        <br />
+
+
+        <!-- Card Row -->
+        <div class="row m-b-30 dashboard-header">
+            <div class="col-lg-3 col-sm-6">
+                <div class="col-sm-12 card dashboard-product">
+                    <span>Images</span>
+                    <h2 class="dashboard-total-products counter" *ngIf="teamDetails">{{this.teamDetails.length > 0 ? this.teamDetails[0].TOTAL_OBJECTS : "0"}}</h2>
+                    <span class="label label-warning">Classified</span>
+                    <div class="side-box bg-warning">
+                        <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="col-sm-12 card dashboard-product">
+                    <span>Team</span>
+                    <div ngClass="{{'progress-circle progress-' + (this.teamDetails ? (this.teamDetails.length > 0 ? (this.teamDetails[0].documents.length / this.localUser.TOTAL_SEATS * 100) : 0) : 0)}}">
+                        <span class="dashboard-total-products counter details teamClassifier" *ngIf="teamDetails">{{this.teamDetails.length > 0 ? this.teamDetails[0].documents.length : 0}}</span>
+                    </div>
+                    <div class="side-box bg-primary">
+                        <i class="fa fa-users"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="col-sm-12 card dashboard-product">
+                    <span>Pending</span>
+                    <h2 class="dashboard-total-products" *ngIf="this.teamDetails"><span class="counter" *ngIf="images">{{this.images.length > 0 ? (this.images.total_images - this.images.distinct) : 0}}</span></h2>
+                    <span class="label label-success">Images</span>
+                    <div class="side-box bg-success">
+                        <i class="fa fa-pause" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="col-sm-12 card dashboard-product">
+                    <span>Spent</span>
+                    <h2 class="dashboard-total-products"><span class="counter" *ngIf="teamDetails">{{this.teamDetails.length > 0 ? (this.teamDetails[0].TOTAL_TIME / 3600).toFixed(0) : 0}}</span></h2>
+                    <span class="label label-info">Hours</span>
+                    <div class="side-box bg-info">
+                        <i class="fa fa-hourglass-half" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart row -->
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="row m-b-10 dashboard-total-income">
+                            <div class="col-sm-6 text-left">
+                                <div class="counter-txt">
+                                    <h6>Classified vs Time</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="teamDetails" class="card-block row">
+                        <div class="col-sm-12">
+                            <app-admin-dashboard-user-chart [adminData]="this.teamDetails[0]"></app-admin-dashboard-user-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="row m-b-10 dashboard-total-income">
+                            <div class="col-sm-6 text-left">
+                                <div class="counter-txt">
+                                    <h6>Annotation Trend</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <i class="fa fa-line-chart" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="teamData" class="card-block row">
+                        <div class="col-sm-12">
+                            <app-admin-dashboard-team-chart [teamDetails]="this.teamData"></app-admin-dashboard-team-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

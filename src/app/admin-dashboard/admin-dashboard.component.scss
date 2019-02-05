@@ -1,0 +1,558 @@
+.tab-content
+{
+    align-items: stretch;
+
+    background-color: #f5f5f5 !important;
+}
+
+.admin-row
+{
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+}
+
+// position: relative;
+
+// margin: 2px;
+.cards
+{
+    font-size: 12px;
+    // position: absolute;
+
+    top: 35px;
+
+    display: table;
+
+    max-width: 220px;
+    height: 120px;
+    padding: 20px;
+
+    background-color: white;
+    box-shadow: 0 2px #ccc;
+}
+
+.cards p
+{
+    font-weight: bold;
+
+    display: table-cell;
+    // display: inline;
+
+    text-align: center;
+    vertical-align: middle;
+}
+
+.cards .details
+{
+    font-size: 30px;
+
+    color: royalblue;
+}
+
+.teamDetailsCard
+{
+    font-size: 12px;
+    font-weight: 400;
+
+    z-index: 100000;
+    // position: absolute;
+    top: 0;
+    right: 0;
+
+    display: none;
+
+    width: max-content;
+    padding: 10px;
+
+    background-color: #fff;
+}
+
+#viewTeamDetails
+{
+    vertical-align: top;
+}
+
+#hoever:hover .teamDetailsCard
+{
+    display: block;
+}
+
+#viewTeamDetails:hover .teamDetailsCard
+{
+    display: block;
+
+    cursor: not-allowed;
+}
+
+.ro
+{
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+//New
+
+@import '../../assets/partials/_dashboard_general.scss';
+
+body
+{
+    font-family: 'Open Sans', sans-serif;
+
+    overflow-x: hidden;
+
+    @include f-s(15px);
+    @include bg-c(#e5e5e5);
+}
+
+* a
+{
+    cursor: pointer;
+
+    @include c(#00b9f5);
+    @include f-s(15px);
+    @include f-w(400);
+    @include transition(all .3s 0s);
+
+    &:focus,
+    &:hover
+    {
+        @include t-d(none);
+    }
+}
+
+*:focus
+{
+    outline: none !important;
+}
+
+p
+{
+    line-height: 1.6;
+
+    @include f-s(13px);
+    @include f-w(400);
+    @include c(#666);
+    @include m(0);
+}
+
+i
+{
+    cursor: pointer;
+}
+
+.card_main
+{
+    @include mb(30px);
+    @include b(none);
+    @include shadow(0 2px 2px 0 rgba(0, 0, 0, .05), 0 3px 1px -2px rgba(0, 0, 0, .08), 0 1px 5px 0 rgba(0, 0, 0, .08));
+}
+
+.sub-title
+{
+    text-transform: capitalize;
+
+    @include b(1px solid rgba(204, 204, 204, .35),bottom);
+    @include pb(10px);
+    @include mb(20px);
+    @include mb(40px);
+}
+
+label
+{
+    text-transform: capitalize;
+
+    @include c(rgba(43, 61, 81, .8));
+    @include f-w(500);
+}
+
+h6
+{
+    @include c(#757575);
+    @include f-w(600);
+}
+
+ul
+{
+    list-style: none;
+
+    @include p(0);
+    @include mb(0);
+}
+
+.counter-txt
+{
+    @include f-s(1.5rem);
+}
+
+.width-100
+{
+    width: 100%;
+}
+
+.c-both
+{
+    clear: both;
+}
+
+.c-pointer
+{
+    cursor: pointer;
+}
+
+.breadcrumb-block
+{
+    .breadcrumb:last-child
+    {
+        @include mb(0);
+    }
+}
+
+.breadcrumb-title
+{
+    @include bg(rgba(0, 0, 0, 0) none repeat scroll 0 0);
+    @include p(0);
+}
+
+.card-header-text
+{
+    text-transform: uppercase;
+
+    @include mb(0);
+    @include f-s(1rem);
+    @include mb(rgba(51, 51, 51, .85));
+    @include f-w(600);
+    @include disp(inline-block);
+    @include v-al(middle);
+}
+
+.card-header
+{
+    @include p(20px);
+    @include bg-c(transparent);
+    @include c(#757575);
+}
+
+.card
+{
+    border-radius: 0;
+
+    @include mb(30px);
+    @include b(none);
+    @include shadow(0 0 1px 2px rgba(0, 0, 0, .05), 0 -2px 1px -2px rgba(0, 0, 0, .04), 0 0 0 -1px rgba(0, 0, 0, .05));
+    &:hover
+    {
+        @include shadow(0 0 25px -5px #9e9c9e);
+        @include transition(all 150ms linear);
+    }
+}
+
+textarea
+{
+    resize: none;
+}
+
+.txt-ellipsis
+{
+    overflow: hidden;
+
+    width: 120px;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.form-inline
+{
+    label
+    {
+        @include mb(5px !important);
+    }
+}
+
+.able-logo
+{
+    @include disp(inline-block);
+    @include mr(10px);
+}
+
+.nav-pills
+{
+    .nav-link
+    {
+        &.active,
+        &.active:focus,
+        &.active:hover
+        {
+            @include bg(transparent);
+            @include c(#0275d8);
+            @include t-a(center);
+            @include b(1px solid #0275d8,bottom);
+        }
+    }
+}
+
+.generic-card-body
+{
+    strong
+    {
+        @include disp(block);
+    }
+
+    code
+    {
+        cursor: pointer;
+
+        @include disp(inline-block);
+        @include mr(10px);
+        @include mb(10px);
+    }
+}
+
+.block
+{
+    @include disp(block);
+}
+
+.btn.shadow-none
+{
+    @include shadow(none);
+}
+
+.dashboard-header i
+{
+    @include f-s(32px);
+}
+
+.dashboard-header .col-sm-6:nth-child(1),
+.dashboard-header .col-sm-6:nth-child(2)
+{
+    @include mb(20px);
+}
+
+.dashboard-header .col-sm-6:nth-child(3)
+{
+    @include mb(20px);
+}
+
+.dashboard-header
+{
+    .col-sm-6
+    {
+        &:nth-child(1),
+        &:nth-child(2)
+        {
+            @include mb(15px);
+        }
+    }
+}
+
+.card-header-text
+{
+    text-transform: uppercase;
+
+    @include mb(0);
+    @include f-s(1rem);
+    @include mb(rgba(51, 51, 51, .85));
+    @include f-w(600);
+    @include disp(inline-block);
+    @include v-al(middle);
+}
+
+.card-header
+{
+    @include p(20px);
+    @include bg-c(transparent);
+    @include c(#757575);
+}
+
+.card
+{
+    @include mb(30px);
+    @include b(none);
+    @include shadow(0 0 1px 2px rgba(0, 0, 0, .05), 0 -2px 1px -2px rgba(0, 0, 0, .04), 0 0 0 -1px rgba(0, 0, 0, .05));
+    &:hover
+    {
+        @include shadow(0 0 25px -5px #9e9c9e);
+        @include transition(all 150ms linear);
+    }
+}
+
+.dashboard-product
+{
+    @include bg-c(#fff);
+    @include pt(21px);
+    @include pb(25px);
+    @include c(#777);
+}
+
+.dashboard-total-products
+{
+    @include f-w(600);
+    @include mt(10px);
+    @include mb(10px);
+}
+
+.dashboard-resource
+{
+    .counter
+    {
+        @include c(#fff);
+        @include disp(inline-block);
+    }
+    .resource-used
+    {
+        @include t-a(right);
+        @include c(#fff);
+        @include flt(right);
+    }
+}
+
+//Labels
+.badge-primary,
+.label-primary
+{
+    @include bg-c(#2196f3);
+}
+
+.badge-success,
+.label-success
+{
+    @include bg-c(#4caf50);
+}
+
+.badge-warning,
+.label-warning
+{
+    @include bg-c(#f57c00);
+}
+
+.badge-danger,
+.label-danger
+{
+    @include bg-c(#ff5252);
+}
+
+.badge-info,
+.label-info
+{
+    @include bg-c(#40c4ff);
+}
+
+.label
+{
+    line-height: 1.1;
+
+    width: 40%;
+
+    white-space: nowrap;
+
+    @include disp(inline);
+    @include p(2px 7px);
+    @include f-s(75%);
+    @include f-w(700);
+    @include c(#fff);
+    @include t-a(center);
+    @include v-al(baseline);
+    @include b(0em,radius);
+    @include mr(10px);
+}
+
+.side-box
+{
+    top: 0;
+    right: 0;
+
+    width: 80px;
+    height: 70px;
+
+    @include pos(absolute);
+    @include c(#fff);
+    @include f-s(26px);
+    @include b(0 0 0 100px,radius);
+    @include t-a(center);
+    i
+    {
+        top: 10px;
+        left: 5px;
+
+        @include pos(relative);
+    }
+}
+
+/*======================
+Basic card CSS
+======================= */
+.card-img-bottom,
+.card-img-top
+{
+    width: 100%;
+}
+
+.global-cards .card-text
+{
+    @include mb(10px);
+}
+.color-card
+{
+    footer,
+    p
+    {
+        @include c(#fff);
+    }
+    .color-default
+    {
+        footer,
+        p
+        {
+            @include c(#222);
+        }
+    }
+}
+
+.dashboard-total-income
+{
+    .counter-txt
+    {
+        font:
+        {
+            weight: 300;
+            size: 35px;
+        };
+
+        @include c(#2196f3);
+    }
+    i
+    {
+        @include flt(right);
+        @include f-s(30px);
+        @include c(#2196f0);
+    }
+}
+
+.inline-forms .card-block .inline-form-style
+{
+    @include mb(0);
+}
+
+.label-bagdes .card .card-block p
+{
+    @include mb(20px);
+}
+
+.task-detail-right
+{
+    .counter
+    {
+        @include t-a(center);
+        @include c(#777);
+    }
+    .card-block table i,
+    .card-header h5 i
+    {
+        @include mr(5px);
+    }
+}

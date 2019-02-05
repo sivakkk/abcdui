@@ -1,0 +1,291 @@
+$theme-color-grey: #f5f5f5;
+$theme-color-grey-dark: #ddd;
+$theme-color-blue: royalblue;
+$theme-color-blue-light: #0083ff;
+$theme-color-blue-dark: blue;
+$bg-color: #F9FAFE;
+$border-color-blue: #3248EC;
+$tools-color: #283BEB;
+$tools-bg-color: rgba(67, 89, 241, 0.28);
+$btn-grad-color-light: #556DF6;
+$btn-grad-color-dark: #2437E9;
+$font-color-light-grey: rgba(123, 126, 145, 0.8);
+$footer-font-color: #505571;
+@import '../../assets/partials/_mixins.scss';
+
+.parent-container
+{
+    width: 100%;
+
+    .content
+    {
+        width: 100%;
+        height: 100%;
+        padding-top: 0;
+        padding-left: 0;
+
+        .classify-header{
+            min-height: 95px;
+            margin-top: 76px;
+    
+            .left-side{ // Question and shape counts styling
+                border-radius: 3px;
+                border: 1px solid $border-color-blue;
+                font-size: 0.9rem;
+                color: $font-color-light-grey;
+                height: 42px;
+    
+                .category{
+                    font-weight: bold;
+                    color: #505571;
+                }
+                .left-border{
+                    border-left: 1px solid #6D7391;
+                }
+                .clear-all{
+                    color: rgba(255, 0, 0, 0.62);
+                    cursor: pointer;
+                }
+                .count{
+                    @include gradient(#fff,135deg, $btn-grad-color-light, $btn-grad-color-dark);
+                }
+            }
+            // Timer styles
+            .middle-side {
+                font-weight: bold;
+                font-size: 12px;
+                color: $font-color-light-grey;
+    
+                .time-pause {
+                    font-size: 18px;
+                    border-radius: 25px;
+                    width: 100%;
+    
+                    @include gradient(rgba(255,255,255,0.72),143deg, $btn-grad-color-light, $btn-grad-color-dark);
+                }
+                .hour-min-sec{
+                    @media (max-width:998px){
+                        font-size: 0.7rem;
+                    }
+                }
+            }
+            // Certification level progress bar styles
+            .right-side {
+                font-size: 0.9rem;
+    
+                @media (min-width:998px){
+                    width: 275px;
+                }
+    
+                .total-image-classified {
+                    font-weight: bold;
+                    opacity: .5;
+                    @media (max-width:998px){
+                        font-size: 12.5px;
+                    }
+                }
+                .progress{
+                    height: 25px;
+                    border-radius: 25px;
+                    border: 2px solid #6174F4;
+                    position: relative;
+                }
+                .progress-bar{
+                    border-radius: 15px;
+    
+                    @include gradient(#fff,142deg, $btn-grad-color-light, $btn-grad-color-dark);
+                }
+                .progress-text{
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    font-size: 0.9rem;
+                    color: rgba(91, 109, 242, 0.63);
+                }
+                .progress-text-right {
+                    left: 75%;
+                }
+            }
+            // Show Layers Icon Styles
+            .show_layers {
+                width: 35px;
+                height: 35px;
+                padding: 4px 4px 0 0;
+                background: #FFFFFF;
+                color: $tools-color;
+                font-size: 1.2rem;
+                border: none;
+                border-radius: 3px;
+                -webkit-transition:  0.2s;
+                transition: 0.2s;
+            }
+            .show_layers.active{
+                @include gradient(#fff,180deg, $btn-grad-color-light, $btn-grad-color-dark);
+            }
+        }
+
+        .canvas-ele {
+            // height: 70%;
+            height: 70vh;    // CANVAS image 70% of screen height
+    
+            .shp, .ctrl {
+                margin-bottom: 0.5rem;
+                width: 35px;
+                height: 35px;
+                box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
+                background: #FFFFFF;
+                text-align: center;
+                cursor: pointer;
+                color: $tools-color;
+                font-size: 1.3rem;
+                border: none;
+                border-radius: 3px;
+                -webkit-transition:  0.2s;
+                transition: 0.2s;
+    
+                .shape, .control{
+                    height: 1.2rem;
+                    width: 1.2rem;
+                }
+                .point{
+                    width: 0.8rem;
+                    height: 0.8rem;
+                }
+                .select{
+                    height: 1.4rem;
+                    width: 1.4rem;
+                }
+            }
+            .shape-selected, .control-selected {
+                cursor: auto;
+                background-color: $tools-bg-color;
+            }
+    
+            .shape-disabled {
+                pointer-events: none;
+    
+                // .shape {
+                //     opacity: 0.6;
+                // }
+            }
+    
+            .control-disabled {
+                pointer-events: none;
+                background-color: #fff;
+    
+                .control {
+                    // opacity: 0.6;
+                    color: #a3a7af
+                }
+            }
+            .ctrl:active {
+                background-color: $tools-bg-color;
+            }
+    
+            .canvas-container {
+                border-radius: 3px;
+    
+                #canvas {
+                    position: absolute;
+                }
+    
+                #canvasImage {
+                    position: absolute;
+                }
+            }
+        }
+
+        .classify-footer{
+            padding-right: 68px!important;
+
+            .btn-next {
+                border : none;
+                border-radius: 60px;
+                font-size: 1.2rem;
+                width: unset;
+                height: unset;
+    
+                @include btn-twoColorLinearGradient(#008bc5, #31c1ff, #3bccff, #3f86ed, to right, 200% 150%);
+                @include btn-twoColorLinearGradient-hover( right center);
+            }
+        }
+        // Layers Styling
+        #sidebar_layers {
+            position: absolute;
+            top: 106px;
+            right: calc(45px + 1.5rem);
+            max-height: 75%;
+            max-height: calc(70vh + 60px);
+            border-radius: 2px;
+            font-size: 0.9rem;
+            font-family: 'helvetica-medium';
+            overflow-y: auto;
+            overflow-x: hidden;
+    
+            .heading {
+                @include gradient(#505571, 180deg, #fff, #cccfe8);
+            }
+    
+            #area_of_info.show {
+                display: flex;
+            }
+    
+            .text-blue {
+                background: #FFF;
+                color: #2846EC;
+                border-radius: 3px;
+            }
+    
+            .dimension {
+                font-size: 2rem;
+            }
+    
+            .layer {
+                border-bottom: 0.8px solid #465DF2;
+                color: #505571;
+    
+                p {
+                    margin-bottom: 0;
+                    padding: 4px;
+                }
+            }
+    
+            .cursor {
+                cursor: pointer;
+                border-color: #465DF2 !important;
+            }
+    
+            .active {
+                color: #465DF2;
+            }
+        }
+    
+        .sidebar {
+            width: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.25s;
+        }
+    
+        .open {
+            width: 275px;
+            visibility: visible;
+            opacity: 1;
+        }
+    
+        .collapse_btn {
+            -webkit-transition  : 0.25s;
+            -moz-transition     : 0.25s;
+            -o-transition       : 0.25s;
+            transition          : 0.25s;
+        }
+    
+        .rotate {
+            -webkit-transform : rotate(90deg);
+            -moz-transform    : rotate(90deg);
+            -ms-transform     : rotate(90deg);
+            -o-transform      : rotate(90deg);
+            transform         : rotate(90deg);
+        }
+    }
+}

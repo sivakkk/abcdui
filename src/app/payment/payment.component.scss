@@ -1,0 +1,251 @@
+@import "../../assets/partials/_mixins.scss";
+
+// .cancelButton{
+//     //@include gradientButton-hover(white,linear-gradient(to right, #d475a6, #F190C1));
+//     @include gradButton-hover(white, #d475a6, #F190C1);
+// }
+
+.tab-content
+{
+    .upgrade-info {
+        border: 1px solid #9e9e9e;
+        border-radius: 3px;
+        font-size: 0.9rem;
+    }
+
+    .upgrade-btn {
+        border-radius: unset;
+        @include btn-twoColorLinearGradient(#4ea9f8,#4ea9f8, #3bccff, #3f86ed, to right, 200% 150%);
+        @include btn-twoColorLinearGradient-hover( right center);
+    }
+
+    .cancelButton{
+        border-radius: unset;
+        @include btn-twoColorLinearGradient(#d475a6, #F190C1, #ffa2d1,#fd49a4, to right, 200% 150%);
+        @include btn-twoColorLinearGradient-hover( right center);
+    }
+
+    h6 {
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+
+    .payment-state {
+        border-radius: 4rem;
+    }
+
+    .green {
+        background-color: #5fd855;
+    }
+
+    .yellow {
+        background-color: #fec107;
+    }
+
+    .orange {
+        background-color: orange;
+    }
+
+    .red {
+        background-color: red;
+    }
+
+    .info
+    {
+        font-size: 18px;
+
+        display: grid;
+
+        margin-bottom: 2%;
+
+        .key
+        {
+            //font-size: 12px;
+            font-size: 0.7em;
+
+            margin-top: 3%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .value
+        {
+            font-size:0.8em;
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+
+    ul
+    {
+        padding-left: 30px;
+
+        list-style: none;
+
+        vertical-align: middle;
+
+        li
+        {
+            font-size: 18px;
+            line-height: 2;
+
+            height: 40px;
+
+            cursor: pointer;
+        }
+    }
+
+    .invoice
+    {
+        width: 100%;
+
+        .invoice-row
+        {
+            display: flex;
+            justify-content: space-around;
+
+            .info
+            {
+                font-size: 18px;
+
+                display: grid;
+
+                margin-bottom: 2%;
+
+                .key
+                {
+                    font-size: 12px;
+
+                    margin-top: 3%;
+                    margin-right: auto;
+                    margin-left: auto;
+                }
+
+                .value
+                {
+                    margin-right: auto;
+                    margin-left: auto;
+                }
+            }
+        }
+    }
+}
+
+#invoice_container
+{
+    position: absolute;
+    z-index: 0;
+    top: calc(52px + 4rem);
+    width: 98%;
+    background: #F9FAFE;
+
+    #invoice {
+        background-color: #fff;
+
+        .header {
+            background-image: linear-gradient(45deg, #03b4de, #3c78e0);
+            position: relative;
+    
+            .back_btn {
+                position: absolute;
+                top: 0;
+                left: 0;
+                font-size: 2rem;
+                width: unset;
+                height: unset;
+                padding: 0 20px;
+                background: #fbfbfb;
+                color: #4da9f7;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+
+            .back_btn:hover {
+                background: #fff;
+                box-shadow: 0px 0px 14px #fff;
+                transform: scale(1.1);
+            }
+
+            .field_name {
+                display: inline-block;
+                width: 125px;
+            }
+
+            .green {
+                background-color: #5fd855;
+            }
+        
+            .yellow {
+                background-color: #fec107;
+            }
+        
+            .orange {
+                background-color: orange;
+            }
+        
+            .red {
+                background-color: red;
+            }
+
+            .pay_status {
+                position: absolute;
+                bottom: -1.5rem;
+                right: -14px;
+                padding: 10px 20px;
+            }
+
+            .pay_status:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 0;
+                height: 0;
+                border-color: transparent;
+                border-style: solid;
+                border-bottom-width: calc(0.75rem + 10px);
+                border-top-width: calc(0.75rem + 10px);
+                border-right: 13px solid#F9FAFE;
+            }
+        }
+    }
+}
+
+#upgradePaymentModal{
+
+    .modal-content {
+        background: #F9FAFE;
+        color: #212121;
+    }
+
+    .modal-header {
+        border-bottom: none;
+
+        .close {
+            width: unset;
+            height: unset;
+            font-size: 3rem;
+            color: #556DF6;
+            opacity: 1;
+            font-weight: 400;
+        }
+    }
+
+    .modal-dialog {
+        min-width: 100%;
+
+        .modal-content {
+            height: 100vh;
+            border: unset;
+            border-radius: unset;
+        }
+
+        .modal-body {
+
+            .cursor {
+                cursor: pointer;
+            }
+        }
+    }
+
+}

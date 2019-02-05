@@ -1,0 +1,115 @@
+@import '../../assets/partials/_mixins.scss';
+
+.card {
+    border-radius: 0;
+}
+
+.list {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 225px
+}
+
+.left-container ul li {
+	list-style-type: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+input {
+    border: 1px solid rgba(80, 85, 113,0.63);
+    border-radius: 3px;
+    color: #505571;
+    width: 75px;
+    padding: 3px 0;
+    text-align: center;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.btn-rounded {
+    padding: 0.7rem 2rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+
+    @include btn-twoColorLinearGradient(#2C98F0, #2C98F0, #1fbcff, #2437e9, to right, 200% 150%);
+    @include btn-twoColorLinearGradient-hover( right center);
+}
+
+.dropdown-icon {
+    transition: 0.3s;
+}
+
+.rotate {
+    -webkit-transform : rotate(180deg);
+    -moz-transform    : rotate(180deg);
+    -ms-transform     : rotate(180deg);
+    -o-transform      : rotate(180deg);
+    transform         : rotate(180deg);
+}
+
+.card-header:first-child {
+    border-radius: 0 !important;
+}
+
+.pay-method {
+    color: #2C98F0;
+    background-color: #F2F2F2;
+}
+
+.pay-method.active {
+    color: #fff;
+    background-color: #2C98F0;
+}
+
+.slidecontainer { // For styling the input type 'range'
+    width: 100%;
+
+    .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 3px;
+        border-radius: 5px;
+        background: #BDBDBD;
+        outline: none;
+        border: none;
+        transition: .2s;
+        padding: 0;
+    }
+    
+    .slider:hover {
+        opacity: 1;
+    }
+    
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        background: #2C98F0;
+        cursor: pointer;
+    }
+    
+    .slider::-moz-range-thumb {
+        width: 0.8rem;
+        height: 0.8rem;
+        border-radius: 50%;
+        background: #2C98F0;
+        cursor: pointer;
+    }
+    
+    .background {
+        background-color: #2C98F0;
+        height: 3px;
+        border-radius: 5px;
+        position: relative;
+        top: -9px;
+    }
+}
+

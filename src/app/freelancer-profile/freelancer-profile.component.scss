@@ -1,0 +1,74 @@
+@import '../../assets/partials/_mixins.scss';
+
+$theme-color-grey: #7b7e91;
+$theme-color-grey-dark: #505571;
+$theme-color-blue: #413df5;
+$theme-color-blue-light: #4b61f4;
+$theme-color-blue-dark: #1124b5;
+$theme-color-light-skyblue: #1c9ee4;
+$theme-color-purple-light: #6d6afa;
+$theme-color-purple-light-bg: rgba(109,106,250,0.2);
+
+.profile-component{
+    font-family: 'helvetica-regular';
+
+    .sidebar    // Left sidebar styles
+    {   
+        position: fixed;
+        top: 76px;
+        bottom: 0;
+        left: 0;
+        padding-top: 1rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+        border-right: 1px solid #eee;
+        color: $theme-color-grey-dark;
+
+        .nav{
+            margin-top: 30px;
+        }
+        li{
+            padding: 0.5rem;
+            border-left: 6px solid #fff;
+        }
+        a{
+            cursor: pointer;
+        }
+        .active{
+            background: $theme-color-purple-light-bg;
+            border-color: $theme-color-purple-light;
+            border-top-right-radius: 60px;
+            border-bottom-right-radius: 60px;
+            font-family: 'helvetica-medium';
+        }
+        .active a{
+            color: $theme-color-blue;
+        }
+        .user-thumb{
+            border: 2px solid #4258F0;
+        }
+        #certificationProgress
+        {
+            border-radius: 4rem;
+            border: 1px solid #536AF5;
+            height: 20px;
+            position: relative;
+
+            .bar{
+                @include gradient(#fff, 180deg, #556DF6, #2437E9);
+            }
+            .progress-text{
+                position: absolute;
+                left: 50%;
+                top: -2px;
+                transform: translateX(-50%);
+                font-size: 0.9rem;
+                color: #546CF5;
+            }
+        }
+    }
+    .right-side{
+        position: relative;
+        top: 100px;
+    }
+}

@@ -1,0 +1,201 @@
+@import '../../assets/partials/_mixins.scss';
+
+$theme-color-grey: #f5f5f5;
+$theme-color-grey-dark: #ddd;
+$theme-color-blue: royalblue;
+$theme-color-blue-light: #0083ff;
+$theme-color-blue-dark: blue;
+$border-color: grey;
+
+.mat-stepper-number .mat-stepper-done {
+    background-color: #2196f3 !important;
+}
+
+#stepper{
+    ol {
+        counter-reset: item;
+    }
+      
+    li {
+        display: block;
+    }
+      
+    li:before {
+        content: counters(item, ".") ": ";
+        counter-increment: item;
+        font-weight: bold;
+    }
+};
+
+.faq-main-tab {
+    main {
+        min-width: 320px;
+        max-width: 90%;
+        margin: 0 auto;
+        background: #fff;
+        .tab-section {
+            display: none;
+            padding: 20px 0 0;
+            border-top: 1px solid #ddd;
+            .tab-sec-accor {
+                // max-width: 90%;
+                width: 100%;
+                margin: 0 auto 10px 0;
+                text-align: left;
+                .tab-sec-label {
+                    height: 30px !important;
+                    line-height: 21px !important;
+                    font-size: 1em !important;
+                    padding: 5px 20px;
+                    position: relative;
+                    z-index: 20;
+                    display: block;
+                    height: 30px;
+                    cursor: pointer;
+                    color: #777;
+                    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+                    line-height: 33px;
+                    background: #fff;
+                    background: -moz-linear-gradient(top, #fff 1%, #eaeaea 100%);
+                    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #fff), color-stop(100%, #eaeaea));
+                    background: -webkit-linear-gradient(top, #fff 1%, #eaeaea 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#eaeaea', GradientType=0);
+                    box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.3), 1px 0 0 rgba(255, 255, 255, 0.9) inset, 0 2px 2px rgba(0, 0, 0, 0.1);
+                    height: 30px;
+                    line-height: 20px;
+                }
+                .tab-sec-label:hover {
+                    background: #fff;
+                }
+                .tab-sec-input:checked+.tab-sec-label,
+                .tab-sec-input:checked+.tab-sec-label:hover {
+                    background: #f1f2f3;
+                    color: #666;
+                    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
+                    box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.3), 0 2px 2px rgba(0, 0, 0, 0.1);
+                    height: 30px;
+                    line-height: 21px;
+                    font-size: 1em;
+                }
+                .tab-sec-label:hover:after,
+                .tab-sec-input:checked+.tab-sec-label:hover:after {
+                    content: '';
+                    position: absolute;
+                    width: 24px;
+                    height: 24px;
+                    right: 13px;
+                    top: 7px;
+                    background: transparent url('../../assets/images/arrow_down.png') no-repeat center center;
+                }
+                .tab-sec-input:checked+.tab-sec-label:hover:after {
+                    background-image: url('../../assets/images/arrow_up.png');
+                }
+                .tab-sec-input {
+                    display: none;
+                }
+                article {
+                    background: rgba(255, 255, 255, 0.5);
+                    margin-top: -1px;
+                    overflow: hidden;
+                    height: 0;
+                    position: relative;
+                    z-index: 10;
+                    -webkit-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+                    -moz-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+                    -o-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+                    -ms-transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+                    transition: height 0.3s ease-in-out, box-shadow 0.6s linear;
+                }
+                article p {
+                    font-style: normal;
+                    color: #777;
+                    line-height: 23px;
+                    font-size: 1em;
+                    padding: 20px;
+                    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+                    font: normal normal 12px 'Open Sans';
+                }
+                .tab-sec-input:checked~article {
+                    -webkit-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+                    -moz-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+                    -o-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+                    -ms-transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+                    transition: height 0.5s ease-in-out, box-shadow 0.1s linear;
+                    box-shadow: 0 0 0 1px rgba(155, 155, 155, 0.3);
+                }
+                .tab-sec-input:checked~article.ac-small {
+                    height: auto;
+                }
+                .tab-sec-input:checked~article.ac-medium {
+                    height: auto;
+                }
+                .tab-sec-input:checked~article.ac-large {
+                    height: auto;
+                }
+            }
+        }
+        .tab-input {
+            display: none;
+        }
+        .tab-label {
+            display: inline-block;
+            margin: 0 0 -1px;
+            padding: 15px 25px;
+            font-weight: 600;
+            text-align: center;
+            color: #bbb;
+            border: 1px solid transparent;
+        }
+        .tab-label:before {
+            font-family: fontawesome;
+            font-weight: normal;
+            margin-right: 10px;
+        }
+        .tab-label[for*='1']:before {
+            content: '\f247';
+        }
+        .tab-label[for*='2']:before {
+            content: '\f021';
+        }
+        .tab-label[for*='3']:before {
+            content: '\f02c';
+        }
+        .tab-label[for*='4']:before {
+            content: '\f0c0';
+        }
+        .tab-label[for*='5']:before {
+            content: '\f270';
+        }
+        .tab-label:hover {
+            color: #888;
+            cursor: pointer;
+        }
+        .tab-input:checked+label {
+            color: #555;
+            border: 1px solid #ddd;
+            border-top: 3px solid #4DA9F7;
+            border-bottom: 1px solid #fff;
+        }
+        #tab1:checked~#content1,
+        #tab2:checked~#content2,
+        #tab3:checked~#content3,
+        #tab4:checked~#content4,
+        #tab5:checked~#content5 {
+            display: block;
+        }
+        @media screen and (max-width: 650px) {
+            .tab-label {
+                font-size: 0;
+            }
+            .tab-label:before {
+                margin: 0;
+                font-size: 18px;
+            }
+        }
+        @media screen and (max-width: 400px) {
+            .tab-label {
+                padding: 15px;
+            }
+        }
+    }
+}

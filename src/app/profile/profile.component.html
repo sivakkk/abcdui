@@ -1,0 +1,67 @@
+<!-- Main Header -->
+<app-header [userData]=session [TAB]="tab" (openTab)="changeTab($event)"></app-header>
+
+<!-- Parent component for most of the component -->
+<div class="container-fluid profile-component h-100">
+    <div class="row">
+        <!-- Left sidebar -->
+        <div class="col-sm-4 col-md-4 col-lg-3 bg-white sidebar pl-0 pt-3">
+
+            <ul class="nav nav-pills flex-column pr-xl-5">
+                <!-- <li class="nav-item" [ngClass]="{active : tab == 'dashboard'}" (click)="changeTab('dashboard')" *ngIf="session?.USER_TYPE === environment.USER_TYPE.FREELANCER.NAME">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/Dashbord.svg" alt="Dashbord" width="30" height="30" class="mr-md-3 mr-xl-4" />
+                        <span>Dashboard</span>
+                    </a>
+                </li>-->
+                <!-- My project tab available for team user -->
+                <li class="nav-item" [ngClass]="{active : (tab == 'my_project' || tab == 'project_settings')}" (click)="changeTab('my_project')" *ngIf="isPlanActive">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/My Project.svg" alt="My Project" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>My Project</span>
+                    </a>
+                </li>
+                <!-- Docs tab, not for team user -->
+                <li class="nav-item" onclick="window.open('http://docs.oclavi.com', '_blank');" *ngIf="isPlanActive && this.session?.USER_TYPE != environment['USER_TYPE']['TEAM']['NAME']">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/Docs.svg" alt="Docs" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>Docs</span>
+                    </a>
+                </li>
+                <!-- Payments tab, not for team user -->
+                <li class="nav-item" [ngClass]="{active : tab == 'payment'}" (click)="changeTab('payment')" *ngIf="this.session?.USER_TYPE != environment['USER_TYPE']['TEAM']['NAME']">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/Payments.svg" alt="Payments" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>Payments</span>
+                    </a>
+                </li>
+                <!-- Invite user tab, only for admin users -->
+                <li class="nav-item" [ngClass]="{active : tab == 'invite_users'}" (click)="changeTab('invite_users')" *ngIf="(session.USER_TYPE == environment.USER_TYPE.STUDENT_ADMIN.NAME) || (session.USER_TYPE == environment.USER_TYPE.ADMIN.NAME)">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/group.svg" alt="Invite users" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>Invite Users</span>
+                    </a>
+                </li>
+                <!-- Video tutorials tab, not for team user -->
+                <li class="nav-item" [ngClass]="{active : tab == 'how_to_work'}" (click)="changeTab('how_to_work')" *ngIf="isPlanActive && this.session?.USER_TYPE != environment['USER_TYPE']['TEAM']['NAME']">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/How to work.svg" alt="How to work" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>Video Tutorials</span>
+                    </a>
+                </li>
+                <!-- Log out, available for all users -->
+                <li class="nav-item" [ngClass]="{active : tab == 'logout'}" (click)="logOut()">
+                    <a class="nav-link">
+                        <img src="../../assets/icons/Logout.svg" alt="Logout" width="30" height="30" class="mr-md-3 mr-xl-4"/>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Child components will be shown inside this div -->
+        <div class="col-sm-8 col-md-8 col-lg-9 ml-auto right-side">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

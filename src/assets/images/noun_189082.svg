@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 144 144" enable-background="new 0 0 144 144" xml:space="preserve">
+    <g>
+        <line fill="none" stroke="#3D6DE3" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="26.89" y1="37.505" x2="108.329" y2="16.034"></line>
+        <line fill="none" stroke="#3D6DE3" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="108.329" y1="17.158" x2="126.376" y2="126.299"></line>
+        <line fill="none" stroke="#3D6DE3" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="126.376" y1="127.391" x2="25.764" y2="105.985"></line>
+        <line fill="none" stroke="#3D6DE3" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" x1="24.311" y1="105.397" x2="27.217" y2="38.476"></line>
+    </g>
+    <g>
+        <g>
+            <rect x="110.198" y="109.037" stroke="#3D6DE3" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" width="27.84" height="26.674"></rect>
+            <rect x="115.967" y="113.892" fill="#3D6DE3" stroke="#3D6DE3" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" width="17.306" height="16.052"></rect>
+        </g>
+        <g>
+            <rect x="94.409" y="3.821" stroke="#3D6DE3" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" width="27.84" height="26.674"></rect>
+            <rect x="100.178" y="8.675" fill="#3D6DE3" stroke="#3D6DE3" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" width="17.306" height="16.052"></rect>
+        </g>
+        <g>
+            <rect x="13.297" y="92.061" stroke="#3D6DE3" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" width="27.84" height="26.674"></rect>
+            <rect x="19.065" y="96.915" fill="#3D6DE3" stroke="#3D6DE3" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" width="17.306" height="16.052"></rect>
+        </g>
+        <g>
+            <rect x="12.97" y="25.139" stroke="#3D6DE3" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" width="27.84" height="26.674"></rect>
+            <rect x="18.738" y="29.994" fill="#3D6DE3" stroke="#3D6DE3" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" width="17.306" height="16.052"></rect>
+        </g>
+    </g>
+</svg>

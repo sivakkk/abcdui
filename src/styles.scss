@@ -1,0 +1,197 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+body
+{
+    font-family: 'open-sans-regular' !important;
+    font-weight: 100;
+
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: #F9FAFE;   // Main background color
+}
+
+.clear
+{
+    clear: both;
+}
+
+.left
+{
+    float: left;
+}
+
+.right
+{
+    float: right;
+}
+@import '~@ng-select/ng-select/themes/default.theme.css';
+
+.ng-select.custom
+{
+    // width: 250px;
+    width: 200px;
+    min-height: 0;
+    padding-bottom: 0 !important;
+
+    border-width: 0;
+    border-radius: 0;
+}
+.ng-select.custom > .ng-control
+{
+    height: 100%;
+    // min-height: 0;
+
+    border-width: 0;
+    border-radius: 0;
+}
+
+@font-face
+{
+    font-family: 'open-sans-regular';
+
+    src: url('./assets/font/OpenSans-Regular.ttf');
+}
+
+@font-face
+{
+    font-family: 'open-sans-semibold';
+
+    src: url('./assets/font/OpenSans-Semibold.ttf');
+}
+
+@font-face
+{
+    font-family: 'helvetica-regular';
+
+    src: url('./assets/font/HelveticaNeue-Roman.otf');
+}
+
+@font-face
+{
+    font-family: 'helvetica-medium';
+
+    src: url('./assets/font/HelveticaNeueMed.ttf');
+}
+
+html
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+a{
+    cursor: pointer;
+}
+
+input[type='email'],
+input[type='password'],
+input[type='text'],
+input[type='number']
+{
+    &:focus
+    {
+        outline: none;
+    }
+}
+button
+{
+    font-family: 'open-sans-regular';
+    font-size: 18px;
+    font-weight: 600;
+
+    width: 100px;
+    height: 40px;
+    padding: 10px 17px;
+
+    color: white;
+    border: none;
+    border-radius: 2px;
+    background: #4da9f7;
+    outline: none !important;
+}
+
+.tab-content
+{
+    padding-bottom: 5%;
+}
+
+.simple-notification .icon svg
+{
+    width: 74% !important;
+    height: 74% !important;
+
+    fill: #fff;
+}
+
+.simple-notification
+{
+    position: relative;
+
+    float: left;
+
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 50px !important;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+
+    cursor: pointer;
+    transition: all .5s;
+
+    color: #fff;
+}
+
+.simple-notification-wrapper
+{
+    position: fixed;
+    z-index: 1000;
+
+    width: 340px !important;
+}
+
+
+@media (max-width : 1024px)
+{
+    .ng-select.custom
+    {
+        font-size: 12px;
+
+        width: 250px;
+        width: 200px;
+        min-height: 0;
+        padding-bottom: 0 !important;
+
+        border-width: 0;
+        border-radius: 0;
+    }
+}
+
+.box-shadow{
+    box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
+}
+.btn-rounded{
+    border-radius: 60px;
+    width: auto;
+    height: auto;
+    outline: none !important;
+    font-family: 'helvetica-regular'
+}
+.btn-rounded:focus{
+     box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
+}
+/************** Custom scrollbar, works only in webkit browsers *************/
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #fff; 
+}
+::-webkit-scrollbar-thumb {
+    background: #1E97E3; 
+    border-radius: 10px;
+}

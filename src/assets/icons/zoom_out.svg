@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 36.493 36.475">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#556df6"/>
+      <stop offset="1" stop-color="#2437e9"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_5934" data-name="Group 5934" transform="translate(-62.771 -426.685)">
+    <path id="search" class="cls-1" d="M215.364,201.3c-2.765-2.755-5.529-5.529-8.294-8.285a3.515,3.515,0,0,0-.335-.27,15.384,15.384,0,1,0-24.649-1.257,14.818,14.818,0,0,0,8.676,6.255,15.307,15.307,0,0,0,13.888-2.932,4.114,4.114,0,0,0,.289.363q4.091,4.091,8.192,8.182a3.431,3.431,0,0,0,.382.354,1.5,1.5,0,0,0,2.383-.791A1.545,1.545,0,0,0,215.364,201.3Z" transform="translate(-116.696 259.123)"/>
+    <g id="Group_5915" data-name="Group 5915" transform="translate(69.208 435.742)">
+      <rect id="Rectangle_3309" data-name="Rectangle 3309" class="cls-2" width="2.509" height="17.56" rx="1.254" transform="translate(17.56 4.992) rotate(90)"/>
+    </g>
+  </g>
+</svg>

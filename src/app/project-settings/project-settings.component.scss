@@ -1,0 +1,84 @@
+@import "../../assets/partials/_mixins.scss";
+
+$border-grey: #CACDDB;
+$font-color-grey-dark: #505571;
+$font-color-skyBlue: #1E9DE5;
+$font-color-tabs: #1E99E4;
+$modal-btn-color: #3043EC;
+
+.project-settings{
+    font-family: 'helvetica-regular';
+    font-size: 1.1rem;
+    color: $font-color-grey-dark;
+    margin-bottom: 5rem;
+
+    #start_btn {
+        @include btn-twoColorLinearGradient(#149fda, #1fbcff, #3bccff, #3f86ed, to right, 200% 150%);
+        @include btn-twoColorLinearGradient-hover( right center);
+    }
+
+    .classify {
+        @include btn-twoColorLinearGradient(#149fda, #1fbcff, #3bccff, #3f86ed, to right, 200% 150%);
+        @include btn-twoColorLinearGradient-hover( right center);
+    }
+    
+    .disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .settings{
+        border-radius: 3px;
+
+        .nav{
+            border-bottom: 1px solid $border-grey;
+            font-weight: 600;
+            a{
+                color: rgba(80, 85, 113,0.63);
+            }
+            .active{
+                color: $font-color-tabs;
+                border-bottom: 3px solid $font-color-tabs;
+            }
+        }
+    }
+}
+
+#freelancerProjectPay{
+    
+    .modal-content {
+        background: #F9FAFE;
+        color: #212121;
+    }
+
+    .modal-header {
+        border-bottom: none;
+
+        .close {
+            width: unset;
+            height: unset;
+            font-size: 3rem;
+            color: #556DF6;
+            opacity: 1;
+            font-weight: 400;
+        }
+    }
+
+    .modal-dialog {
+        min-width: 100%;
+
+        .modal-content {
+            height: 100vh;
+            border: unset;
+            border-radius: unset;
+        }
+
+        .modal-body {
+
+            .cursor {
+                cursor: pointer;
+            }
+        }
+    }
+   
+}

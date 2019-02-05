@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38.403 36.802">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#556df6"/>
+      <stop offset="1" stop-color="#2437e9"/>
+    </linearGradient>
+  </defs>
+  <g id="pentagon" transform="translate(0 -10.674)">
+    <g id="Group_5913" data-name="Group 5913" transform="translate(0 10.674)">
+      <path id="Path_5990" data-name="Path 5990" class="cls-1" d="M38.088,24.9l-18.4-14.057a.8.8,0,0,0-.971,0L.314,24.9a.8.8,0,0,0-.274.888L7.07,46.929a.8.8,0,0,0,.76.547H30.575a.8.8,0,0,0,.76-.547l7.029-21.145A.808.808,0,0,0,38.088,24.9Z" transform="translate(0 -10.674)"/>
+    </g>
+  </g>
+</svg>
